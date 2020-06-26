@@ -93,3 +93,10 @@ Route::get('/information04', function () {
 Route::get('/information05', function () {
     return view('all_board');
 });
+
+Route::get('/board_view', function () {
+    return view('board_view');
+});
+Route::get('/board_write', function () {
+    return view('board_write');
+});

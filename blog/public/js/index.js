@@ -36,7 +36,18 @@ $(document).ready(function(){
         }else{
             $(this).children('.faq_a').slideUp();
         }
-        
-        
     });
+
+    $(".tab_menu").click(function(){
+        $('.tab_menu').removeClass('on');
+        $(this).addClass('on');
+        var tab_idx = $(this).index();
+        console.log(tab_idx)
+        $('.tab_con').hide();
+        $('.tab_con').eq(tab_idx).show();
+    });
+
+    $(".board_view_con .board_sub_title .file_down").click(function(){
+        $(".board_view_con .board_sub_title .file_down_real").toggle();
+    })
 });
