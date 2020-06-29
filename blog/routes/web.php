@@ -105,6 +105,39 @@ Route::get('/search', function () {
     return view('search');
 });
 
-Route::get('/ey_admin', function () {
-    return view('ey_admin');
+//관리자페이지
+Route::get('/ey_pcslider', function () {
+    return view('ey_main');
+});
+Route::get('/ey_pcpopup', function () {
+    return view('ey_main');
+});
+Route::get('/ey_moslider', function () {
+    return view('ey_main');
+});
+Route::get('/ey_mopopup', function () {
+    return view('ey_main');
+});
+Route::get('/ey_faq', function () {
+    return view('ey_community');
+});
+Route::get('/ey_notice', function () {
+    return view('ey_community');
+});
+Route::get('/ey_free', function () {
+    return view('ey_community');
+});
+Route::get('/ey_consul', function () {
+    return view('ey_community');
+});
+Route::get('/ey_education', function () {
+    return view('ey_community');
+});
+
+//관리자 게시글 수정 및 등록
+Route::get('/ey_write_notice', function () {
+    return view('ey_write_notice');
+});
+Route::get('/ey_write_gallery', function () {
+    return view('ey_write_gallery');
 });

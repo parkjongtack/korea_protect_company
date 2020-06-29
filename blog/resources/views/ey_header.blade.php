@@ -11,6 +11,7 @@
     </head>
     <body>
         <div id="container">
+            <div class="nav_space"></div>
             <div id="nav">
                 <div class="logo">
                     <a href="#none">
@@ -23,34 +24,23 @@
                 <div class="nav_con">
                     <div class="na_title nav_img"><i class="fas fa-desktop"></i>메인페이지 설정</div>
                     <div class="na_title dep2">
-                        <div class="nav_sub"><a href="#none">PC 슬라이드</a></div>
-                        <div class="nav_sub"><a href="#none">PC 팝업</a></div>
-                        <div class="nav_sub"><a href="#none">MOBILE 슬라이드</a></div>
-                        <div class="nav_sub"><a href="#none">MOBILE 팝업</a></div>
-                    </div>
-                    <div class="na_title nav_img"><i class="fas fa-file-alt"></i>페이지 설정</div>
-                    <div class="na_title dep2">
-                        <div class="nav_sub"><a href="#none">이용약관</a></div>
-                        <div class="nav_sub"><a href="#none">개인정보처리방침</a></div>
-                    </div>
-                    <div class="na_title nav_img"><i class="fas fa-user"></i>회원관리</div>
-                    <div class="na_title dep2">
-                        <div class="nav_sub"><a href="#none">회원목록</a></div>
-                        <div class="nav_sub"><a href="#none">회원등급관리</a></div>
+                        <div class="nav_sub"><a href="/ey_pcslider">PC 슬라이드</a></div>
+                        <div class="nav_sub"><a href="/ey_pcpopup">PC 팝업</a></div>
+                        <div class="nav_sub"><a href="/ey_moslider">MOBILE 슬라이드</a></div>
+                        <div class="nav_sub"><a href="/ey_mopopup">MOBILE 팝업</a></div>
                     </div>
                     <div class="na_title nav_img"><i class="fas fa-comments"></i>커뮤니티</div>
                     <div class="na_title dep2">
-                        <div class="nav_sub"><a href="#none">FAQ</a></div>
-                        <div class="nav_sub"><a href="#none">Q&A</a></div>
-                        <div class="nav_sub"><a href="#none">공지사항</a></div>
-                        <div class="nav_sub"><a href="#none">자유게시판</a></div>
-                        <div class="nav_sub"><a href="#none">상담게시판</a></div>
-                        <div class="nav_sub"><a href="#none">교육게시판</a></div>
+                        <div class="nav_sub"><a href="/ey_faq">FAQ</a></div>
+                        <div class="nav_sub"><a href="/ey_notice">공지사항</a></div>
+                        <div class="nav_sub"><a href="/ey_free">자유게시판</a></div>
+                        <div class="nav_sub"><a href="/ey_consul">상담게시판</a></div>
+                        <div class="nav_sub"><a href="/ey_education">교육게시판</a></div>
                     </div>
                     <div class="na_title nav_img"><i class="far fa-chart-bar"></i>통계 현황</div>
                     <div class="na_title dep2">
-                        <div class="nav_sub"><a href="#none">접속 통계</a></div>
-                        <div class="nav_sub"><a href="#none">유입 경로</a></div>
+                        <div class="nav_sub"><a href="#">접속 통계</a></div>
+                        <div class="nav_sub"><a href="#">유입 경로</a></div>
                     </div>
                 </div>
             </div>
