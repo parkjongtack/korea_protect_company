@@ -33,11 +33,11 @@
                         <div class="board_write_file">
                             <div class="wid_20">
                                 <input type="file" id="write_file">
-                                <label for="write_file">파일첨부 +</label>
+                                <label for="write_file" style="cursor:pointer;">파일첨부 +</label>
                             </div>
                             <div class="wid_80">
                                 <label></label>
-                                <span>삭제하기</span>
+                                <span class="del_file" style="cursor:pointer;">삭제하기</span>
                             </div>
                         </div>
                         <div class="board_write">
@@ -54,9 +54,23 @@
                             <input type="submit" value="글쓰기">
                             <input type="reset" value="취소하기">
                         </div>
-                        
                     </div>
                 </form>
+                <script>
+                    $('#write_file').change(function(){
+                        var fileValue = $("#write_file").val().split("\\");
+                        var fileName = fileValue[fileValue.length-1]; // 파일명
+                        $('.wid_80 label').text(fileName)
+                        console.log(fileName);
+                    });
+                    $('.del_file').click(function(){
+                        $('.wid_80 label').text('');
+                        //$('#write_file').attr({value:''});
+                    });
+                    //if($('.wid_80 label').text() == '' || $('.wid_80 label').text() == ''){
+                    //    $("#write_file").remove();
+                    //}
+                </script>
             </div>
         </div>
     </div>

@@ -100,3 +100,11 @@ Route::get('/board_view', function () {
 Route::get('/board_write', function () {
     return view('board_write');
 });
+
+Route::get('/search', function () {
+    return view('search');
+});
+
+Route::get('/ey_admin', function () {
+    return view('ey_admin');
+});
