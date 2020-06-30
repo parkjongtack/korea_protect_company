@@ -6,13 +6,10 @@
     <div class="sub_con">
         <div class="sub_side">
             <ul>
-                <li><a href="#none" class="bold f_nanum">국가핵심기술</a></li>
+                <li><a href="#none" class="bold f_nanum">산업기술 확인제도</a></li>
                 <li class="on"><a href="#none">제도소개</a></li>
-                <li><a href="#none">보호조치/실태조사</a></li>
-                <li><a href="#none">지정/변경/해제</a></li>
-                <li><a href="#none">수출승인/신고</a></li>
-                <li><a href="#none">해외 인수/합병</a></li>
-                <li><a href="#none">사전판정/사전검토</a></li>
+                <li><a href="#none">확인절차</a></li>
+                <li><a href="#none">확인신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">
@@ -22,7 +19,7 @@
                 </div>
                 <ul>
                     <li>Home</li>
-                    <li>국가핵심기술</li>
+                    <li>산업기술 확인제도</li>
                     <li class="on">제도소개</li>
                 </ul>
             </div>
