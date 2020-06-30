@@ -410,7 +410,7 @@
         <div class="sub_outer">
             <div class="sub_nav">
                 <div class="sub_subject f_nanum bold">
-                    자료실
+                    법령정보
                 </div>
                 <ul>
                     <li>Home</li>

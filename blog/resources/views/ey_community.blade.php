@@ -6,10 +6,9 @@
             <colgroup>
                 <col width="100">
                 <col width="100">
-                <col width="510">
+                <col width="550">
                 <col width="150">
                 <col width="150">
-                <col width="70">
                 <col width="180">
             </colgroup>
             <thead>
@@ -19,7 +18,6 @@
                     <th>제목</th>
                     <th>글쓴이</th>
                     <th>등록일</th>
-                    <th>노출여부</th>
                     <th>기능</th>
                 </tr>
             </thead>
@@ -30,7 +28,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
@@ -39,7 +36,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>강산</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
@@ -48,7 +44,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>홍길동</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
@@ -57,7 +52,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
             </tbody>
@@ -86,10 +80,9 @@
             <colgroup>
                 <col width="100">
                 <col width="100">
-                <col width="510">
+                <col width="550">
                 <col width="150">
                 <col width="150">
-                <col width="70">
                 <col width="180">
             </colgroup>
             <thead>
@@ -99,7 +92,6 @@
                     <th>제목</th>
                     <th>글쓴이</th>
                     <th>등록일</th>
-                    <th>노출여부</th>
                     <th>기능</th>
                 </tr>
             </thead>
@@ -110,7 +102,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
@@ -119,7 +110,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>강산</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
@@ -128,7 +118,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>홍길동</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
@@ -137,7 +126,6 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
             </tbody>
@@ -159,17 +147,16 @@
         </div>
     </form>
 </div>
-{{-- 자유게시판 --}}
+{{-- 일반게시판 --}}
 <div class="con_main">
     <form action="">
         <table>
             <colgroup>
                 <col width="100">
                 <col width="100">
-                <col width="510">
+                <col width="550">
                 <col width="150">
                 <col width="150">
-                <col width="70">
                 <col width="180">
             </colgroup>
             <thead>
@@ -179,45 +166,40 @@
                     <th>제목</th>
                     <th>글쓴이</th>
                     <th>등록일</th>
-                    <th>노출여부</th>
                     <th>기능</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>자유게시판</td>
+                    <td>일반게시판</td>
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>자유게시판</td>
+                    <td>일반게시판</td>
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>강산</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>자유게시판</td>
+                    <td>일반게시판</td>
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>홍길동</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>자유게시판</td>
+                    <td>일반게시판</td>
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
                     <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
                 </tr>
             </tbody>
@@ -246,10 +228,9 @@
             <colgroup>
                 <col width="100">
                 <col width="100">
-                <col width="510">
+                <col width="550">
                 <col width="150">
                 <col width="150">
-                <col width="70">
                 <col width="180">
             </colgroup>
             <thead>
@@ -259,7 +240,6 @@
                     <th>제목</th>
                     <th>글쓴이</th>
                     <th>등록일</th>
-                    <th>노출여부</th>
                     <th>기능</th>
                 </tr>
             </thead>
@@ -270,8 +250,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">답변</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -279,8 +258,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>강산</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">답변</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -288,8 +266,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>홍길동</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">답변</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -297,8 +274,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">답변</a></td>
                 </tr>
             </tbody>
         </table>
@@ -313,9 +289,6 @@
                 <li class="page page_next move_page"><a href="#none"></a></li>
                 <li class="page page_end move_page"><a href="#none"></a></li>
             </ul>
-        </div>
-        <div class="create">
-            <a href="#none">등록</a>
         </div>
     </form>
 </div>
@@ -326,10 +299,9 @@
             <colgroup>
                 <col width="100">
                 <col width="100">
-                <col width="510">
+                <col width="550">
                 <col width="150">
                 <col width="150">
-                <col width="70">
                 <col width="180">
             </colgroup>
             <thead>
@@ -339,7 +311,6 @@
                     <th>제목</th>
                     <th>글쓴이</th>
                     <th>등록일</th>
-                    <th>노출여부</th>
                     <th>기능</th>
                 </tr>
             </thead>
@@ -350,8 +321,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -359,8 +329,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>강산</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -368,8 +337,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>홍길동</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a></td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -377,8 +345,7 @@
                     <td><a href="#none">가나다라마바사아자차카타파하</a></td>
                     <td>관리자</td>
                     <td>2020-04-10</td>
-                    <td>노출</td>
-                    <td class="delete_box"><a href="#none">삭제</a><a href="/ey_write_notice" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+                    <td class="delete_box"><a href="#none">삭제</a></td>
                 </tr>
             </tbody>
         </table>
@@ -393,9 +360,6 @@
                 <li class="page page_next move_page"><a href="#none"></a></li>
                 <li class="page page_end move_page"><a href="#none"></a></li>
             </ul>
-        </div>
-        <div class="create">
-            <a href="#none">등록</a>
         </div>
     </form>
 </div>

@@ -1,11 +1,11 @@
 @charset "utf-8";
-@font-face {
+/* @font-face {
     font-family: 'NanumSquareR';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
     src: url('../font/NanumSquareR.woff') format('woff');
-  }
+  } */
 /*공통사항*/
 *{margin: 0; padding: 0; box-sizing: border-box;}
 body{font-size: 14px;font-family: 'NanumSquareR', sans-serif;}
@@ -84,5 +84,5 @@ i{color: #fff;margin-right: 5px;width: 16px;}
 .harf_line{display: inline-block; width: 50%; font-size: 16px;border: 1px solid #ddd;}
 .harf_line:last-child{border-left: 0;}
 .harf_line > div{display: inline-block;}
-.line_title{width: 120px;}
+.line_title{width: 120px;padding-left: 10px;}
 .line_title,.line_content{display: inline-block;}
