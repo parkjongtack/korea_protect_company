@@ -41,7 +41,7 @@ Route::get('/tech06', function () {
 Route::get('/institution01', function () {
     return view('institution01');
 });
-Route::get('/institution03', function () {
+Route::get('/institution02', function () {
     return view('institution02');
 });
 Route::get('/institution03', function () {
