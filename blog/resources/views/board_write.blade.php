@@ -24,15 +24,16 @@
                 </ul>
             </div>
             <div class="sub_inner">
-                <form action="">
+                <form id="happyCallForm" name="happyCallForm" action="/happy_call_action" method="post" enctype="multipart/form-data" onsubmit="return happy_call_action();">
+					{{ csrf_field() }}
                     <div class="board_write_con">
                         <div class="board_write_title">
                             <div class="wid_20">제목</div>
-                            <div class="wid_80"><input type="text"></div>
+                            <div class="wid_80"><input type="text" name="subject"></div>
                         </div>
                         <div class="board_write_file">
                             <div class="wid_20">
-                                <input type="file" id="write_file">
+                                <input type="file" id="write_file" name="write_file">
                                 <label for="write_file" style="cursor:pointer;">파일첨부 +</label>
                             </div>
                             <div class="wid_80">
@@ -41,7 +42,7 @@
                             </div>
                         </div>
                         <div class="board_write">
-                            <textarea placeholder="내용을 입력해주세요"></textarea>
+                            <textarea name="contents" placeholder="내용을 입력해주세요"></textarea>
                         </div>
                         <div class="board_write_secret">
                             <div class="secret_con">
@@ -57,14 +58,83 @@
                     </div>
                 </form>
                 <script>
+
+					function happy_call_action() {
+						
+						var form = document.form;
+						
+						if(form.subject.value == "") {
+							alert("제목을 입력해주세요.");
+							return false;
+						}
+
+						if(form.contents.value == "") {
+							alert("제목을 입력해주세요.");
+							return false;
+						}
+
+					}
+
+					function deleteFile(){
+						var form = $('#happyCallForm')[0];
+						var formData = new FormData(form);
+						formData.append("deleteimage", $('.wid_80 label').text());
+		 
+						$.ajax({
+							url: '/image_delete_action',
+							processData: false,
+							contentType: false,
+							data: formData,
+							type: 'POST',
+							success: function(result){
+								alert("삭제 되었습니다.");
+							}
+						});
+					}
+
                     $('#write_file').change(function(){
-                        var fileValue = $("#write_file").val().split("\\");
-                        var fileName = fileValue[fileValue.length-1]; // 파일명
-                        $('.wid_80 label').text(fileName)
-                        console.log(fileName);
+
+						var form = $('#happyCallForm')[0];
+						var formData = new FormData(form);
+						formData.append("write_file", $("#write_file")[0].files[0]);
+		 
+						$.ajax({
+							url: '/image_upload_action',
+							processData: false,
+							contentType: false,
+							data: formData,
+							type: 'POST',
+							success: function(result){
+								fileName = result;
+								$('.wid_80 label').text(fileName);
+								alert("첨부되었습니다.");
+							}
+						});
+
+                        //var fileValue = $("#write_file").val().split("\\");
+                        //var fileName = fileValue[fileValue.length-1]; // 파일명
+                        //$('.wid_80 label').text(fileName)
+                        //console.log(fileName);
                     });
                     $('.del_file').click(function(){
-                        $('.wid_80 label').text('');
+
+						var form = $('#happyCallForm')[0];
+						var formData = new FormData(form);
+						formData.append("deleteimage", $('.wid_80 label').text());
+
+						$.ajax({
+							url: '/image_delete_action',
+							processData: false,
+							contentType: false,
+							data: formData,
+							type: 'POST',
+							success: function(result){
+								$('.wid_80 label').text('');
+								alert("삭제 되었습니다.");
+							}
+						});
+
+                        //$('.wid_80 label').text('');
                         //$('#write_file').attr({value:''});
                     });
                     //if($('.wid_80 label').text() == '' || $('.wid_80 label').text() == ''){

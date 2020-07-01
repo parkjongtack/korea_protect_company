@@ -81,6 +81,14 @@ Route::get('/happycall03', function () {
     return view('all_board');
 });
 
+Route::get('/happyCall', 'Board@happyCall');
+
+Route::post('/happy_call_action', 'Board@happy_call_action');
+
+Route::post('/image_upload_action', 'Board@image_upload_action');
+
+Route::post('/image_delete_action', 'Board@image_delete_action');
+
 Route::get('/information01', function () {
     return view('all_board');
 });
