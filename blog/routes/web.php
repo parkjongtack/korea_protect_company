@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::post('/research_action', 'Research@research_action');
+
 Route::get('/', function () {
     return view('index');
 });

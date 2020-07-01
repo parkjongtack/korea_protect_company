@@ -310,6 +310,11 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                    <a href="/board_write" class="board_write">글쓰기</a>
+                </form>
             </div>
         </div>
     </div>
@@ -386,7 +391,6 @@
                 <form action="" class="board_search_con">
                     <input type="text" name="" placeholder="검색어를 입력하세요" required>
                     <button></button>
-                    <a href="#none" class="board_write">글쓰기</a>
                 </form>
             </div>
         </div>
@@ -475,6 +479,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             {{-- 영업비밀보호법 --}}
             <div class="sub_inner tab_con" style="display:none;">
@@ -516,6 +524,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             {{-- 방산기술보호법 --}}
             <div class="sub_inner tab_con" style="display:none;">
@@ -557,6 +569,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             {{-- 중소기업기술보호법 --}}
             <div class="sub_inner tab_con" style="display:none;">
@@ -598,6 +614,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             {{-- 기타 법령 --}}
             <div class="sub_inner tab_con" style="display:none;">
@@ -639,6 +659,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
         </div>
     </div>
@@ -716,6 +740,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             <div class="sub_inner tab_con" style="display: none">
                 <table>
@@ -756,6 +784,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
         </div>
     </div>
@@ -836,6 +868,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             <div class="sub_inner tab_con" style="display: none;">
                 <table>
@@ -873,6 +909,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             <div class="sub_inner tab_con" style="display: none;">
                 <table>
@@ -910,6 +950,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
             <div class="sub_inner tab_con" style="display: none">
                 <table>
@@ -950,6 +994,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
+				<form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
         </div>
     </div>
@@ -1016,7 +1064,10 @@
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
                 </div>
-                
+                <form action="" class="board_search_con">
+                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                    <button></button>
+                </form>
             </div>
         </div>
     </div>

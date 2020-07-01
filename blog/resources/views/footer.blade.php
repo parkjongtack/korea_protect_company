@@ -1,14 +1,34 @@
-                <div class="satisfaction inner">
+                <script type="text/javascript">
+
+					function research_action_func() {
+
+						
+
+						if($('input:radio[name="satisfaction[]"]').is(':checked') == false) {
+							alert("설문조사를 완료해주세요.");
+							return false;
+						}
+
+
+						$("input[name=ResearchSelect]").val($('input:radio[name="satisfaction[]"]:checked').val());
+
+					}
+
+				</script>
+				<div class="satisfaction inner">
                     <div class="satis_top">
                         이 페이지에서 제공하는 정보에 만족하십니까?
                     </div>
                     <div class="satis_bot">
-                        <form action="">
-                            <label for="satis1"><input type="radio" name="satisfaction" id="satis1">매우만족</label>
-                            <label for="satis2"><input type="radio" name="satisfaction" id="satis2">만족</label>
-                            <label for="satis3"><input type="radio" name="satisfaction" id="satis3">보통</label>
-                            <label for="satis4"><input type="radio" name="satisfaction" id="satis4">미흡</label>
-                            <label for="satis5"><input type="radio" name="satisfaction" id="satis5">매우미흡</label>
+                        <form action="/research_action" onsubmit="return research_action_func();" method="post">
+							{{ csrf_field() }}
+							<input type="hidden" name="ResearchSelect"  />
+							<input type="hidden" name="ResearchType" value="index" />
+                            <label for="satis1"><input type="radio" name="satisfaction[]" id="satis1" value="5">매우만족</label>
+                            <label for="satis2"><input type="radio" name="satisfaction[]" id="satis2" value="4">만족</label>
+                            <label for="satis3"><input type="radio" name="satisfaction[]" id="satis3" value="3">보통</label>
+                            <label for="satis4"><input type="radio" name="satisfaction[]" id="satis4" value="2">미흡</label>
+                            <label for="satis5"><input type="radio" name="satisfaction[]" id="satis5" value="1">매우미흡</label>
                             <div class="satis_submit"><input type="submit" value="평가하기"></div>
                         </form>
                     </div>
