@@ -141,3 +141,6 @@ Route::get('/ey_write_notice', function () {
 Route::get('/ey_write_gallery', function () {
     return view('ey_write_gallery');
 });
+
+//전체검색
+Route::get('/all_search','all_search@all_search');
