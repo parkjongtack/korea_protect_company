@@ -117,7 +117,7 @@
                                 <a href="/happycall02">
                                     <li>FAQ</li>
                                 </a>
-                                <a href="/happycall03">
+                                <a href="/happyCall">
                                     <li>상담신청</li>
                                 </a>
                             </ul>

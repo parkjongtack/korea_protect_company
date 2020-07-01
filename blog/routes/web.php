@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::post('/research_action', 'Research@research_action');
+
 Route::get('/', function () {
     return view('index');
 });
@@ -77,6 +80,14 @@ Route::get('/happycall02', function () {
 Route::get('/happycall03', function () {
     return view('all_board');
 });
+
+Route::get('/happyCall', 'Board@happyCall');
+
+Route::post('/happy_call_action', 'Board@happy_call_action');
+
+Route::post('/image_upload_action', 'Board@image_upload_action');
+
+Route::post('/image_delete_action', 'Board@image_delete_action');
 
 Route::get('/information01', function () {
     return view('all_board');
