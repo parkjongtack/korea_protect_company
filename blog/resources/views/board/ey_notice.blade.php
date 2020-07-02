@@ -26,7 +26,7 @@
 					<tr>
 						<td>공지</td>
 						<td>{{ $board_top_list->category }}</td>
-						<td><a href="#none">{{ $board_top_list->subject }}</a></td>
+						<td><a href="/ey_notice/ey_write_notice/modify/?board_idx={{ $board_top_list->idx }}">{{ $board_top_list->subject }}</a></td>
 						<td>{{ $board_top_list->writer }}</td>
 						<td>{{ $board_top_list->reg_date }}</td>
 						<td class="delete_box"><a href="javascript:notice_control('{{ $board_top_list->idx }}');">삭제</a><a href="/ey_notice/ey_write_notice/modify/?board_idx={{ $board_top_list->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
