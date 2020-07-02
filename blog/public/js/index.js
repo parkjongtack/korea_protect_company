@@ -49,5 +49,26 @@ $(document).ready(function(){
 
     $(".board_view_con .board_sub_title .file_down").click(function(){
         $(".board_view_con .board_sub_title .file_down_real").toggle();
-    })
+    });
+    var url = location.href;
+    console.log(url)
+    if(url.indexOf("tech") !== -1){
+        console.log(url)
+        $(".sub_top").css({background: 'url(../img/sub_top01.png) no-repeat center'})
+    }else if(url.indexOf("institution") !== -1){
+        console.log(url)
+        $(".sub_top").css({background: 'url(../img/sub_top02.png) no-repeat center'})
+    }else if(url.indexOf("dispute") !== -1){
+        console.log(url)
+        $(".sub_top").css({background: 'url(../img/sub_top03.png) no-repeat center'})
+    }else if(url.indexOf("education") !== -1){
+        console.log(url)
+        $(".sub_top").css({background: 'url(../img/sub_top04.png) no-repeat center'})
+    }else if(url.indexOf("happycall") !== -1){
+        console.log(url)
+        $(".sub_top").css({background: 'url(../img/sub_top05.png) no-repeat center'})
+    }else if(url.indexOf("information") !== -1){
+        console.log(url)
+        $(".sub_top").css({background: 'url(../img/sub_top06.png) no-repeat center'})
+    }
 });
