@@ -124,9 +124,13 @@ Route::get('/happy_call/board_write_happy_call', 'Board@happyCallWrite');
 Route::get('/happy_call/board_passwd_check', 'Board@happyCallPassCheck');
 Route::get('/happy_call/board_view', 'Board@happyCallView');
 
-Route::get('/ey_notice/ey_write_notice', 'EyAdmin@ey_write_notice');
+Route::get('/notice/notice_list', 'Board@notice_list');
 
+Route::get('/ey_notice/ey_write_notice', 'Board@ey_write_notice');
+Route::get('/ey_notice/ey_write_notice/modify', 'Board@ey_modify_notice');
+Route::get('/ey_notice', 'Board@ey_notice');
 Route::post('/ey_notice/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_notice/ey_notice_control', 'Board@notice_control');
 
 
 Route::get('/search', function () {

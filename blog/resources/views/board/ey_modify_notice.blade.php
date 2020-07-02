@@ -35,6 +35,7 @@
 <div class="con_main">
     <form action="/ey_notice/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
 		{{ csrf_field() }}
+		<input type="hidden" name="board_idx" value="{{ $_GET['board_idx'] }}" />
 		<input type="hidden" name="board_type" value="{{ request()->segment(1) }}" />
 		<input type="hidden" name="write_type" value="{{ request()->segment(3) }}" />
         <div class="write_box">
@@ -51,7 +52,7 @@
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_content" style="padding-left:10px;">
-						<input type="checkbox" name="top_type" value="Y" /> 최상단 공지 지정
+						<input type="checkbox" name="top_type" value="Y" @if($data->top_type == 'Y') checked @endif /> 최상단 공지 지정
                     </div>
                 </div>
             </div>
@@ -61,7 +62,7 @@
                         제목
                     </div>
                     <div class="line_content">
-						<input type="text" name="subject" />
+						<input type="text" name="subject" value="{{ $data->subject }}" />
                     </div>
                 </div>
             </div>
@@ -70,7 +71,7 @@
                     <div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
                     <div class="line_content">
 						<div id="editor">
-							<div id="edit" style="width:900px;"></div>
+							<div id="edit" style="width:900px;">{!! $data->contents !!}</div>
 						</div>
 						<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
                     </div>
@@ -82,7 +83,7 @@
                         파일선택
                     </div>
                     <div class="line_content">
-                        <input type="file" name="writer_file" />
+                        <input type="file" name="writer_file" /><a href="/storage/app/images/{{ $data->attach_file }}">{{ $data->attach_file }}</a>
                     </div>
                 </div>
             </div>
@@ -92,12 +93,12 @@
                         작성자
                     </div>
                     <div class="line_content">
-                        <input type="text" name="writer" value="admin" readonly style="border:none;">
+                        <input type="text" name="writer" value="@if($data->writer) {{ $data->writer }} @else admin @endif" readonly style="border:none;">
                     </div>
                 </div>
             </div>
             <div class="submit_box" style="text-align:center;margin-top:10px;">
-                <input type="button" value="등록" onclick="javascript:write_action();">
+                <input type="button" value="수정" onclick="javascript:write_action();">
                 <input type="reset" value="취소">
             </div>
         </div>

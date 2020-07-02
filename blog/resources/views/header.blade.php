@@ -122,7 +122,7 @@
                                 </a>
                             </ul>
                             <ul>
-                                <a href="/information01">
+                                <a href="/notice/notice_list">
                                     <li>공지사항</li>
                                 </a>
                                 <a href="/information02">
