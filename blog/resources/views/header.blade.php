@@ -103,7 +103,7 @@
                                 <a href="/education01">
                                     <li>교육소개</li>
                                 </a>
-                                <a href="/education02">
+                                <a href="/request_education">
                                     <li>교육신청</li>
                                 </a>
                                 <a href="/education03">
@@ -117,7 +117,7 @@
                                 <a href="/happycall02">
                                     <li>FAQ</li>
                                 </a>
-                                <a href="/happyCall">
+                                <a href="/happy_call">
                                     <li>상담신청</li>
                                 </a>
                             </ul>

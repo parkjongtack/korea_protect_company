@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\Facades\Image as Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,13 +82,23 @@ Route::get('/happycall03', function () {
     return view('all_board');
 });
 
-Route::get('/happyCall', 'Board@happyCall');
+Route::get('/request_education', 'RequestProcess@request_form');
 
-Route::post('/happy_call_action', 'Board@happy_call_action');
+Route::post('/request_education/request_education_action2', 'RequestProcess@request_education_action2');
+
+Route::post('/request_education/request_education_action', 'RequestProcess@request_education_action');
+
+Route::get('/happy_call', 'Board@happyCall');
+
+Route::post('/happy_call/happy_call_action', 'Board@happy_call_action');
+
+Route::post('/happy_call/comment_write_action', 'Board@happy_call_comment_action');
 
 Route::post('/image_upload_action', 'Board@image_upload_action');
 
 Route::post('/image_delete_action', 'Board@image_delete_action');
+
+Route::post('/happy_call/passwd_check_action', 'Board@passwordCheckAction');
 
 Route::get('/information01', function () {
     return view('all_board');
@@ -108,9 +119,15 @@ Route::get('/information05', function () {
 Route::get('/board_view', function () {
     return view('board_view');
 });
-Route::get('/board_write', function () {
-    return view('board_write');
-});
+
+Route::get('/happy_call/board_write_happy_call', 'Board@happyCallWrite');
+Route::get('/happy_call/board_passwd_check', 'Board@happyCallPassCheck');
+Route::get('/happy_call/board_view', 'Board@happyCallView');
+
+Route::get('/ey_notice/ey_write_notice', 'EyAdmin@ey_write_notice');
+
+Route::post('/ey_notice/ey_board_write_action', 'Board@notice_action');
+
 
 Route::get('/search', function () {
     return view('search');
@@ -132,7 +149,7 @@ Route::get('/ey_mopopup', function () {
 Route::get('/ey_faq', function () {
     return view('ey_community');
 });
-Route::get('/ey_notice', function () {
+Route::get('/ey_notice2', function () {
     return view('ey_community');
 });
 Route::get('/ey_free', function () {
@@ -146,12 +163,11 @@ Route::get('/ey_education', function () {
 });
 
 //관리자 게시글 수정 및 등록
+/*
 Route::get('/ey_write_notice', function () {
     return view('ey_write_notice');
 });
+*/
 Route::get('/ey_write_gallery', function () {
     return view('ey_write_gallery');
 });
-
-//전체검색
-Route::get('/all_search','all_search@all_search');

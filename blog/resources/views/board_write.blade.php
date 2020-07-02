@@ -24,14 +24,24 @@
                 </ul>
             </div>
             <div class="sub_inner">
-                <form id="happyCallForm" name="happyCallForm" action="/happy_call_action" method="post" enctype="multipart/form-data" onsubmit="return happy_call_action();">
+                <form id="happyCallForm" name="happyCallForm" action="/happy_call/happy_call_action" method="post" enctype="multipart/form-data" onsubmit="return happy_call_action();">
 					{{ csrf_field() }}
+					<input type="hidden" name="board_type" value="{{ request()->segment(1) }}" />
+					<input type="hidden" name="file_value" />
                     <div class="board_write_con">
                         <div class="board_write_title">
                             <div class="wid_20">제목</div>
                             <div class="wid_80"><input type="text" name="subject"></div>
                         </div>
-                        <div class="board_write_file">
+                        <div class="board_write_title">
+                            <div class="wid_20">카테고리</div>
+                            <div class="wid_80"><input type="text" name="category" value="해피콜상담신청" readonly></div>
+                        </div>
+                        <div class="board_write_title">
+                            <div class="wid_20">작성자</div>
+                            <div class="wid_80"><input type="text" name="writer"></div>
+                        </div>
+						<div class="board_write_file">
                             <div class="wid_20">
                                 <input type="file" id="write_file" name="write_file">
                                 <label for="write_file" style="cursor:pointer;">파일첨부 +</label>
@@ -46,9 +56,9 @@
                         </div>
                         <div class="board_write_secret">
                             <div class="secret_con">
-                                <input type="checkbox" id="secret">
+                                <input type="checkbox" id="secret" name="secretCheck">
                                 <label for="secret" class="secret">비밀댓글</label>
-                                <input type="password" placeholder="비밀번호 입력">
+                                <input type="password" name="secretNumber" placeholder="비밀번호 입력">
                             </div>
                         </div>
                         <div class="board_write_submit">
@@ -60,16 +70,17 @@
                 <script>
 
 					function happy_call_action() {
-						
-						var form = document.form;
+						var form = document.happyCallForm;
 						
 						if(form.subject.value == "") {
 							alert("제목을 입력해주세요.");
+							form.subject.focus();
 							return false;
 						}
 
 						if(form.contents.value == "") {
 							alert("제목을 입력해주세요.");
+							form.contents.focus();
 							return false;
 						}
 
@@ -106,6 +117,7 @@
 							type: 'POST',
 							success: function(result){
 								fileName = result;
+								$('input[name=file_value]').val(fileName);
 								$('.wid_80 label').text(fileName);
 								alert("첨부되었습니다.");
 							}
@@ -130,6 +142,7 @@
 							type: 'POST',
 							success: function(result){
 								$('.wid_80 label').text('');
+								$('input[name=file_value]').val('');
 								alert("삭제 되었습니다.");
 							}
 						});

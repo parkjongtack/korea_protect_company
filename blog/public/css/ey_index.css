@@ -79,7 +79,7 @@ i{color: #fff;margin-right: 5px;width: 16px;}
 
 /*관리자 write*/
 .write_box{padding: 10px;}
-.write_line{width:97%; height: 40px; line-height: 40px; font-size: 0; margin: 0 auto;}
+.write_line{width:97%; font-size: 0; margin: 0 auto;}
 .all_line{font-size: 16px;border: 1px solid #ddd;}
 .harf_line{display: inline-block; width: 50%; font-size: 16px;border: 1px solid #ddd;}
 .harf_line:last-child{border-left: 0;}

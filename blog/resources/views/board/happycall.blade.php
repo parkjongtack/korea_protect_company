@@ -50,14 +50,26 @@
                         <th>작성자</th>
                         <th>등록일</th>
                     </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>회원</td>
-                        <td class="table_td_title">안녕하세요 산업보안 정보도서관 게시판입니다</td>
-                        <td>관리자</td>
-                        <td>20-60-30</td>
-                    </tr>
-                    <tr class="reply">
+					@if($totalCount <= 0)
+						<tr>
+							<td colspan="5">게시글이 없습니다.</td>
+						</tr>
+					@else
+						@foreach ($data as $data)
+						<tr>
+							<td>{{ $number-- }}</td>
+							<td>{{ $data->category }}</td>
+							@if($data->secret_status == 'Y')
+								<td class="table_td_title"><a href="/happy_call/board_passwd_check/?idx={{ $data->idx }}&board_type={{ $data->board_type }}">{{ $data->subject }}</a></td>
+							@else
+								<td class="table_td_title"><a href="/happy_call/board_view/?idx={{ $data->idx }}&board_type={{ $data->board_type }}">{{ $data->subject }}</a></td>
+							@endif
+							<td>{{ $data->writer }}</td>
+							<td>{{ $data->subject }}</td>
+						</tr>
+						@endforeach
+					@endif
+                    <!-- <tr class="reply">
                         <td>15</td>
                         <td>회원</td>
                         <td class="table_td_title"><span class="reply_img">답변</span>안녕하세요 산업보안 정보도서관 게시판입니다</td>
@@ -70,9 +82,10 @@
                         <td class="table_td_title">안녕하세요 산업보안 정보도서관 게시판입니다</td>
                         <td>관리자</td>
                         <td>20-60-30</td>
-                    </tr>
+                    </tr> -->
                 </table>
-                <div class="pag_write">
+				{!! $paging_view !!}
+                <!-- <div class="pag_write">
                     <ul>
                         <li><a href="#none"><img src="../img/pag_prev_btn.png" alt=""></a></li>
                         <li class="on"><a href="#none">1</a></li>
@@ -83,14 +96,26 @@
                         <li><a href="#none">6</a></li>
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
-                </div>
-				<form action="" class="board_search_con">
-                    <input type="text" name="" placeholder="검색어를 입력하세요" required>
+                </div> -->
+				<form name="search_form" action="{{ $_SERVER['REQUEST_URI'] }}/" class="board_search_con" onsubmit="return search();">
+                    <input type="text" name="key" placeholder="검색어를 입력하세요" value="{{ $key }}" required>
                     <button></button>
-                    <a href="/board_write" class="board_write">글쓰기</a>
+                    <a href="/happy_call/board_write_happy_call" class="board_write">글쓰기</a>
                 </form>
             </div>
         </div>
     </div>
+	<script type="text/javascript">
 
+		function search() {
+			var form = document.search_form;
+
+			if(form.key.value == "") {
+				alert("검색어를 입력해주세요.");
+				return false;
+			}
+
+		}
+
+	</script>
 @include('footer')

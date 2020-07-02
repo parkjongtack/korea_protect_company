@@ -23,7 +23,7 @@
                         <form action="/research_action" onsubmit="return research_action_func();" method="post">
 							{{ csrf_field() }}
 							<input type="hidden" name="ResearchSelect"  />
-							<input type="hidden" name="ResearchType" value="index" />
+							<input type="hidden" name="ResearchType" value="{{ (request()->segment(1)) ? request()->segment(1) : 'index' }}" />
                             <label for="satis1"><input type="radio" name="satisfaction[]" id="satis1" value="5">매우만족</label>
                             <label for="satis2"><input type="radio" name="satisfaction[]" id="satis2" value="4">만족</label>
                             <label for="satis3"><input type="radio" name="satisfaction[]" id="satis3" value="3">보통</label>
