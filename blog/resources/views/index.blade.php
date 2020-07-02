@@ -29,16 +29,16 @@
                         <a href="#"><li>
                             <img src="img/main_go_btn.png" alt="">
                         </li></a>
-                        <a href="#"><li>
+                        <a href="/institution03"><li>
                             <img src="img/main_sub_menu1.png" alt="">
                         </li></a>
-                        <a href="#"><li>
+                        <a href="/happy_call"><li>
                             <img src="img/main_sub_menu2.png" alt="">
                         </li></a>
-                        <a href="#"><li>
+                        <a href="/request_education"><li>
                             <img src="img/main_sub_menu3.png" alt="">
                         </li></a>
-                        <a href="#"><li>
+                        <a href="/education03"><li>
                             <img src="img/main_sub_menu4.png" alt="">
                         </li></a>
                     </ul>

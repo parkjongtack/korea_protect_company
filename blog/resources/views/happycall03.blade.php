@@ -6,10 +6,10 @@
     <div class="sub_con">
         <div class="sub_side">
             <ul>
-                <li><a href="#none" class="bold f_nanum">해피콜상담서비스</a></li>
-                <li><a href="#none">상담서비스 소개</a></li>
-                <li><a href="#none">FAQ</a></li>
-                <li class="on"><a href="#none">상담신청</a></li>
+                <li><a href="#none" class="bold f_nanum">해피콜 상담서비스</a></li>
+                <li><a href="/happycall01">상담서비스 소개</a></li>
+                <li><a href="/happycall02">FAQ</a></li>
+                <li class="on"><a href="/happycall03">상담신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">
@@ -19,8 +19,8 @@
                 </div>
                 <ul>
                     <li>Home</li>
-                    <li>해피콜상담서비스</li>
-                    <li class="on">상담신청</li>
+                    <li>해피콜 상담서비스</li>
+                    <li class="on">상담서비스 소개</li>
                 </ul>
             </div>
             <div class="sub_inner">

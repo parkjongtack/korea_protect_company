@@ -35,7 +35,7 @@
                         </ul>
                     </li>
                     <li class="depth1">
-                        <h2>산업기술확인제도</h2>
+                        <h2>산업기술 확인제도</h2>
                         <ul>
                             <li><a href="/institution01">제도 소개</a></li>
                             <li><a href="/institution02">확인 절차</a></li>

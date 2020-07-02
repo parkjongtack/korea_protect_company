@@ -7,9 +7,9 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">산업기술분쟁조정</a></li>
-                <li><a href="#none">제도소개</a></li>
-                <li><a href="#none">위원회 소개</a></li>
-                <li class="on"><a href="#none">조정신청</a></li>
+                <li><a href="/dispute01">제도 소개</a></li>
+                <li><a href="/dispute02">위원회 소개</a></li>
+                <li class="on"><a href="/dispute03">조정신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">
@@ -32,7 +32,7 @@
                         소정의 양식을 작성하신 후, 산업기술분쟁조정위원회 사무국에 방문 또는 우편으로 제출하시면 신청이 완료됩니다. <br>
                         조정신청서 작성 시 도움이 필요하신 경우에는 사무국에서 작성 도움을 드립니다.<br>
                         <br>
-                        주 소 : 서울특별시 서초구 서운로 1길 34 (서초동 1355-26) 한국산업기술보호협회(산업기술분쟁조정위원회 사무국 담당자 앞)
+                        주소 : 서울특별시 서초구 서운로 1길 34 (서초동 1355-26) 한국산업기술보호협회(산업기술분쟁조정위원회 사무국 담당자 앞)
                     </p>
                     <div class="download_outer">
                         <a href="#none" class="download_abtn">

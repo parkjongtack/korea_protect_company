@@ -49,7 +49,7 @@
                             산업보안교육
                         </li></a>
                         <a href="/happycall01"><li>
-                            해피콜상담서비스
+                            해피콜 상담서비스
                         </li></a>
                         <a href="/information01"><li>
                             정보마당
@@ -59,27 +59,27 @@
                         <div class="inner">
                             <ul>
                                 <a href="/tech01">
-                                    <li>제도소개</li>
+                                    <li>제도 소개</li>
                                 </a>
                                 <a href="/tech02">
-                                    <li>보호조치/실태조사</li>
+                                    <li>보호조치ㆍ실태조사</li>
                                 </a>
                                 <a href="/tech03">
-                                    <li>지정/변경/해제</li>
+                                    <li>지정ㆍ변경ㆍ해제</li>
                                 </a>
                                 <a href="/tech04">
-                                    <li>수출승인/신고</li>
+                                    <li>수출승인ㆍ신고</li>
                                 </a>
                                 <a href="/tech05">
-                                    <li>해외 인수/합병</li>
+                                    <li>해외 인수ㆍ합병</li>
                                 </a>
                                 <a href="/tech06">
-                                    <li>사전판정/사전검토</li>
+                                    <li>사전판정ㆍ사전검토</li>
                                 </a>
                             </ul>
                             <ul>
                                 <a href="/institution01">
-                                    <li>제도소개</li>
+                                    <li>제도 소개</li>
                                 </a>
                                 <a href="/institution02">
                                     <li>확인절차</li>
@@ -90,7 +90,7 @@
                             </ul>
                             <ul>
                                 <a href="/dispute01">
-                                    <li>제도소개</li>
+                                    <li>제도 소개</li>
                                 </a>
                                 <a href="/dispute02">
                                     <li>위원회 소개</li>

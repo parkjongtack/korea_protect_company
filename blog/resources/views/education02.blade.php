@@ -7,9 +7,9 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">보안교육</a></li>
-                <li><a href="#none">교육 소개</a></li>
-                <li class="on"><a href="#none">교육신청</a></li>
-                <li><a href="#none">이러닝 교육</a></li>
+                <li><a href="/education01">교육소개</a></li>
+                <li class="on"><a href="/education02">교육신청</a></li>
+                <li><a href="/education03">이러닝 교육</a></li>
             </ul>
         </div>
         <div class="sub_outer">

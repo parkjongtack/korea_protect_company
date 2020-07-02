@@ -13,23 +13,23 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">국가핵심기술</a></li>
-                <li><a href="#none">제도소개</a></li>
-                <li><a href="#none">보호조치/실태조사</a></li>
-                <li><a href="#none">지정/변경/해제</a></li>
-                <li><a href="#none">수출승인/신고</a></li>
-                <li><a href="#none">해외 인수/합병</a></li>
-                <li class="on"><a href="#none">사전판정/사전검토</a></li>
+                <li><a href="/tech01">제도 소개</a></li>
+                <li><a href="/tech02">보호조치ㆍ실태조사</a></li>
+                <li><a href="/tech03">지정ㆍ변경ㆍ해제</a></li>
+                <li><a href="/tech04">수출승인ㆍ신고</a></li>
+                <li><a href="/tech05">해외 인수ㆍ합병</a></li>
+                <li class="on"><a href="/tech06">사전판정ㆍ사전검토</a></li>
             </ul>
         </div>
         <div class="sub_outer">
             <div class="sub_nav">
                 <div class="sub_subject f_nanum bold">
-                    제도소개
+                    제도 소개
                 </div>
                 <ul>
                     <li>Home</li>
                     <li>국가핵심기술</li>
-                    <li class="on">사전판정/사전검토</li>
+                    <li class="on">사전판정ㆍ사전검토</li>
                 </ul>
             </div>
             <div class="sub_inner tech06">

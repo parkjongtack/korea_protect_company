@@ -7,9 +7,9 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">국가핵심기술</a></li>
-                <li><a href="#none">제도소개</a></li>
-                <li class="on"><a href="#none">위원회 소개</a></li>
-                <li><a href="#none">조정신청</a></li>
+                <li><a href="/dispute01">제도소개</a></li>
+                <li class="on"><a href="/dispute02">위원회 소개</a></li>
+                <li><a href="/dispute03">조정신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">

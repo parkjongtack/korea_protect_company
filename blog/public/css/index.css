@@ -45,9 +45,9 @@ img{vertical-align: middle; max-width: 100%;}
 #header .h_nav .h_sub_nav ul:nth-child(2){width: 195.55px;}
 #header .h_nav .h_sub_nav ul:nth-child(3){width: 191.05px;}
 #header .h_nav .h_sub_nav ul:nth-child(4){width: 158.28px;}
-#header .h_nav .h_sub_nav ul:nth-child(5){width: 191.05px;}
+#header .h_nav .h_sub_nav ul:nth-child(5){width: 200.05px;}
 #header .h_nav .h_sub_nav ul:last-child{width: 125.53px;}
-#header .h_nav .h_sub_nav ul li{padding: 8px 18px;}
+#header .h_nav .h_sub_nav ul li{padding: 8px 18px;letter-spacing: -1px;}
 #header .h_nav .h_sub_nav ul li.on{color: #3a6db5;}
 #header .h_nav .h_sub_nav ul a:first-child li{padding-top: 20px;}
 #header .h_nav .h_sub_nav ul a:last-child li{padding-bottom: 20px;}
@@ -302,7 +302,7 @@ img{vertical-align: middle; max-width: 100%;}
 .tech01_1,.tech02_3,.inst01_1,.disp01_1,.disp01_5{background-color: #f6f6f6; padding: 35px 30px; border-bottom: 1px solid #ddd; position: relative;}
 h3.sub_sec_title{font-size: 22px; color: #3d6cb4; position: relative; margin-bottom: 15px;}
 h3.sub_sec_title.be_line::before{content: ""; width: 15px; height: 5px; background-color: #467acb; display: inline-block; vertical-align: middle; margin-right: 10px; position: relative; top: -3px;}
-.sub_sec_text{font-size: 15px; line-height: 28px; color: #666666;}
+.sub_sec_text{font-size: 15px; line-height: 28px; color: #666666; letter-spacing: -0.5px;}
 .sub_sec_text.be_line{margin-left: 30px;}
 .tech01_2 ul li{margin: 10px 0px; height: 35px; line-height: 35px; font-size: 0;}
 .tech01_2 ul li h4{display: inline-block; text-align: center; width: 35px; color: #fff; background-color: #3d6cb4; font-size: 15px;}

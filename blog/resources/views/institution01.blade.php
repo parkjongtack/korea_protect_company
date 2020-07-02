@@ -7,20 +7,20 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">산업기술 확인제도</a></li>
-                <li class="on"><a href="#none">제도소개</a></li>
-                <li><a href="#none">확인절차</a></li>
-                <li><a href="#none">확인신청</a></li>
+                <li class="on"><a href="/institution01">제도 소개</a></li>
+                <li><a href="/institution02">확인절차</a></li>
+                <li><a href="/institution03">확인신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">
             <div class="sub_nav">
                 <div class="sub_subject f_nanum bold">
-                    제도소개
+                    제도 소개
                 </div>
                 <ul>
                     <li>Home</li>
                     <li>산업기술 확인제도</li>
-                    <li class="on">제도소개</li>
+                    <li class="on">제도 소개</li>
                 </ul>
             </div>
             <div class="sub_inner inst01">
