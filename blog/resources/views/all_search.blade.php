@@ -66,6 +66,9 @@
                         </span>
                     </div>
                 </div>
+                <div class="search_result_box">
+                    <h3 style="text-align: center;">찾으시는 정보가 없습니다.</h3>
+                </div>
                 <div class="pag_write search_list">
                     <ul>
                         <li><a href="#none"><img src="../img/pag_prev_btn.png" alt=""></a></li>

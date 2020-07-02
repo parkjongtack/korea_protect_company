@@ -171,3 +171,8 @@ Route::get('/ey_write_notice', function () {
 Route::get('/ey_write_gallery', function () {
     return view('ey_write_gallery');
 });
+
+//사이트맵
+Route::get('/sitemap', function () {
+    return view('sitemap');
+});

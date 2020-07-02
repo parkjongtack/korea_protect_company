@@ -120,7 +120,10 @@
 								$('input[name=file_value]').val(fileName);
 								$('.wid_80 label').text(fileName);
 								alert("첨부되었습니다.");
-							}
+							}, 
+                            error: function(e) {
+                                console.log(e.responseText);
+                            }
 						});
 
                         //var fileValue = $("#write_file").val().split("\\");
