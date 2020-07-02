@@ -6,75 +6,45 @@
     <div class="sub_con">
         <div class="sub_side">
             <ul>
-                <li><a href="#none" class="bold f_nanum">해피콜상담서비스</a></li>
-                <li><a href="#none">상담서비스 소개</a></li>
-                <li><a href="#none">FAQ</a></li>
-                <li class="on"><a href="#none">상담신청</a></li>
+                <li><a href="#none" class="bold f_nanum">산업기술분쟁조정</a></li>
+                <li><a href="#none">제도소개</a></li>
+                <li><a href="#none">위원회 소개</a></li>
+                <li class="on"><a href="#none">조정신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">
             <div class="sub_nav">
                 <div class="sub_subject f_nanum bold">
-                    상담신청
+                    조정신청
                 </div>
                 <ul>
                     <li>Home</li>
-                    <li>해피콜상담서비스</li>
-                    <li class="on">상담신청</li>
+                    <li>산업기술분쟁조정</li>
+                    <li class="on">조정신청</li>
                 </ul>
             </div>
             <div class="sub_inner">
-                <form action="" class="form_list">
-                        <input type="text" placeholder="성명">
-                        <select name="" id="">
-                            <option value="" selected disabled>성별 선택</option>
-                            <option value="남자">남자</option>
-                            <option value="여자">여자</option>
-                        </select>
-                        <select name="" id="">
-                            <option value="" selected disabled>소속 기업 구분 선택</option>
-                            <option value="대기업">대기업</option>
-                            <option value="중소 · 중견기업">중소 · 중견기업</option>
-                            <option value="정부출연연구기관">정부출연연구기관</option>
-                            <option value="기타">기타</option>
-                        </select>
-                        <input type="text" placeholder="소속 기업명">
-                        <input type="text" placeholder="직위">
-                        <input type="text" placeholder="연락처 (-제외)" class="bor_bot number">
-                        <input type="text" placeholder="이메일" class="e_mail"> @ <input type="text" placeholder="" class="e_mail str_email02">
-                        <select name="" id="" class="e_mail selectEmail">
-                            <option value="1" selected>직접입력</option>
-                            <option value="naver.com">naver.com</option>
-                            <option value="hanmail.net">hanmail.net</option>
-                            <option value="hotmail.com">hotmail.com</option>
-                            <option value="nate.com">nate.com</option>
-                            <option value="yahoo.co.kr">yahoo.co.kr</option>
-                            <option value="empas.com">empas.com</option>
-                            <option value="dreamwiz.com">dreamwiz.com</option>
-                            <option value="freechal.com">freechal.com</option>
-                            <option value="lycos.co.kr">lycos.co.kr</option>
-                            <option value="korea.com">korea.com</option>
-                            <option value="gmail.com">gmail.com</option>
-                            <option value="hanmir.com">hanmir.com</option>
-                            <option value="paran.com">paran.com</option>
-                        </select>
-                        <input type="text" placeholder="회사주소">
-                        <input type="text" placeholder="(상세주소)">
-                        <select name="" id="">
-                            <option value="" selected disabled>CSO 양성교육을 알게 된 경로</option>
-                            <option value="인터넷 검색">인터넷 검색</option>
-                            <option value="지인 추천">지인 추천</option>
-                            <option value="협회 행사 참석">협회 행사 참석</option>
-                            <option value="협회 홈페이지">협회 홈페이지</option>
-                            <option value="회원사 서비스 안내">회원사 서비스 안내</option>
-                            <option value="직접 문의">직접 문의</option>
-                            <option value="기타">기타</option>
-                        </select>
-                        <div class="submit_box">
-                            <input type="submit" value="신청하기">
-                            <input type="reset" value="취소하기">
-                        </div>
-                </form>
+                <div class="disp03_1 disp_">
+                    <h3 class="sub_sec_title be_line">
+                        신청방법
+                    </h3>
+                    <p class="sub_sec_text be_line">
+                        소정의 양식을 작성하신 후, 산업기술분쟁조정위원회 사무국에 방문 또는 우편으로 제출하시면 신청이 완료됩니다. <br>
+                        조정신청서 작성 시 도움이 필요하신 경우에는 사무국에서 작성 도움을 드립니다.<br>
+                        <br>
+                        주 소 : 서울특별시 서초구 서운로 1길 34 (서초동 1355-26) 한국산업기술보호협회(산업기술분쟁조정위원회 사무국 담당자 앞)
+                    </p>
+                    <div class="download_outer">
+                        <a href="#none" class="download_abtn">
+                            조정신청서 다운받기<img src="img/download_ico.png" alt="">
+                        </a>
+                    </div>
+                    <p class="sub_sec_text be_line">
+                        <br>
+                        * 조정신청서 수령 후 7일 이내에 사무국에서 연락을 드립니다.<br>
+                        * 문의사항은 전화(02-3489-7022) 또는 이메일(mgcho@kaits.or.kr)로 연락주시기 바랍니다.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

@@ -59,7 +59,7 @@ Route::get('/dispute02', function () {
     return view('dispute02');
 });
 Route::get('/dispute03', function () {
-    return view('all_board');
+    return view('dispute03');
 });
 
 Route::get('/education01', function () {

@@ -298,8 +298,8 @@ img{vertical-align: middle; max-width: 100%;}
 .sub_inner .sub_table td{line-height: 40px; color: #666; font-size: 15px; height: 40px; padding: 0 20px; text-align: left;}
 .sub_inner .sub_table td.bold{text-align: center;}
 .sub_inner .tech01_3 .sub_table td.bold:last-child{border-bottom: 1px solid #ddd;}
-.tech_,.inst_{margin-bottom: 20px;}
-.tech01_1,.tech02_3,.inst01_1{background-color: #f6f6f6; padding: 35px 30px; border-bottom: 1px solid #ddd; position: relative;}
+.tech_,.inst_,.disp_{margin-bottom: 20px;}
+.tech01_1,.tech02_3,.inst01_1,.disp01_1,.disp01_5{background-color: #f6f6f6; padding: 35px 30px; border-bottom: 1px solid #ddd; position: relative;}
 h3.sub_sec_title{font-size: 22px; color: #3d6cb4; position: relative; margin-bottom: 15px;}
 h3.sub_sec_title.be_line::before{content: ""; width: 15px; height: 5px; background-color: #467acb; display: inline-block; vertical-align: middle; margin-right: 10px; position: relative; top: -3px;}
 .sub_sec_text{font-size: 15px; line-height: 28px; color: #666666;}
@@ -310,10 +310,11 @@ h3.sub_sec_title.be_line::before{content: ""; width: 15px; height: 5px; backgrou
 .tech01_3 .sub_sec_text{margin-bottom: 10px;}
 .tech02_1{margin-bottom: 60px;}
 .sub_line{font-size: 15px; color: #999999; margin: 8px 0px; margin-left: 40px;}
-.img_area{margin: 30px 0 60px;}
+.img_area{margin: 30px 0 60px; text-align: center;}
+.disp_ .img_area{margin: 50px 0;}
 .tech04_1 .img_area{margin-bottom: 30px;}
-.tech02_3 .sub_sec_text,.tech03_2 .sub_sec_text{margin-bottom: 30px;}
-
+.tech02_3 .sub_sec_text,.tech03_2 .sub_sec_text,.disp01_5 .sub_sec_text,.disp01_5 .sub_sec_text{margin-bottom: 30px;}
+.disp01_5 .sub_sec_title{letter-spacing: -1px;}
 .inst01_2 ul li{margin-top: 10px; border: 1px solid #ddd; border-left: 2px solid #3d6cb4;height: 65px;}
 .inst01_2 ul li .be_list{font-size: 20px; font-weight: 500; color: #3d6cb4;display: inline-block; margin-left: 20px;}
 .inst01_2 ul li p{display: inline; color: #666666; font-size: 15px; font-weight: 300; letter-spacing: -1px;}
@@ -330,6 +331,37 @@ h3.sub_sec_title.be_line::before{content: ""; width: 15px; height: 5px; backgrou
 .inst03 .inst03_2 .sub_table td{text-align: center;border-right:1px solid #ddd; line-height: 24px; padding: 5px 0;}
 .inst03 .inst03_2 .sub_table td:first-child{text-align: left;padding: 5px 18px;}
 .inst03 .inst03_2 .sub_table td:last-child{border-right: 0;}
+
+.disp02_2{font-size: 0;}
+.disp02_2 {}
+.disp02_2 .disp_img_box,.disp02_2 .disp_top_person{display: inline-block; font-size: 0; vertical-align: top;}
+.disp02_2 .disp_img_box{width: 180px;}
+.disp02_2 .disp_top_person{width: 615px;}
+.disp02_2 .disp_top_person .sub_sec_title{margin-top: 15px; border-bottom: 4px solid #3d6db5;padding-left: 30px;}
+.disp02_2 .disp_top_person .sub_sec_text{padding-left: 30px;display: inline-block; vertical-align: top; font-size: 15px;}
+.disp_top_person .bc_e1{font-size: 15px;}
+.bc_e1{padding: 0px 5px;background-color: #f1f1f1; color: #666666; font-size: 14px; display: inline-block; font-weight: bold;}
+.disp_top_person{margin-bottom: 20px;}
+
+.disp_top_list .bc_e1{margin-top: 10px;}
+.sub_sec_text .bc_e1:first-child{margin-top: 0;}
+.disp_top_list{padding:20px 20px 30px; width: 390px; border: 1px solid #ddd; margin-top: 20px; display: inline-block; letter-spacing: -1px; vertical-align: top;}
+.disp_top_list:nth-child(3){height: 395px;}
+.disp_top_list:nth-child(4){height: 395px;}
+.disp_top_list:nth-child(5){height: 445px;}
+.disp_top_list:nth-child(6){height: 445px;}
+.disp_top_list:nth-child(7){height: 368px;}
+.disp_top_list:nth-child(8){height: 368px;}
+.disp_top_list:nth-child(9){height: 345px;}
+.disp_top_list:nth-child(10){height: 345px;}
+.disp_top_list:nth-child(11){height: 345px;}
+.disp_top_list:nth-child(12){height: 345px;}
+.disp_top_list:nth-child(13){height: 400px;}
+.disp_top_list:nth-of-type(odd){margin-right: 10px;}
+.disp_top_list .disp_img_box{float: right; text-align: right; width: 110px;}
+.disp_top_list p.sub_sec_text{font-size: 14px; line-height: 26px;}
+
+.happy01_3 .sub_sec_text span{color: #999;display: inline-block;margin: 5px 0;}
 
 /*검색 결과창*/
 .all_search{color: #555555;}
