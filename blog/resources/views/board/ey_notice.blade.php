@@ -41,7 +41,7 @@
 						<tr>
 							<td>{{ $number-- }}</td>
 							<td>{{ $data->category }}</td>
-							<td><a href="#none">{{ $data->subject }}</a></td>
+							<td><a href="/ey_notice/ey_write_notice/modify/?board_idx={{ $data->idx }}">{{ $data->subject }}</a></td>
 							<td>{{ $data->writer }}</td>
 							<td>{{ $data->reg_date }}</td>
 							<td class="delete_box"><a href="javascript:notice_control('{{ $data->idx }}');">삭제</a><a href="/ey_notice/ey_write_notice/modify/?board_idx={{ $data->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>

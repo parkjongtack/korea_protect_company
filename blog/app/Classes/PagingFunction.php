@@ -328,7 +328,7 @@ Class PagingFunction
 
 				for($i = $start_view; $i <= $end_view; $i++) {
 					if($i == $thisPage) {
-						$paging .= '<button type="button" class="btn btn-primary">' . $i . '</button>';
+						$paging .= '<button type="button" class="btn btn-primary on">' . $i . '</button>';
 					} else {
 						$paging .= '<span onclick="javascript:' . $link . '(' . $i . ')"><button type="button" class="btn btn-default">' . $i . '</button></span>';
 					}
@@ -368,7 +368,7 @@ Class PagingFunction
 				
 				for($i = $blockStartView; $i <= $endloop; $i++) {
 					if($thisPage == $i) {
-						$paging .= '<button type="button" class="btn btn-primary">' . $i . '</button>';
+						$paging .= '<button type="button" class="btn btn-primary on">' . $i . '</button>';
 					} else {
 						$paging .= '<span onclick="javascript:' . $link . '(' . $i . ')"><button type="button" class="btn btn-default">' . $i . '</button></span>';
 					}

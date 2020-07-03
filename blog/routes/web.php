@@ -83,21 +83,14 @@ Route::get('/happycall03', function () {
 });
 
 Route::get('/request_education', 'RequestProcess@request_form');
-
 Route::post('/request_education/request_education_action2', 'RequestProcess@request_education_action2');
-
 Route::post('/request_education/request_education_action', 'RequestProcess@request_education_action');
 
 Route::get('/happy_call', 'Board@happyCall');
-
 Route::post('/happy_call/happy_call_action', 'Board@happy_call_action');
-
 Route::post('/happy_call/comment_write_action', 'Board@happy_call_comment_action');
-
 Route::post('/image_upload_action', 'Board@image_upload_action');
-
 Route::post('/image_delete_action', 'Board@image_delete_action');
-
 Route::post('/happy_call/passwd_check_action', 'Board@passwordCheckAction');
 
 Route::get('/information01', function () {
@@ -125,13 +118,18 @@ Route::get('/happy_call/board_passwd_check', 'Board@happyCallPassCheck');
 Route::get('/happy_call/board_view', 'Board@happyCallView');
 
 Route::get('/notice/notice_list', 'Board@notice_list');
-
 Route::get('/ey_notice/ey_write_notice', 'Board@ey_write_notice');
 Route::get('/ey_notice/ey_write_notice/modify', 'Board@ey_modify_notice');
 Route::get('/ey_notice', 'Board@ey_notice');
 Route::post('/ey_notice/ey_board_write_action', 'Board@notice_action');
 Route::post('/ey_notice/ey_notice_control', 'Board@notice_control');
 
+Route::get('/faq/board_view', 'Board@faqView');
+Route::get('/ey_faq/ey_write_faq', 'Board@ey_write_faq');
+Route::post('/ey_faq/ey_board_write_action', 'Board@faq_action');
+Route::get('/ey_faq/ey_write_faq/modify', 'Board@ey_modify_faq');
+Route::get('/ey_faq', 'Board@faq_list');
+Route::post('/ey_faq/ey_faq_control', 'Board@faq_control');
 
 Route::get('/search', function () {
     return view('search');
@@ -150,9 +148,11 @@ Route::get('/ey_moslider', function () {
 Route::get('/ey_mopopup', function () {
     return view('ey_main');
 });
+/*
 Route::get('/ey_faq', function () {
     return view('ey_community');
 });
+*/
 Route::get('/ey_notice2', function () {
     return view('ey_community');
 });

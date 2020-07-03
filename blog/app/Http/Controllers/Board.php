@@ -19,6 +19,10 @@ use App\Classes\jsonRPCClient;
 class Board extends Controller
 {
 
+	public function ey_write_faq(Request $request) {
+		return view("board/ey_write_faq");
+	}   
+
 	public function ey_write_notice(Request $request) {
 		return view("ey_write_notice");
 	}    
@@ -29,6 +33,90 @@ class Board extends Controller
 
 	public function happyCallPassCheck(Request $request) {
 		return view("secret_number_write");		
+	}
+
+	public function faq_list(Request $request) {
+
+		$paging_option = array(
+			"pageSize" => 15,
+			"blockSize" => 5
+		);		
+
+		$thisPage = ($request->page) ? $request->page : 1 ;
+		$paging = new PagingFunction($paging_option);
+
+		$totalQuery = DB::table('board');
+		if($request->key != "") {
+			$totalQuery->where(function($totalQuery) use($request){
+				$totalQuery->where('subject', 'like', '%' . $request->key . '%')
+				->orWhere('contents', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		$totalQuery->where('board_type', 'ey_faq');
+        $totalQuery->where(function($query_set) {
+                $query_set->where('top_type', '<>', 'Y')
+                ->orWhere('top_type', null);
+        });
+
+
+		$totalCount = $totalQuery->get()->count();
+		
+		$paging_view = $paging->paging($totalCount, $thisPage, "page");
+		
+		$query = DB::table('board')
+				->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+				->orderBy('idx', 'desc');
+				
+		if($request->key != "") {
+			$query->where(function($query) use($request){
+				$query->where('subject', 'like', '%' . $request->key . '%')
+				->orWhere('contents', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		$query->where('board_type', 'ey_faq');
+        $query->where(function($query_set2) {
+                $query_set2->where('top_type', '<>', 'Y')
+                ->orWhere('top_type', null);
+        });
+		//$query->where('top_type', '<>', 'Y');
+		//$query->orWhere('top_type', null);
+		
+		if($request->page != "" && $request->page > 1) {
+			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
+		}
+
+		$list = $query->take($paging_option["pageSize"])->get();
+		
+		// 게시판 출력 글 번호 계산
+		$number =$totalCount-($paging_option["pageSize"]*($thisPage-1));
+
+		$board_top_count = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', 'ey_faq')
+					->where('top_type', 'Y')
+					->get()->count();
+
+		$board_top_list = DB::table('board') 
+					->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+					->where('board_type', 'ey_faq')
+					->where('top_type', 'Y')
+					->get();
+
+		$return_list = array();
+		$return_list["board_top_count"] = $board_top_count;
+		$return_list["board_top_list"] = $board_top_list;
+		$return_list["data"] = $list;
+		$return_list["number"] = $number;
+		$return_list["key"] = $request->key;
+		$return_list["totalCount"] = $totalCount;
+		$return_list["paging_view"] = $paging_view;
+		$return_list["page"] = $thisPage;
+		$return_list["key"] = $request->key;
+
+		return view("board/ey_faq", $return_list);
+
 	}
 
 	public function notice_list(Request $request) {
@@ -115,6 +203,19 @@ class Board extends Controller
 
 	}
 
+	public function ey_modify_faq(Request $request) {
+
+		$board_infom = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', 'ey_faq')
+					->where('idx', $request->board_idx)
+					->first();
+
+		$return_list['data'] = $board_infom;
+
+		return view("board/ey_modify_faq", $return_list);
+	}
+
 	public function ey_modify_notice(Request $request) {
 
 		$board_infom = DB::table('board') 
@@ -171,6 +272,100 @@ class Board extends Controller
 		echo "<script>alert('댓글 작성이 완료되었습니다.');location.href = '/".$request->board_type."/board_view/?idx=".$request->board_idx."&board_type=".$request->board_type."';</script>";
 		exit;
 
+	}
+
+	public function faqView(Request $request) {
+
+		$board_infom = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('idx', $request->idx)
+					->first();
+
+		if($board_infom->secret_status == "Y") {
+			
+			echo "<script>alert('비밀글입니다.');location.href='/happy_call/board_passwd_check?idx=".$request->idx."&board_type=".$request->board_type."';</script>";
+			exit;
+
+		}
+
+		$return_list["data"] = $board_infom;
+
+		$board_next_infom_cnt = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('idx', '>', $request->idx)
+					->orderBy('idx','asc')
+					->get()->count();
+		
+		$board_next_infom = array();
+		if($board_next_infom_cnt > 0) {
+
+			$board_next_infom = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', $request->board_type)
+						->where('idx', '>', $request->idx)
+						->orderBy('idx','asc')
+						->first();
+
+			$board_next_infom_idx = $board_next_infom->idx;
+			$board_next_infom_board_type = $board_next_infom->board_type;
+		
+
+		} else {
+			$board_next_infom_idx = $request->idx;
+			$board_next_infom_board_type = $request->board_type;
+		}
+
+		$return_list["board_next_infom_idx"] = $board_next_infom_idx;
+		$return_list["board_next_infom_board_type"] = $board_next_infom_board_type;
+		$return_list["board_next_inform"] = $board_next_infom;
+
+		
+			$board_prev_infom_cnt = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', $request->board_type)
+						->where('idx', '<', $request->idx)
+						->orderBy('idx','desc')
+						->get()->count();		
+
+		$board_prev_infom = array();
+		if($board_prev_infom_cnt > 0) {
+		
+			$board_prev_infom = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', $request->board_type)
+						->where('idx', '<', $request->idx)
+						->orderBy('idx','desc')
+						->first();
+
+			$board_prev_infom_idx = $board_prev_infom->idx;
+			$board_prev_infom_board_type = $board_prev_infom->board_type;
+
+		} else {
+			$board_prev_infom_idx = $request->idx;
+			$board_prev_infom_board_type = $request->board_type;
+		}
+
+		$return_list["board_prev_infom_idx"] = $board_prev_infom_idx;
+		$return_list["board_prev_infom_board_type"] = $board_prev_infom_board_type;
+		$return_list["board_prev_inform"] = $board_prev_infom;
+
+		$comment_infom_cnt = DB::table('comment') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('board_idx', $request->idx)
+					->get()->count();
+
+		$comment_infom = DB::table('comment') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('board_idx', $request->idx)
+					->get();
+
+		$return_list["comment_data"] = $comment_infom;
+
+		return view("board_view", $return_list);		
 	}
 
 	public function happyCallView(Request $request) {
@@ -356,6 +551,11 @@ class Board extends Controller
 
 	}
 
+	public function faq_control(Request $request) {
+		DB::table('board')->where('idx', $request->idx)->delete();
+		return true;
+	}
+
 	public function notice_control(Request $request) {
 		DB::table('board')->where('idx', $request->idx)->delete();
 		return true;
@@ -502,6 +702,88 @@ class Board extends Controller
 
 	}
 
+	public function faq_action(Request $request) {
+		
+		if($request->secretCheck && $request->secretNumber) {
+			$secretStatus = "Y";
+			$secretNumber = Bcrypt($request->secretNumber);
+		} else {
+			$secretStatus = "N";
+			$secretNumber = "";
+		}
+
+		$board_cnt = DB::table('board')
+					->where('board_type', $request->board_type)->get()->count();
+
+		$answer_infom = DB::table('board') 
+					->select(DB::raw('board.grp + 1 as grp_now, board.prino + 1 as prino_now'))
+					->where('board_type', $request->board_type)
+					->orderBy('idx', 'desc')
+					->first();
+
+		if($board_cnt <= 0) {
+			$prino_now = 1;
+			$grp_now = 1;
+		} else {
+			$prino_now = $answer_infom->prino_now;
+			$grp_now = $answer_infom->grp_now;
+		}
+		
+		if($request->writer_file) {
+			$file = $request->writer_file->store('images');
+			$file_array = explode("/", $file);
+			copy("../storage/app/images/".$file_array[1], "./storage/app/images/".$file_array[1]);
+		} else {
+			$file_array[1] = null;
+		}
+
+		if($request->write_type == "modify") {
+
+			DB::table('board')->where('idx', $request->board_idx)->update(
+				[
+					'subject' => $request->subject,
+					'contents' => $request->contents,
+					'category' => $request->category,
+					'writer' => $request->writer,
+					'ip_addr' => request()->ip(),
+					'board_type' => $request->board_type,
+					'parno' => 0,
+					'prino' => $prino_now,
+					'depth' => 1,
+					'grp' => $grp_now,
+				]
+			);
+
+			echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+			exit;
+
+		} else {
+
+			DB::table('board')->insert(
+				[
+					'subject' => $request->subject,
+					'contents' => $request->contents,
+					'category' => $request->category,
+					'writer' => $request->writer,
+					'ip_addr' => request()->ip(),
+					'board_type' => $request->board_type,
+					'parno' => 0,
+					'prino' => $prino_now,
+					'depth' => 1,
+					'grp' => $grp_now,
+					'reg_date' => \Carbon\Carbon::now(),
+				]
+			);
+
+			echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+			exit;
+
+		}
+
+
+
+	}
+
 	public function notice_action(Request $request) {
 		
 		if($request->secretCheck && $request->secretNumber) {
@@ -583,8 +865,6 @@ class Board extends Controller
 			exit;
 
 		}
-
-
 
 	}
 
