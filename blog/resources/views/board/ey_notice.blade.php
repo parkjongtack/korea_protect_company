@@ -1,7 +1,8 @@
 @include('ey_header')
 {{-- 공지사항 --}}
 <div class="con_main">
-    <form action="">
+    <form name="search_form" action="">
+		<input type="hidden" name="page" />
         <table>
             <colgroup>
                 <col width="100">

@@ -1,3 +1,9 @@
+function page(page){		
+	var f = document.search_form;
+	f.page.value = page;
+	f.submit();
+}
+
 $(function(){
     var nav_dep1 = $('.nav_img');
     var nav_dep2 = $('.dep2');

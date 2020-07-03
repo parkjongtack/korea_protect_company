@@ -1,3 +1,9 @@
+function page(page){		
+	var f = document.search_form;
+	f.page.value = page;
+	f.submit();
+}
+
 $(document).ready(function(){
     var t_nav = $('.top_nav li');
     var s_nav = $('.h_sub_nav');
