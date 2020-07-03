@@ -7,7 +7,7 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">정보마당</a></li>
-                <li class="on"><a href="/information01">공지사항</a></li>
+                <li class="on"><a href="/notice/notice_list">공지사항</a></li>
                 <li><a href="/information02">법령정보</a></li>
                 <li><a href="/information03">보안서식</a></li>
                 <li><a href="/information04">자료실</a></li>

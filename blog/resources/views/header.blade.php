@@ -114,7 +114,7 @@
                                 <a href="/happycall01">
                                     <li>상담서비스 소개</li>
                                 </a>
-                                <a href="/happycall02">
+                                <a href="/ey_faq">
                                     <li>FAQ</li>
                                 </a>
                                 <a href="/happy_call">

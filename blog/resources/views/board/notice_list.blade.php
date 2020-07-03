@@ -46,7 +46,7 @@
 						<tr class="notice">
 							<td>공지</td>
 							<td>{{ $board_top_list->category }}</td>
-							<td class="table_td_title">{{ $board_top_list->subject }}</td>
+							<td class="table_td_title"><a href="/notice/notice_view/?idx={{ $board_top_list->idx }}&board_type={{ $board_top_list->board_type }}">{{ $board_top_list->subject }}</td>
 							<td>{{ $board_top_list->writer }}</td>
 							<td>{{ $board_top_list->reg_date_cut }}</td>
 						</tr>
@@ -60,7 +60,7 @@
 							<tr>
 								<td>{{ $number-- }}</td>
 								<td>{{ $data->category }}</td>
-								<td class="table_td_title">{{ $data->subject }}</td>
+								<td class="table_td_title"><a href="/notice/notice_view/?idx={{ $data->idx }}&board_type={{ $data->board_type }}">{{ $data->subject }}</a></td>
 								<td>{{ $data->writer }}</td>
 								<td>{{ $data->reg_date_cut }}</td>
 							</tr>

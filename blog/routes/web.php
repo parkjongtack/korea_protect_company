@@ -118,6 +118,7 @@ Route::get('/happy_call/board_passwd_check', 'Board@happyCallPassCheck');
 Route::get('/happy_call/board_view', 'Board@happyCallView');
 
 Route::get('/notice/notice_list', 'Board@notice_list');
+Route::get('/notice/notice_view', 'Board@noticeView');
 Route::get('/ey_notice/ey_write_notice', 'Board@ey_write_notice');
 Route::get('/ey_notice/ey_write_notice/modify', 'Board@ey_modify_notice');
 Route::get('/ey_notice', 'Board@ey_notice');

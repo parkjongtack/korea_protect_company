@@ -275,6 +275,101 @@ class Board extends Controller
 	}
 
 	public function faqView(Request $request) {
+		
+		$board_infom = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('idx', $request->idx)
+					->first();
+		/*
+		if($board_infom->secret_status == "Y") {
+			
+			echo "<script>alert('비밀글입니다.');location.href='/happy_call/board_passwd_check?idx=".$request->idx."&board_type=".$request->board_type."';</script>";
+			exit;
+
+		}
+		*/	
+
+		$return_list["data"] = $board_infom;
+		
+		$board_next_infom_cnt = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('idx', '>', $request->idx)
+					->orderBy('idx','asc')
+					->get()->count();
+
+		$board_next_infom = array();
+		if($board_next_infom_cnt > 0) {
+
+			$board_next_infom = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', $request->board_type)
+						->where('idx', '>', $request->idx)
+						->orderBy('idx','asc')
+						->first();
+
+			$board_next_infom_idx = $board_next_infom->idx;
+			$board_next_infom_board_type = $board_next_infom->board_type;
+		
+
+		} else {
+			$board_next_infom_idx = $request->idx;
+			$board_next_infom_board_type = $request->board_type;
+		}
+
+		$return_list["board_next_infom_idx"] = $board_next_infom_idx;
+		$return_list["board_next_infom_board_type"] = $board_next_infom_board_type;
+		$return_list["board_next_inform"] = $board_next_infom;
+
+		
+			$board_prev_infom_cnt = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', $request->board_type)
+						->where('idx', '<', $request->idx)
+						->orderBy('idx','desc')
+						->get()->count();		
+
+		$board_prev_infom = array();
+		if($board_prev_infom_cnt > 0) {
+		
+			$board_prev_infom = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', $request->board_type)
+						->where('idx', '<', $request->idx)
+						->orderBy('idx','desc')
+						->first();
+
+			$board_prev_infom_idx = $board_prev_infom->idx;
+			$board_prev_infom_board_type = $board_prev_infom->board_type;
+
+		} else {
+			$board_prev_infom_idx = $request->idx;
+			$board_prev_infom_board_type = $request->board_type;
+		}
+
+		$return_list["board_prev_infom_idx"] = $board_prev_infom_idx;
+		$return_list["board_prev_infom_board_type"] = $board_prev_infom_board_type;
+		$return_list["board_prev_inform"] = $board_prev_infom;
+
+		$comment_infom_cnt = DB::table('comment') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('board_idx', $request->idx)
+					->get()->count();
+
+		$comment_infom = DB::table('comment') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('board_idx', $request->idx)
+					->get();
+
+		$return_list["comment_data"] = $comment_infom;
+
+		return view("board/faq_view", $return_list);		
+	}
+
+	public function noticeView(Request $request) {
 
 		$board_infom = DB::table('board') 
 					->select(DB::raw('*'))
@@ -365,7 +460,7 @@ class Board extends Controller
 
 		$return_list["comment_data"] = $comment_infom;
 
-		return view("board_view", $return_list);		
+		return view("board/notice_view", $return_list);		
 	}
 
 	public function happyCallView(Request $request) {
