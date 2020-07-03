@@ -35,7 +35,7 @@ class Board extends Controller
 		return view("secret_number_write");		
 	}
 
-	public function faq_list(Request $request) {
+	public function ey_faq_list(Request $request) {
 
 		$paging_option = array(
 			"pageSize" => 15,
@@ -116,6 +116,90 @@ class Board extends Controller
 		$return_list["key"] = $request->key;
 
 		return view("board/ey_faq", $return_list);
+
+	}
+
+	public function faq_list(Request $request) {
+
+		$paging_option = array(
+			"pageSize" => 15,
+			"blockSize" => 5
+		);		
+
+		$thisPage = ($request->page) ? $request->page : 1 ;
+		$paging = new PagingFunction($paging_option);
+
+		$totalQuery = DB::table('board');
+		if($request->key != "") {
+			$totalQuery->where(function($totalQuery) use($request){
+				$totalQuery->where('subject', 'like', '%' . $request->key . '%')
+				->orWhere('contents', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		$totalQuery->where('board_type', 'ey_faq');
+        $totalQuery->where(function($query_set) {
+                $query_set->where('top_type', '<>', 'Y')
+                ->orWhere('top_type', null);
+        });
+
+
+		$totalCount = $totalQuery->get()->count();
+		
+		$paging_view = $paging->paging($totalCount, $thisPage, "page");
+		
+		$query = DB::table('board')
+				->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+				->orderBy('idx', 'desc');
+				
+		if($request->key != "") {
+			$query->where(function($query) use($request){
+				$query->where('subject', 'like', '%' . $request->key . '%')
+				->orWhere('contents', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		$query->where('board_type', 'ey_faq');
+        $query->where(function($query_set2) {
+                $query_set2->where('top_type', '<>', 'Y')
+                ->orWhere('top_type', null);
+        });
+		//$query->where('top_type', '<>', 'Y');
+		//$query->orWhere('top_type', null);
+		
+		if($request->page != "" && $request->page > 1) {
+			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
+		}
+
+		$list = $query->take($paging_option["pageSize"])->get();
+		
+		// 게시판 출력 글 번호 계산
+		$number =$totalCount-($paging_option["pageSize"]*($thisPage-1));
+
+		$board_top_count = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', 'ey_faq')
+					->where('top_type', 'Y')
+					->get()->count();
+
+		$board_top_list = DB::table('board') 
+					->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+					->where('board_type', 'ey_faq')
+					->where('top_type', 'Y')
+					->get();
+
+		$return_list = array();
+		$return_list["board_top_count"] = $board_top_count;
+		$return_list["board_top_list"] = $board_top_list;
+		$return_list["data"] = $list;
+		$return_list["number"] = $number;
+		$return_list["key"] = $request->key;
+		$return_list["totalCount"] = $totalCount;
+		$return_list["paging_view"] = $paging_view;
+		$return_list["page"] = $thisPage;
+		$return_list["key"] = $request->key;
+
+		return view("board/faq_list", $return_list);
 
 	}
 

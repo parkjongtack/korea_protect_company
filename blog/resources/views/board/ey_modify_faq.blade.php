@@ -45,7 +45,7 @@
                         카테고리
                     </div>
                     <div class="line_content">
-						<input type="text" name="category" value="공지사항" readonly style="border:none;" />
+						<input type="text" name="category" value="FAQ" readonly style="border:none;" />
                     </div>
                 </div>
             </div>

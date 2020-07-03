@@ -126,10 +126,12 @@ Route::post('/ey_notice/ey_board_write_action', 'Board@notice_action');
 Route::post('/ey_notice/ey_notice_control', 'Board@notice_control');
 
 Route::get('/faq/board_view', 'Board@faqView');
+Route::get('/faq/faq_list', 'Board@faq_list');
+
 Route::get('/ey_faq/ey_write_faq', 'Board@ey_write_faq');
 Route::post('/ey_faq/ey_board_write_action', 'Board@faq_action');
 Route::get('/ey_faq/ey_write_faq/modify', 'Board@ey_modify_faq');
-Route::get('/ey_faq', 'Board@faq_list');
+Route::get('/ey_faq', 'Board@ey_faq_list');
 Route::post('/ey_faq/ey_faq_control', 'Board@faq_control');
 
 Route::get('/search', function () {
