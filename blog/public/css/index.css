@@ -199,10 +199,11 @@ img{vertical-align: middle; max-width: 100%;}
 
 /*페이징*/
 .pag_write{font-size: 0; margin-top: 45px; text-align: left; float: left;}
-.pag_write span{display: inline-block; width: 25px; height: 25px; line-height: 25px; text-align: center; color: #888888; font-size: 12px;}
+.pag_write button{display: inline-block; width: 25px; height: 25px; line-height: 25px; text-align: center; color: #888888; font-size: 12px;}
+.pag_write button{color: #888; border:0; background-color:#fff}
 .pag_write span button{color: #888; border:0; background-color:#fff}
-.pag_write span.on{background-color: #3d6cb4; color: #fff;}
-.pag_write span.on a{color: #fff;}
+.pag_write button.on{background-color: #3d6cb4; color: #fff;}
+.pag_write span.on button{color: #fff;}
 
 /*게시판 검색*/
 .board_search_con{position: relative; margin-left: 130px; float: right; margin-top: 35px;}

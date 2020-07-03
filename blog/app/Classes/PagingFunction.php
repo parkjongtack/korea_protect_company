@@ -248,7 +248,7 @@ Class PagingFunction
 				
 			} else {
 				if($prevBtn == "") {
-					$prevBtn = '<span onclick="javascript:' . $link . '(' . ($thisPage - 1) . ')"><button type="button" class="btn btn-danger">◀</button></span>';
+					$prevBtn = '<span onclick="javascript:' . $link . '(' . ($thisPage - 1) . ')"><button type="button" class="btn btn-danger"><img src="../img/pag_prev_btn.png"></button></span>';
 				} else {
 					$prevBtn = '<span onclick="javascript:' . $link . '(' . ($thisPage - 1) . ')">' . $prevBtn . '</span>';
 				}
@@ -265,7 +265,7 @@ Class PagingFunction
 				}
 			} else {
 				if($firstBtn == "") {
-					$firstBtn = '<span onclick="javascript:' . $link . '(1)"><button type="button" class="btn btn-danger">◀◀</button></span>';
+					//$firstBtn = '<span onclick="javascript:' . $link . '(1)"><button type="button" class="btn btn-danger">◀◀</button></span>';
 				} else {
 					$firstBtn = '<span onclick="javascript:' . $link . '(1)">' . $firstBtn . '</span>';
 				}
@@ -283,7 +283,7 @@ Class PagingFunction
 				}
 			} else {
 				if($nextBtn == "") {
-					$nextBtn = '<span onclick="javascript:' . $link . '(' . ($thisPage + 1) . ')"><button type="button" class="btn btn-danger">▶</button></span>';
+					$nextBtn = '<span onclick="javascript:' . $link . '(' . ($thisPage + 1) . ')"><button type="button" class="btn btn-danger"><img src="../img/pag_next_btn.png"></button></span>';
 				} else {
 					$nextBtn = '<span onclick="javascript:' . $link . '(' . ($thisPage + 1) . ')">' . $nextBtn . '</span>';
 				}
@@ -300,7 +300,7 @@ Class PagingFunction
 				}			
 			} else {
 				if($endBtn == "") {
-					$endBtn = '<span onclick="javascript:' . $link . '(' . $totalPage . ')"><button type="button" class="btn btn-danger">▶▶</button></span>';
+					//$endBtn = '<span onclick="javascript:' . $link . '(' . $totalPage . ')"><button type="button" class="btn btn-danger">▶▶</button></span>';
 				} else {
 					$endBtn = '<span onclick="javascript:' . $link . '(' . $totalPage . ')">' . $endBtn . '</span>';
 				}
@@ -383,7 +383,7 @@ Class PagingFunction
 					}
 				} else {
 					if($prevBtn == "") {
-						$prevBtn = '<span onclick="javascript:' . $link . '(' . $prevNum . ')"><button type="button" class="btn btn-danger">◀</button></span>';
+						$prevBtn = '<span onclick="javascript:' . $link . '(' . $prevNum . ')"><button type="button" class="btn btn-danger"><img src="../img/pag_prev_btn.png"></button></span>';
 					} else {
 						$prevBtn = '<span onclick="javascript:' . $link . '(' . $prevNum . ')">' . $prevBtn . '</span>';
 					}
@@ -395,7 +395,7 @@ Class PagingFunction
 					}
 				} else {
 					if($nextBtn == "") {
-						$nextBtn = '<span onclick="javascript:' . $link . '(' . $nextNum . ')"><button type="button" class="btn btn-danger">▶</button></span>';
+						$nextBtn = '<span onclick="javascript:' . $link . '(' . $nextNum . ')"><button type="button" class="btn btn-danger"><img src="../img/pag_next_btn.png"></button></span>';
 					} else {
 						$nextBtn = '<span onclick="javascript:' . $link . '(' . $nextNum . ')">' . $nextBtn . '</span>';
 					}
