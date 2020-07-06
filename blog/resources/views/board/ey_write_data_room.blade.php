@@ -33,9 +33,8 @@
     }
   </style>
 <div class="con_main">
-    <form action="/ey_notice/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
+    <form action="/{{ request()->segment(1) }}/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
 		{{ csrf_field() }}
-		<input type="hidden" name="board_idx" value="{{ $_GET['board_idx'] }}" />
 		<input type="hidden" name="board_type" value="{{ request()->segment(1) }}" />
 		<input type="hidden" name="write_type" value="{{ request()->segment(3) }}" />
         <div class="write_box">
@@ -45,18 +44,34 @@
                         카테고리
                     </div>
                     <div class="line_content">
-						@if(request()->segment(1) == 'ey_notice')
-							<input type="text" name="category" value="공지사항" readonly style="border:none;" />
-						@elseif(request()->segment(1) == 'ey_newsletter')
-							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
-						@endif
+					@if(request()->segment(1) == 'ey_law_data_room')
+						<select name="category">
+							<option value="1">산업기술보호법</option>
+							<option value="2">영업비밀보호법</option>
+							<option value="3">방산기술보호법</option>
+							<option value="4">중소기업기술보호법</option>
+							<option value="5">기타 법령</option>
+						</select>
+					@elseif(request()->segment(1) == 'ey_security_data_room')
+						<select name="category">
+							<option value="1">규정</option>
+							<option value="2">서식</option>
+						</select>
+					@else
+						<select name="category" onchange="javascript:data_room_type(this.value);">
+							<option value="1">연구보고서</option>
+							<option value="2">행사자료</option>
+							<option value="3">학술자료</option>
+							<option value="4">기타</option>
+						</select>
+					@endif
                     </div>
                 </div>
             </div>
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_content" style="padding-left:10px;">
-						<input type="checkbox" name="top_type" value="Y" @if($data->top_type == 'Y') checked @endif /> 최상단 공지 지정
+						<input type="checkbox" name="top_type" value="Y" /> 최상단 공지 지정
                     </div>
                 </div>
             </div>
@@ -66,7 +81,7 @@
                         제목
                     </div>
                     <div class="line_content">
-						<input type="text" name="subject" value="{{ $data->subject }}" />
+						<input type="text" name="subject" />
                     </div>
                 </div>
             </div>
@@ -75,34 +90,99 @@
                     <div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
                     <div class="line_content">
 						<div id="editor">
-							<div id="edit" style="width:900px;">{!! $data->contents !!}</div>
+							<div id="edit" style="width:900px;"></div>
 						</div>
 						<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
                     </div>
                 </div>
             </div>
-            <div class="write_line cate_file">
-                <div class="all_line">
-                    <div class="line_title">
-                        파일선택
-                    </div>
-                    <div class="line_content">
-                        <input type="file" name="writer_file" /><a href="/storage/app/images/{{ $data->attach_file }}">{{ $data->attach_file }}</a>
-                    </div>
-                </div>
-            </div>
+			@if(request()->segment(1) != 'ey_law_data_room' && request()->segment(1) != 'ey_security_data_room')
+				<div id="normal_file_area" class="write_line cate_file">
+					<div class="all_line">
+						<div class="line_title">
+							파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file" />
+						</div>
+					</div>
+				</div>
+			@endif
+			@if(request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room')
+				<div id="hwp_file_area" class="write_line cate_file">
+					<div class="all_line">
+						<div class="line_title">
+							HWP파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_hwp" />
+						</div>
+					</div>
+				</div>
+				<div id="doc_file_area" class="write_line cate_file">
+					<div class="all_line">
+						<div class="line_title">
+							DOC파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_doc" />
+						</div>
+					</div>
+				</div>
+				<div id="pdf_file_area" class="write_line cate_file">
+					<div class="all_line">
+						<div class="line_title">
+							PDF파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_pdf" />
+						</div>
+					</div>
+				</div>
+			@else
+				<div id="hwp_file_area" class="write_line cate_file" style="display:none;">
+					<div class="all_line">
+						<div class="line_title">
+							HWP파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_hwp" />
+						</div>
+					</div>
+				</div>
+				<div id="doc_file_area" class="write_line cate_file" style="display:none;">
+					<div class="all_line">
+						<div class="line_title">
+							DOC파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_doc" />
+						</div>
+					</div>
+				</div>
+				<div id="pdf_file_area" class="write_line cate_file" style="display:none;">
+					<div class="all_line">
+						<div class="line_title">
+							PDF파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_pdf" />
+						</div>
+					</div>
+				</div>
+			@endif
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_title">
                         작성자
                     </div>
                     <div class="line_content">
-                        <input type="text" name="writer" value="@if($data->writer) {{ $data->writer }} @else admin @endif" readonly style="border:none;">
+                        <input type="text" name="writer" value="admin" readonly style="border:none;">
                     </div>
                 </div>
             </div>
             <div class="submit_box" style="text-align:center;margin-top:10px;">
-                <input type="button" value="수정" onclick="javascript:write_action();">
+                <input type="button" value="등록" onclick="javascript:write_action();">
                 <input type="reset" value="취소">
             </div>
         </div>
@@ -147,6 +227,21 @@
   <script type="text/javascript" src="/editor/js/plugins/word_paste.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script>
+
+	function data_room_type(value) {
+		if(value == 4) {
+			$("#normal_file_area").hide();
+			$("#hwp_file_area").show();
+			$("#doc_file_area").show();
+			$("#pdf_file_area").show();
+		} else {
+			$("#normal_file_area").show();
+			$("#hwp_file_area").hide();
+			$("#doc_file_area").hide();
+			$("#pdf_file_area").hide();
+		}
+	}
+
     (function () {
       //new FroalaEditor("#edit")
 

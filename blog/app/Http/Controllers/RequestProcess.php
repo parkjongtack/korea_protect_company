@@ -17,7 +17,313 @@ use App\Classes\jsonRPCClient;
 
 class RequestProcess extends Controller
 {
-    
+
+	public function ey_modify_security(Request $request) {
+
+		if(request()->segment(1) == "ey_cso_request_education") {
+			$tableValue = "cso_education";
+		} else if(request()->segment(1) == "ey_security_request_education") {
+			$tableValue = "security_education";
+		}
+
+		$board_infom = DB::table($tableValue) 
+					->select(DB::raw('*'))
+					//->where('board_type', request()->segment(1))
+					->where('idx', $request->board_idx)
+					->first();
+
+		$return_list['data'] = $board_infom;
+		
+		/*
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+			return view("board/ey_modify_data_room", $return_list);
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+			return view("board/ey_modify_notice", $return_list);
+		}
+		*/
+
+		return view("board/security_request_education_modify", $return_list);
+
+	}	
+
+	public function ey_modify_cso(Request $request) {
+
+		if(request()->segment(1) == "ey_cso_request_education") {
+			$tableValue = "cso_education";
+		} else if(request()->segment(1) == "ey_security_request_education") {
+			$tableValue = "security_education";
+		}
+
+		$board_infom = DB::table($tableValue) 
+					->select(DB::raw('*'))
+					//->where('board_type', request()->segment(1))
+					->where('idx', $request->board_idx)
+					->first();
+
+		$return_list['data'] = $board_infom;
+		
+		/*
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+			return view("board/ey_modify_data_room", $return_list);
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+			return view("board/ey_modify_notice", $return_list);
+		}
+		*/
+
+		return view("board/cso_request_education_modify", $return_list);
+
+	}	
+
+	public function cso_request_list(Request $request) {
+
+		if(request()->segment(1) == "ey_cso_request_education") {
+			$tableValue = "cso_education";
+		} else if(request()->segment(1) == "ey_security_request_education") {
+			$tableValue = "security_education";
+		}
+
+		$paging_option = array(
+			"pageSize" => 10,
+			"blockSize" => 5
+		);		
+
+		$thisPage = ($request->page) ? $request->page : 1 ;
+		$paging = new PagingFunction($paging_option);
+
+		$totalQuery = DB::table($tableValue);
+		if($request->key != "") {
+			$totalQuery->where(function($totalQuery) use($request){
+				$totalQuery->where('write_corporation', 'like', '%' . $request->key . '%')
+				->orWhere('write_tel', 'like', '%' . $request->key . '%')
+				->orWhere('write_email', 'like', '%' . $request->key . '%')
+				->orWhere('write_addr1', 'like', '%' . $request->key . '%')
+				->orWhere('write_addr2', 'like', '%' . $request->key . '%')
+				->orWhere('write_know_reason', 'like', '%' . $request->key . '%')
+				->orWhere('write_name', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		//$totalQuery->where('board_type', $boardType);
+        //$totalQuery->where(function($query_set) {
+        //        $query_set->where('top_type', '<>', 'Y')
+        //        ->orWhere('top_type', null);
+        //});
+
+		if($request->category_type) {
+			$totalQuery->where('category', $request->category_type);
+		}
+
+		if(request()->segment(1) == "ey_data_room" && !$request->category_type) {
+			$totalQuery->where('category', 1);
+		}
+
+		$totalCount = $totalQuery->get()->count();
+		
+		$paging_view = $paging->paging($totalCount, $thisPage, "page");
+		
+		$query = DB::table($tableValue)
+				->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+				->orderBy('idx', 'desc');
+				
+		if($request->key != "") {
+			$query->where(function($query) use($request){
+				$query->where('write_corporation', 'like', '%' . $request->key . '%')
+				->orWhere('write_tel', 'like', '%' . $request->key . '%')
+				->orWhere('write_email', 'like', '%' . $request->key . '%')
+				->orWhere('write_addr1', 'like', '%' . $request->key . '%')
+				->orWhere('write_addr2', 'like', '%' . $request->key . '%')
+				->orWhere('write_know_reason', 'like', '%' . $request->key . '%')
+				->orWhere('write_name', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		//$query->where('board_type', $boardType);
+        //$query->where(function($query_set2) {
+        //        $query_set2->where('top_type', '<>', 'Y')
+        //        ->orWhere('top_type', null);
+        //});
+		
+		//$query->where('top_type', '<>', 'Y');
+		//$query->orWhere('top_type', null);
+		
+		//if($request->category_type) {
+			//$query->where('category', $request->category_type);
+		//}
+
+		//if(request()->segment(1) == "ey_data_room" && !$request->category_type) {
+		//	$query->where('category', 1);
+		//}
+
+		if($request->page != "" && $request->page > 1) {
+			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
+		}
+
+		$list = $query->take($paging_option["pageSize"])->get();
+		
+		// 게시판 출력 글 번호 계산
+		$number = $totalCount-($paging_option["pageSize"]*($thisPage-1));
+
+		//$board_top_count = DB::table($tableValue) 
+					//->select(DB::raw('*'))
+					//->where('board_type', $boardType)
+					//->where('top_type', 'Y')
+					//->get()->count();
+
+		//$board_top_list = DB::table($tableValue) 
+					//->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+					//->where('board_type', $boardType)
+					//->where('top_type', 'Y')
+					//->get();
+
+		$return_list = array();
+		//$return_list["board_top_count"] = $board_top_count;
+		//$return_list["board_top_list"] = $board_top_list;
+		$return_list["data"] = $list;
+		$return_list["number"] = $number;
+		$return_list["key"] = $request->key;
+		$return_list["totalCount"] = $totalCount;
+		$return_list["paging_view"] = $paging_view;
+		$return_list["page"] = $thisPage;
+		$return_list["key"] = $request->key;
+		
+		/*
+		if(request()->segment(1) != "notice" && request()->segment(1) != "ey_newsletter") {
+			return view("board/data_room", $return_list);
+		} else {
+			return view("board/notice_list", $return_list);
+		}
+		*/
+
+		return view("board/cso_request_education", $return_list);
+		
+		
+	}
+
+	public function security_request_list(Request $request) {
+
+		if(request()->segment(1) == "ey_cso_request_education") {
+			$tableValue = "cso_education";
+		} else if(request()->segment(1) == "ey_security_request_education") {
+			$tableValue = "security_education";
+		}
+
+		$paging_option = array(
+			"pageSize" => 10,
+			"blockSize" => 5
+		);		
+
+		$thisPage = ($request->page) ? $request->page : 1 ;
+		$paging = new PagingFunction($paging_option);
+
+		$totalQuery = DB::table($tableValue);
+		if($request->key != "") {
+			$totalQuery->where(function($totalQuery) use($request){
+				$totalQuery->where('write2_corporation', 'like', '%' . $request->key . '%')
+				->orWhere('write2_tel', 'like', '%' . $request->key . '%')
+				->orWhere('write2_email', 'like', '%' . $request->key . '%')
+				->orWhere('writer2_corporation_addr1', 'like', '%' . $request->key . '%')
+				->orWhere('writer2_corporation_addr2', 'like', '%' . $request->key . '%')
+				->orWhere('write2_know_reason', 'like', '%' . $request->key . '%')
+				->orWhere('write2_name', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		//$totalQuery->where('board_type', $boardType);
+        //$totalQuery->where(function($query_set) {
+        //        $query_set->where('top_type', '<>', 'Y')
+        //        ->orWhere('top_type', null);
+        //});
+
+		if($request->category_type) {
+			$totalQuery->where('category', $request->category_type);
+		}
+
+		if(request()->segment(1) == "ey_data_room" && !$request->category_type) {
+			$totalQuery->where('category', 1);
+		}
+
+		$totalCount = $totalQuery->get()->count();
+		
+		$paging_view = $paging->paging($totalCount, $thisPage, "page");
+		
+		$query = DB::table($tableValue)
+				->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+				->orderBy('idx', 'desc');
+				
+		if($request->key != "") {
+			$query->where(function($query) use($request){
+				$query->where('write2_corporation', 'like', '%' . $request->key . '%')
+				->orWhere('write2_tel', 'like', '%' . $request->key . '%')
+				->orWhere('write2_email', 'like', '%' . $request->key . '%')
+				->orWhere('writer2_corporation_addr1', 'like', '%' . $request->key . '%')
+				->orWhere('writer2_corporation_addr2', 'like', '%' . $request->key . '%')
+				->orWhere('write2_know_reason', 'like', '%' . $request->key . '%')
+				->orWhere('write2_name', 'like', '%' . $request->key . '%');
+			});
+		}
+
+		//$query->where('board_type', $boardType);
+        //$query->where(function($query_set2) {
+        //        $query_set2->where('top_type', '<>', 'Y')
+        //        ->orWhere('top_type', null);
+        //});
+		
+		//$query->where('top_type', '<>', 'Y');
+		//$query->orWhere('top_type', null);
+		
+		//if($request->category_type) {
+			//$query->where('category', $request->category_type);
+		//}
+
+		//if(request()->segment(1) == "ey_data_room" && !$request->category_type) {
+		//	$query->where('category', 1);
+		//}
+
+		if($request->page != "" && $request->page > 1) {
+			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
+		}
+
+		$list = $query->take($paging_option["pageSize"])->get();
+		
+		// 게시판 출력 글 번호 계산
+		$number = $totalCount-($paging_option["pageSize"]*($thisPage-1));
+
+		//$board_top_count = DB::table($tableValue) 
+					//->select(DB::raw('*'))
+					//->where('board_type', $boardType)
+					//->where('top_type', 'Y')
+					//->get()->count();
+
+		//$board_top_list = DB::table($tableValue) 
+					//->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
+					//->where('board_type', $boardType)
+					//->where('top_type', 'Y')
+					//->get();
+
+		$return_list = array();
+		//$return_list["board_top_count"] = $board_top_count;
+		//$return_list["board_top_list"] = $board_top_list;
+		$return_list["data"] = $list;
+		$return_list["number"] = $number;
+		$return_list["key"] = $request->key;
+		$return_list["totalCount"] = $totalCount;
+		$return_list["paging_view"] = $paging_view;
+		$return_list["page"] = $thisPage;
+		$return_list["key"] = $request->key;
+		
+		/*
+		if(request()->segment(1) != "notice" && request()->segment(1) != "ey_newsletter") {
+			return view("board/data_room", $return_list);
+		} else {
+			return view("board/notice_list", $return_list);
+		}
+		*/
+
+		return view("board/security_request_education", $return_list);
+		
+		
+	}
+
 	public function request_form(Request $request) {
 		return view("request_education");
 	}

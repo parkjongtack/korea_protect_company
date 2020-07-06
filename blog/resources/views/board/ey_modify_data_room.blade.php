@@ -33,7 +33,7 @@
     }
   </style>
 <div class="con_main">
-    <form action="/ey_notice/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
+    <form action="/{{ request()->segment(1) }}/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
 		{{ csrf_field() }}
 		<input type="hidden" name="board_idx" value="{{ $_GET['board_idx'] }}" />
 		<input type="hidden" name="board_type" value="{{ request()->segment(1) }}" />
@@ -45,12 +45,28 @@
                         카테고리
                     </div>
                     <div class="line_content">
-						@if(request()->segment(1) == 'ey_notice')
-							<input type="text" name="category" value="공지사항" readonly style="border:none;" />
-						@elseif(request()->segment(1) == 'ey_newsletter')
-							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
-						@endif
+					@if(request()->segment(1) == 'ey_law_data_room')
+						<select name="category">
+							<option value="1" @if($data->category == '1') selected @endif >산업기술보호법</option>
+							<option value="2" @if($data->category == '2') selected @endif >영업비밀보호법</option>
+							<option value="3" @if($data->category == '3') selected @endif >방산기술보호법</option>
+							<option value="4" @if($data->category == '4') selected @endif >중소기업기술보호법</option>
+							<option value="5" @if($data->category == '5') selected @endif >기타 법령</option>
+						</select>
+					@elseif(request()->segment(1) == 'ey_security_data_room')
+						<select name="category">
+							<option value="1" @if($data->category == '1') selected @endif >규정</option>
+							<option value="2" @if($data->category == '2') selected @endif >서식</option>
+						</select>
+					@else
+						<select name="category">
+							<option value="1" @if($data->category == '1') selected @endif >연구보고서</option>
+							<option value="2" @if($data->category == '2') selected @endif >행사자료</option>
+							<option value="3" @if($data->category == '3') selected @endif >학술자료</option>
+							<option value="4" @if($data->category == '4') selected @endif >기타</option>
+						</select>
                     </div>
+					@endif
                 </div>
             </div>
             <div class="write_line">
@@ -81,16 +97,79 @@
                     </div>
                 </div>
             </div>
-            <div class="write_line cate_file">
-                <div class="all_line">
-                    <div class="line_title">
-                        파일선택
-                    </div>
-                    <div class="line_content">
-                        <input type="file" name="writer_file" /><a href="/storage/app/images/{{ $data->attach_file }}">{{ $data->attach_file }}</a>
-                    </div>
-                </div>
-            </div>
+			@if(request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room')
+				<div id="hwp_file_area" class="write_line cate_file" >
+					<div class="all_line">
+						<div class="line_title">
+							HWP파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_hwp" />@if($data->attach_file2)<a href="/storage/app/images/{{ $data->attach_file2 }}">{{ $data->attach_file2 }}</a>@endif
+						</div>
+					</div>
+				</div>
+				<div id="doc_file_area" class="write_line cate_file" >
+					<div class="all_line">
+						<div class="line_title">
+							DOC파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_doc" />@if($data->attach_file3)<a href="/storage/app/images/{{ $data->attach_file3 }}">{{ $data->attach_file3 }}</a>@endif
+						</div>
+					</div>
+				</div>
+				<div id="pdf_file_area" class="write_line cate_file" >
+					<div class="all_line">
+						<div class="line_title">
+							PDF파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_pdf" />@if($data->attach_file4)<a href="/storage/app/images/{{ $data->attach_file4 }}">{{ $data->attach_file4 }}</a>@endif
+						</div>
+					</div>
+				</div>			
+			@else
+				<div class="write_line cate_file" @if($data->category == 4) style="display:none;" @endif>
+					<div class="all_line">
+						<div class="line_title">
+							파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file" /><a href="/storage/app/images/{{ $data->attach_file }}">{{ $data->attach_file }}</a>
+						</div>
+					</div>
+				</div>			
+				<div id="hwp_file_area" class="write_line cate_file" @if($data->category != 4) style="display:none;" @endif>
+					<div class="all_line">
+						<div class="line_title">
+							HWP파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_hwp" />@if($data->attach_file2)<a href="/storage/app/images/{{ $data->attach_file2 }}">{{ $data->attach_file2 }}</a>@endif
+						</div>
+					</div>
+				</div>
+				<div id="doc_file_area" class="write_line cate_file" @if($data->category != 4) style="display:none;" @endif>
+					<div class="all_line">
+						<div class="line_title">
+							DOC파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_doc" />@if($data->attach_file3)<a href="/storage/app/images/{{ $data->attach_file3 }}">{{ $data->attach_file3 }}</a>@endif
+						</div>
+					</div>
+				</div>
+				<div id="pdf_file_area" class="write_line cate_file" @if($data->category != 4) style="display:none;" @endif>
+					<div class="all_line">
+						<div class="line_title">
+							PDF파일선택
+						</div>
+						<div class="line_content">
+							<input type="file" name="writer_file_pdf" />@if($data->attach_file4)<a href="/storage/app/images/{{ $data->attach_file4 }}">{{ $data->attach_file4 }}</a>@endif
+						</div>
+					</div>
+				</div>
+			@endif
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_title">

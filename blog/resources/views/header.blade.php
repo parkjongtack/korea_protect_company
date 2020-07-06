@@ -17,7 +17,7 @@
                     <div class="h_top inner">
                         <a href="/">
                             <div class="h_logo">
-                                <img src="img/logo.png" alt="선업보안 정보 도서관 로고">
+                                <img src="/img/logo.png" alt="선업보안 정보 도서관 로고">
                             </div>
                         </a>
                         <div class="h_search">
@@ -125,16 +125,16 @@
                                 <a href="/notice/notice_list">
                                     <li>공지사항</li>
                                 </a>
-                                <a href="/information02">
+                                <a href="/ey_law_data_room/data_room_list/?category_type=ey_data_room&category_type=1">
                                     <li>법령정보</li>
                                 </a>
-                                <a href="/information03">
+                                <a href="/ey_security_data_room/data_room_list/?category_type=ey_data_room&category_type=1">
                                     <li>보안서식</li>
                                 </a>
-                                <a href="/information04">
+                                <a href="/ey_data_room/data_room_list/?category_type=ey_data_room&category_type=1">
                                     <li>자료실</li>
                                 </a>
-                                <a href="/information05">
+                                <a href="/ey_newsletter/notice_list">
                                     <li>뉴스레터</li>
                                 </a>
                             </ul>

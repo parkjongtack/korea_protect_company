@@ -8,7 +8,7 @@
             <ul>
                 <li><a href="#none" class="bold f_nanum">산업보안교육</a></li>
                 <li class="on"><a href="/education01">교육소개</a></li>
-                <li><a href="/education02">교육신청</a></li>
+                <li><a href="/request_education">교육신청</a></li>
                 <li><a href="/education03">이러닝 교육</a></li>
             </ul>
         </div>

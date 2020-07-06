@@ -86,6 +86,12 @@ Route::get('/request_education', 'RequestProcess@request_form');
 Route::post('/request_education/request_education_action2', 'RequestProcess@request_education_action2');
 Route::post('/request_education/request_education_action', 'RequestProcess@request_education_action');
 
+Route::get('/ey_cso_request_education', 'RequestProcess@cso_request_list');
+Route::get('/ey_cso_request_education/ey_write_notice/modify', 'RequestProcess@ey_modify_cso');
+
+Route::get('/ey_security_request_education', 'RequestProcess@security_request_list');
+Route::get('/ey_security_request_education/ey_write_notice/modify', 'RequestProcess@ey_modify_security');
+
 Route::get('/happy_call', 'Board@happyCall');
 Route::post('/happy_call/happy_call_action', 'Board@happy_call_action');
 Route::post('/happy_call/comment_write_action', 'Board@happy_call_comment_action');
@@ -124,6 +130,38 @@ Route::get('/ey_notice/ey_write_notice/modify', 'Board@ey_modify_notice');
 Route::get('/ey_notice', 'Board@ey_notice');
 Route::post('/ey_notice/ey_board_write_action', 'Board@notice_action');
 Route::post('/ey_notice/ey_notice_control', 'Board@notice_control');
+
+Route::get('/ey_newsletter/notice_list', 'Board@notice_list');
+Route::get('/ey_newsletter/notice_view', 'Board@noticeView');
+Route::get('/ey_newsletter/ey_write_notice', 'Board@ey_write_notice');
+Route::get('/ey_newsletter/ey_write_notice/modify', 'Board@ey_modify_notice');
+Route::get('/ey_newsletter', 'Board@ey_notice');
+Route::post('/ey_newsletter/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_newsletter/ey_notice_control', 'Board@notice_control');
+
+Route::get('/ey_data_room/data_room_list', 'Board@notice_list');
+Route::get('/ey_data_room/board_view', 'Board@noticeView');
+Route::get('/ey_data_room/ey_write_data_room', 'Board@ey_write_notice');
+Route::get('/ey_data_room/ey_write_data_room/modify', 'Board@ey_modify_notice');
+Route::get('/ey_data_room', 'Board@ey_notice');
+Route::post('/ey_data_room/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_data_room/ey_notice_control', 'Board@notice_control');
+
+Route::get('/ey_law_data_room/data_room_list', 'Board@notice_list');
+Route::get('/ey_law_data_room/board_view', 'Board@noticeView');
+Route::get('/ey_law_data_room/ey_write_data_room', 'Board@ey_write_notice');
+Route::get('/ey_law_data_room/ey_write_data_room/modify', 'Board@ey_modify_notice');
+Route::get('/ey_law_data_room', 'Board@ey_notice');
+Route::post('/ey_law_data_room/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_law_data_room/ey_notice_control', 'Board@notice_control');
+
+Route::get('/ey_security_data_room/data_room_list', 'Board@notice_list');
+Route::get('/ey_security_data_room/board_view', 'Board@noticeView');
+Route::get('/ey_security_data_room/ey_write_data_room', 'Board@ey_write_notice');
+Route::get('/ey_security_data_room/ey_write_data_room/modify', 'Board@ey_modify_notice');
+Route::get('/ey_security_data_room', 'Board@ey_notice');
+Route::post('/ey_security_data_room/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_security_data_room/ey_notice_control', 'Board@notice_control');
 
 Route::get('/faq/board_view', 'Board@faqView');
 Route::get('/faq/faq_list', 'Board@faq_list');

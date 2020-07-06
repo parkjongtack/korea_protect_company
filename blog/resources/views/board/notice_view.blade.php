@@ -7,22 +7,24 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">정보마당</a></li>
-                <li class="on"><a href="/notice/notice_list">공지사항</a></li>
-                <li><a href="/information02">법령정보</a></li>
-                <li><a href="/information03">보안서식</a></li>
-                <li><a href="/information04">자료실</a></li>
-                <li><a href="/information05">뉴스레터</a></li>
+                <li @if($_GET['board_type'] == 'ey_notice') class="on" @endif ><a href="/notice/notice_list">공지사항</a></li>
+                <li @if($_GET['board_type'] == 'ey_law_data_room') class="on" @endif><a href="/ey_law_data_room/data_room_list/?category_type=ey_law_data_room&category_type=1">법령정보</a></li>
+                <li @if($_GET['board_type'] == 'ey_security_data_room') class="on" @endif><a href="/ey_security_data_room/data_room_list/?category_type=ey_security_data_room&category_type=1">보안서식</a></li>
+                <li @if($_GET['board_type'] == 'ey_data_room') class="on" @endif ><a href="/ey_data_room/data_room_list/?category_type=ey_data_room&category_type=1">자료실</a></li>
+                <li @if($_GET['board_type'] == 'ey_newsletter') class="on" @endif ><a href="/ey_newsletter/notice_list">뉴스레터</a></li>
             </ul>
         </div>
         <div class="sub_outer">
             <div class="sub_nav">
                 <div class="sub_subject f_nanum bold">
-                    공지사항
+					@if($_GET['board_type'] == 'ey_notice') 공지사항 @endif
+					@if($_GET['board_type'] == 'ey_data_room') 자료실 @endif
                 </div>
                 <ul>
                     <li>Home</li>
                     <li>정보마당</li>
-                    <li class="on">공지사항</li>
+					@if($_GET['board_type'] == 'ey_notice') <li class="on">공지사항</li> @endif
+					@if($_GET['board_type'] == 'ey_data_room') <li class="on">자료실</li> @endif
                 </ul>
             </div>
             <div class="sub_inner">
@@ -34,14 +36,17 @@
                     <div class="board_sub_title">
                         <p>작성자 : {{ $data->writer }}</p>
                         <div class="file_down">
-							@if($data->attach_file != '')
-								첨부파일(1)
-							@else
-								첨부파일(0)
-							@endif
+								첨부파일({{ $file_cnt }})
                             <div class="file_down_real">
-                                <a href="{{ asset('storage/app/images/') }}/{{ $data->attach_file }}" style="padding:10px;">{{ $data->attach_file }}</a>
-                            </div>
+								@if($data->attach_file != "")
+	                                <a href="{{ asset('storage/app/images/') }}/{{ $data->attach_file }}" style="padding:10px;">{{ $data->attach_file }}</a>
+								@else
+									@if($file_cnt != 0)
+											@if($data->attach_file2 != "") <a href="{{ asset('storage/app/images/') }}/{{ $data->attach_file2 }}" style="padding:10px;">{{ $data->attach_file2 }}</a>@endif
+											@if($data->attach_file3 != "") <a href="{{ asset('storage/app/images/') }}/{{ $data->attach_file3 }}" style="padding:10px;">{{ $data->attach_file3 }}</a>@endif	@if($data->attach_file4 != "") <a href="{{ asset('storage/app/images/') }}/{{ $data->attach_file4 }}" style="padding:10px;">{{ $data->attach_file4 }}</a>@endif	
+									@endif
+								@endif
+							</div>
                         </div>
                     </div>
                     <div class="board_content">
@@ -79,7 +84,7 @@
                         </div> -->
                     </div>
                     <div class="board_more">
-                        <a href="/{{ request()->segment(1) }}">목록</a>
+                        <a href=@if($_GET['board_type'] == 'ey_notice') /{{ request()->segment(1) }}/notice_list @endif @if($_GET['board_type'] == 'ey_data_room') /{{ request()->segment(1) }}/data_room_list/?category_type=1 @endif>목록</a>
                         <a href="/{{ request()->segment(1) }}/board_view/?idx={{ $board_next_infom_idx }}&board_type={{ $board_next_infom_board_type }}">다음글</a>
                         <a href="/{{ request()->segment(1) }}/board_view/?idx={{ $board_prev_infom_idx }}&board_type={{ $board_prev_infom_board_type }}">이전글</a>
                         

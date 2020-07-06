@@ -8,22 +8,44 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">정보마당</a></li>
-                <li class="on"><a href="/information01">공지사항</a></li>
-                <li><a href="/information02">법령정보</a></li>
-                <li><a href="/information03">보안서식</a></li>
-                <li><a href="/information04">자료실</a></li>
-                <li><a href="/information05">뉴스레터</a></li>
+                <li @if(request()->segment(1) == 'notice') class="on" @endif ><a href="/notice/notice_list">공지사항</a></li>
+                <li @if(request()->segment(1) == 'ey_law_data_room') class="on" @endif ><a href="/ey_law_data_room/data_room_list/?category_type=ey_law_data_room&category_type=1">법령정보</a></li>
+                <li @if(request()->segment(1) == 'ey_security_data_room') class="on" @endif ><a href="/ey_security_data_room/data_room_list/?category_type=ey_security_data_room&category_type=1">보안서식</a></li>
+                <li @if(request()->segment(1) == 'ey_data_room') class="on" @endif ><a href="/ey_data_room/data_room_list/?category_type=ey_data_room&category_type=1">자료실</a></li>
+                <li @if(request()->segment(1) == 'ey_newsletter') class="on" @endif ><a href="/information05">뉴스레터</a></li>
             </ul>
         </div>
         <div class="sub_outer">
             <div class="sub_nav">
                 <div class="sub_subject f_nanum bold">
-                    공지사항
+                    @if(request()->segment(1) == 'notice')
+					공지사항
+					@elseif(request()->segment(1) == 'ey_law_data_room')
+					법령정보
+					@elseif(request()->segment(1) == 'ey_security_data_room')
+					보안서식
+					@elseif(request()->segment(1) == 'ey_data_room')
+					자료실
+					@elseif(request()->segment(1) == 'ey_newsletter')
+					뉴스레터
+					@endif
                 </div>
                 <ul>
                     <li>Home</li>
                     <li>정보마당</li>
-                    <li class="on">공지사항</li>
+                    <li class="on">
+						@if(request()->segment(1) == 'notice')
+						공지사항
+						@elseif(request()->segment(1) == 'ey_law_data_room')
+						법령정보
+						@elseif(request()->segment(1) == 'ey_security_data_room')
+						보안서식
+						@elseif(request()->segment(1) == 'ey_data_room')
+						자료실
+						@elseif(request()->segment(1) == 'ey_newsletter')
+						뉴스레터
+						@endif
+                    </li>
                 </ul>
             </div>
             <div class="sub_inner">

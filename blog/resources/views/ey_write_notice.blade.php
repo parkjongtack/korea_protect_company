@@ -33,7 +33,7 @@
     }
   </style>
 <div class="con_main">
-    <form action="/ey_notice/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
+    <form action="/{{ request()->segment(1) }}/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
 		{{ csrf_field() }}
 		<input type="hidden" name="board_type" value="{{ request()->segment(1) }}" />
 		<input type="hidden" name="write_type" value="{{ request()->segment(3) }}" />
@@ -44,7 +44,11 @@
                         카테고리
                     </div>
                     <div class="line_content">
-						<input type="text" name="category" value="공지사항" readonly style="border:none;" />
+						@if(request()->segment(1) == 'ey_notice')
+							<input type="text" name="category" value="공지사항" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'ey_newsletter')
+							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
+						@endif
                     </div>
                 </div>
             </div>

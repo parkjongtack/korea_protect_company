@@ -24,7 +24,13 @@ class Board extends Controller
 	}   
 
 	public function ey_write_notice(Request $request) {
-		return view("ey_write_notice");
+		
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+			return view("board/ey_write_data_room");
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+			return view("ey_write_notice");
+		}
+
 	}    
 
 	public function happyCallWrite(Request $request) {
@@ -38,7 +44,7 @@ class Board extends Controller
 	public function ey_faq_list(Request $request) {
 
 		$paging_option = array(
-			"pageSize" => 15,
+			"pageSize" => 10,
 			"blockSize" => 5
 		);		
 
@@ -122,7 +128,7 @@ class Board extends Controller
 	public function faq_list(Request $request) {
 
 		$paging_option = array(
-			"pageSize" => 15,
+			"pageSize" => 10,
 			"blockSize" => 5
 		);		
 
@@ -205,8 +211,14 @@ class Board extends Controller
 
 	public function notice_list(Request $request) {
 
+		if(request()->segment(1) != "notice") {
+			$boardType = request()->segment(1);
+		} else {
+			$boardType = "ey_notice";
+		}
+
 		$paging_option = array(
-			"pageSize" => 15,
+			"pageSize" => 10,
 			"blockSize" => 5
 		);		
 
@@ -221,12 +233,19 @@ class Board extends Controller
 			});
 		}
 
-		$totalQuery->where('board_type', 'ey_notice');
+		$totalQuery->where('board_type', $boardType);
         $totalQuery->where(function($query_set) {
                 $query_set->where('top_type', '<>', 'Y')
                 ->orWhere('top_type', null);
         });
 
+		if($request->category_type) {
+			$totalQuery->where('category', $request->category_type);
+		}
+
+		if(request()->segment(1) == "ey_data_room" && !$request->category_type) {
+			$totalQuery->where('category', 1);
+		}
 
 		$totalCount = $totalQuery->get()->count();
 		
@@ -243,14 +262,23 @@ class Board extends Controller
 			});
 		}
 
-		$query->where('board_type', 'ey_notice');
+		$query->where('board_type', $boardType);
         $query->where(function($query_set2) {
                 $query_set2->where('top_type', '<>', 'Y')
                 ->orWhere('top_type', null);
         });
+		
 		//$query->where('top_type', '<>', 'Y');
 		//$query->orWhere('top_type', null);
 		
+		if($request->category_type) {
+			$query->where('category', $request->category_type);
+		}
+
+		if(request()->segment(1) == "ey_data_room" && !$request->category_type) {
+			$query->where('category', 1);
+		}
+
 		if($request->page != "" && $request->page > 1) {
 			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
 		}
@@ -258,17 +286,17 @@ class Board extends Controller
 		$list = $query->take($paging_option["pageSize"])->get();
 		
 		// 게시판 출력 글 번호 계산
-		$number =$totalCount-($paging_option["pageSize"]*($thisPage-1));
+		$number = $totalCount-($paging_option["pageSize"]*($thisPage-1));
 
 		$board_top_count = DB::table('board') 
 					->select(DB::raw('*'))
-					->where('board_type', 'ey_notice')
+					->where('board_type', $boardType)
 					->where('top_type', 'Y')
 					->get()->count();
 
 		$board_top_list = DB::table('board') 
 					->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
-					->where('board_type', 'ey_notice')
+					->where('board_type', $boardType)
 					->where('top_type', 'Y')
 					->get();
 
@@ -283,7 +311,11 @@ class Board extends Controller
 		$return_list["page"] = $thisPage;
 		$return_list["key"] = $request->key;
 
-		return view("board/notice_list", $return_list);
+		if(request()->segment(1) != "notice" && request()->segment(1) != "ey_newsletter") {
+			return view("board/data_room", $return_list);
+		} else {
+			return view("board/notice_list", $return_list);
+		}
 
 	}
 
@@ -304,13 +336,18 @@ class Board extends Controller
 
 		$board_infom = DB::table('board') 
 					->select(DB::raw('*'))
-					->where('board_type', 'ey_notice')
+					->where('board_type', request()->segment(1))
 					->where('idx', $request->board_idx)
 					->first();
 
 		$return_list['data'] = $board_infom;
+		
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+			return view("board/ey_modify_data_room", $return_list);
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+			return view("board/ey_modify_notice", $return_list);
+		}
 
-		return view("board/ey_modify_notice", $return_list);
 	}
 
 	public function happy_call_comment_action(Request $request) {
@@ -469,6 +506,20 @@ class Board extends Controller
 		}
 
 		$return_list["data"] = $board_infom;
+
+		$file_cnt = 0;
+		for($i=1;$i<=4;$i++) {
+
+			if($i == 1) $number = "";
+			else $number = $i;
+
+			$attach_file = "attach_file".$number;
+
+			if($board_infom->$attach_file) $file_cnt = $file_cnt + 1;
+
+		}
+
+		$return_list["file_cnt"] = $file_cnt;
 
 		$board_next_infom_cnt = DB::table('board') 
 					->select(DB::raw('*'))
@@ -743,7 +794,7 @@ class Board extends Controller
 	public function ey_notice(Request $request) {
 
 		$paging_option = array(
-			"pageSize" => 15,
+			"pageSize" => 10,
 			"blockSize" => 5
 		);		
 
@@ -758,7 +809,7 @@ class Board extends Controller
 			});
 		}
 
-		$totalQuery->where('board_type', 'ey_notice');
+		$totalQuery->where('board_type', request()->segment(1));
         $totalQuery->where(function($query_set) {
                 $query_set->where('top_type', '<>', 'Y')
                 ->orWhere('top_type', null);
@@ -779,7 +830,7 @@ class Board extends Controller
 			});
 		}
 
-		$query->where('board_type', 'ey_notice');
+		$query->where('board_type', request()->segment(1));
         $query->where(function($query_set2) {
                 $query_set2->where('top_type', '<>', 'Y')
                 ->orWhere('top_type', null);
@@ -798,13 +849,13 @@ class Board extends Controller
 
 		$board_top_count = DB::table('board') 
 					->select(DB::raw('*'))
-					->where('board_type', 'ey_notice')
+					->where('board_type', request()->segment(1))
 					->where('top_type', 'Y')
 					->get()->count();
 
 		$board_top_list = DB::table('board') 
 					->select(DB::raw('*'))
-					->where('board_type', 'ey_notice')
+					->where('board_type', request()->segment(1))
 					->where('top_type', 'Y')
 					->get();
 
@@ -819,14 +870,19 @@ class Board extends Controller
 		$return_list["page"] = $thisPage;
 		$return_list["key"] = $request->key;
 
-		return view("board/ey_notice", $return_list);
+		if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+			return view("board/ey_notice", $return_list);
+		} else if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+			return view("board/ey_data_room", $return_list);
+		}
+
 
 	}
 
 	public function happyCall(Request $request) {
 
 		$paging_option = array(
-			"pageSize" => 15,
+			"pageSize" => 10,
 			"blockSize" => 5
 		);		
 
@@ -998,51 +1054,141 @@ class Board extends Controller
 			$file_array[1] = null;
 		}
 
-		if($request->write_type == "modify") {
+		if($request->category == 4 || request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room') {
 
-			DB::table('board')->where('idx', $request->board_idx)->update(
-				[
-					'subject' => $request->subject,
-					'contents' => $request->contents,
-					'category' => $request->category,
-					'writer' => $request->writer,
-					'ip_addr' => request()->ip(),
-					'board_type' => $request->board_type,
-					'top_type' => $request->top_type,
-					'attach_file' => $file_array[1],
-					'parno' => 0,
-					'prino' => $prino_now,
-					'depth' => 1,
-					'grp' => $grp_now,
-				]
-			);
+			if($request->writer_file_hwp) {
+				$file = $request->writer_file_hwp->store('images');
+				$file_array2 = explode("/", $file);
+				copy("../storage/app/images/".$file_array2[1], "./storage/app/images/".$file_array2[1]);
+				$file_array2[1] = ", attach_file2 = '".$file_array2[1]."'";
+			} else {
+				$file_array2[1] = "";
+			}
 
-			echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
-			exit;
+			if($request->writer_file_doc) {
+				$file = $request->writer_file_doc->store('images');
+				$file_array3 = explode("/", $file);
+				copy("../storage/app/images/".$file_array3[1], "./storage/app/images/".$file_array3[1]);
+				$file_array3[1] = ", attach_file3 = '".$file_array3[1]."'";
+			} else {
+				$file_array3[1] = "";
+			}
+
+			if($request->writer_file_pdf) {
+				$file = $request->writer_file_pdf->store('images');
+				$file_array4 = explode("/", $file);
+				copy("../storage/app/images/".$file_array4[1], "./storage/app/images/".$file_array4[1]);
+				$file_array4[1] = ", attach_file4 = '".$file_array4[1]."'";
+			} else {
+				$file_array4[1] = "";
+			}
+
+			if($request->write_type == "modify") {
+
+				DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "'.$prino_now.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].' where idx = "'.$request->board_idx.'"');
+
+				echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+				exit;
+
+			} else {
+
+				DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "'.$prino_now.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1]);
+
+				/*
+				DB::table('board')->insert(
+					[
+						'subject' => $request->subject,
+						'contents' => $request->contents,
+						'category' => $request->category,
+						'writer' => $request->writer,
+						'ip_addr' => request()->ip(),
+						'board_type' => $request->board_type,
+						'top_type' => $request->top_type,
+						'attach_file' => $file_array[1],
+						'parno' => 0,
+						'prino' => $prino_now,
+						'depth' => 1,
+						'grp' => $grp_now,
+						'reg_date' => \Carbon\Carbon::now(),
+					]
+				);
+				*/
+
+				echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+				exit;
+
+			}
 
 		} else {
 
-			DB::table('board')->insert(
-				[
-					'subject' => $request->subject,
-					'contents' => $request->contents,
-					'category' => $request->category,
-					'writer' => $request->writer,
-					'ip_addr' => request()->ip(),
-					'board_type' => $request->board_type,
-					'top_type' => $request->top_type,
-					'attach_file' => $file_array[1],
-					'parno' => 0,
-					'prino' => $prino_now,
-					'depth' => 1,
-					'grp' => $grp_now,
-					'reg_date' => \Carbon\Carbon::now(),
-				]
-			);
+			if($request->write_type == "modify") {
 
-			echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
-			exit;
+				if($file_array[1] == null) {
 
+					DB::table('board')->where('idx', $request->board_idx)->update(
+						[
+							'subject' => $request->subject,
+							'contents' => $request->contents,
+							'category' => $request->category,
+							'writer' => $request->writer,
+							'ip_addr' => request()->ip(),
+							'board_type' => $request->board_type,
+							'top_type' => $request->top_type,
+							'parno' => 0,
+							'prino' => $prino_now,
+							'depth' => 1,
+							'grp' => $grp_now,
+						]
+					);
+
+				} else {
+
+					DB::table('board')->where('idx', $request->board_idx)->update(
+						[
+							'subject' => $request->subject,
+							'contents' => $request->contents,
+							'category' => $request->category,
+							'writer' => $request->writer,
+							'ip_addr' => request()->ip(),
+							'board_type' => $request->board_type,
+							'top_type' => $request->top_type,
+							'attach_file' => $file_array[1],
+							'parno' => 0,
+							'prino' => $prino_now,
+							'depth' => 1,
+							'grp' => $grp_now,
+						]
+					);
+
+				}
+
+				echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+				exit;
+
+			} else {
+
+				DB::table('board')->insert(
+					[
+						'subject' => $request->subject,
+						'contents' => $request->contents,
+						'category' => $request->category,
+						'writer' => $request->writer,
+						'ip_addr' => request()->ip(),
+						'board_type' => $request->board_type,
+						'top_type' => $request->top_type,
+						'attach_file' => $file_array[1],
+						'parno' => 0,
+						'prino' => $prino_now,
+						'depth' => 1,
+						'grp' => $grp_now,
+						'reg_date' => \Carbon\Carbon::now(),
+					]
+				);
+
+				echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+				exit;
+
+			}
 		}
 
 	}

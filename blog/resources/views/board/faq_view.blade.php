@@ -7,11 +7,11 @@
         <div class="sub_side">
             <ul>
                 <li><a href="#none" class="bold f_nanum">정보마당</a></li>
-                <li class="on"><a href="/information01">공지사항</a></li>
-                <li><a href="/information02">법령정보</a></li>
-                <li><a href="/information03">보안서식</a></li>
-                <li><a href="/information04">자료실</a></li>
-                <li><a href="/information05">뉴스레터</a></li>
+                <li class="on"><a href="/notice/notice_list">공지사항</a></li>
+                <li><a href="/ey_law_data_room/data_room_list/?category_type=ey_law_data_room&category_type=1">법령정보</a></li>
+                <li><a href="/ey_security_data_room/data_room_list/?category_type=ey_security_data_room&category_type=1">보안서식</a></li>
+                <li><a href="/ey_data_room/data_room_list/?category_type=ey_data_room&category_type=1">자료실</a></li>
+                <li><a href="/ey_newsletter/notice_list">뉴스레터</a></li>
             </ul>
         </div>
         <div class="sub_outer">

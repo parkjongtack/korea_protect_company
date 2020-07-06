@@ -27,10 +27,10 @@
 					<tr>
 						<td>공지</td>
 						<td>{{ $board_top_list->category }}</td>
-						<td><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $board_top_list->idx }}">{{ $board_top_list->subject }}</a></td>
+						<td><a href="/ey_data_room/ey_write_data_room/modify/?board_idx={{ $board_top_list->idx }}">{{ $board_top_list->subject }}</a></td>
 						<td>{{ $board_top_list->writer }}</td>
 						<td>{{ $board_top_list->reg_date }}</td>
-						<td class="delete_box"><a href="javascript:notice_control('{{ $board_top_list->idx }}');">삭제</a><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $board_top_list->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+						<td class="delete_box"><a href="javascript:notice_control('{{ $board_top_list->idx }}');">삭제</a><a href="/ey_data_room/ey_write_data_room/modify/?board_idx={{ $board_top_list->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
 					</tr>
 				@endforeach
 				@if($totalCount <= 0)
@@ -41,11 +41,41 @@
 					@foreach ($data as $data)
 						<tr>
 							<td>{{ $number-- }}</td>
-							<td>{{ $data->category }}</td>
-							<td><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $data->idx }}">{{ $data->subject }}</a></td>
+							<td>
+								@if(request()->segment(1) == 'ey_law_data_room')
+									@if($data->category == '1')
+										산업기술보호법
+									@elseif($data->category == '2')
+										영업비밀보호법
+									@elseif($data->category == '3')
+										방산기술보호법
+									@elseif($data->category == '4')
+										중소기업기술보호법
+									@elseif($data->category == '5')
+										기타 법령
+									@endif
+								@elseif(request()->segment(1) == 'ey_security_data_room')
+									@if($data->category == '1')
+										규정
+									@elseif($data->category == '2')
+										서식
+									@endif
+								@else
+									@if($data->category == '1')
+										연구보고서
+									@elseif($data->category == '2')
+										행사자료
+									@elseif($data->category == '3')
+										학술자료
+									@elseif($data->category == '4')
+										기타
+									@endif
+								@endif
+							</td>
+							<td><a href="/{{ request()->segment(1) }}/ey_write_data_room/modify/?board_idx={{ $data->idx }}">{{ $data->subject }}</a></td>
 							<td>{{ $data->writer }}</td>
 							<td>{{ $data->reg_date }}</td>
-							<td class="delete_box"><a href="javascript:notice_control('{{ $data->idx }}');">삭제</a><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $data->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+							<td class="delete_box"><a href="javascript:notice_control('{{ $data->idx }}');">삭제</a><a href="/{{ request()->segment(1) }}/ey_write_data_room/modify/?board_idx={{ $data->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
 						</tr>
 					@endforeach
 				@endif
@@ -89,7 +119,7 @@
 			{!! $paging_view !!}
         </div>
         <div class="create" style="padding-bottom:20px;">
-            <a href="/{{ request()->segment(1) }}/ey_write_notice">등록</a>
+            <a href="/{{ request()->segment(1) }}/ey_write_data_room">등록</a>
         </div>
     </form>
 </div>

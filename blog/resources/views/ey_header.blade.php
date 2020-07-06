@@ -33,9 +33,15 @@
                     <div class="na_title dep2">
                         <div class="nav_sub"><a href="/ey_faq">FAQ</a></div>
                         <div class="nav_sub"><a href="/ey_notice">공지사항</a></div>
+						<div class="nav_sub"><a href="/ey_newsletter">뉴스레터</a></div>
                         <div class="nav_sub"><a href="/ey_free">자유게시판</a></div>
                         <div class="nav_sub"><a href="/ey_consul">상담게시판</a></div>
                         <div class="nav_sub"><a href="/ey_education">교육게시판</a></div>
+						<div class="nav_sub"><a href="/ey_data_room">자료실</a></div>
+						<div class="nav_sub"><a href="/ey_law_data_room">법령정보</a></div>
+						<div class="nav_sub"><a href="/ey_security_data_room">보안서식</a></div>
+						<div class="nav_sub"><a href="/ey_cso_request_education">CSO 양성교육</a></div>
+						<div class="nav_sub"><a href="/ey_security_request_education">산업보안방문교육</a></div>
                     </div>
                     <div class="na_title nav_img"><i class="far fa-chart-bar"></i>통계 현황</div>
                     <div class="na_title dep2">
