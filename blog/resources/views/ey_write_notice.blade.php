@@ -56,9 +56,9 @@
             </div>
             <div class="write_line">
                 <div class="all_line">
-                    <div class="line_content" style="padding-left:10px;">
-						<input type="checkbox" name="top_type" value="Y" /> 최상단 공지 지정
-                    </div>
+                  <div class="line_content" style="padding-left:10px;">
+                    <label for="write_check" style="vertical-align: middle"><input type="checkbox" name="top_type" value="Y" id="write_check"/>최상단 공지 지정</label>
+                  </div>
                 </div>
             </div>
             <div class="write_line">

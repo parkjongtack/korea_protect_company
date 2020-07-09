@@ -80,15 +80,28 @@ i{color: #fff;margin-right: 5px;width: 16px;}
 /*관리자 write*/
 .write_box{padding: 10px;}
 .write_line{width:97%; font-size: 0; margin: 0 auto;}
-.all_line{font-size: 16px;border: 1px solid #ddd;}
+.all_line{font-size: 16px;border: 1px solid #ddd; padding: 10px 0;}
 .harf_line{display: inline-block; width: 50%; font-size: 16px;border: 1px solid #ddd;}
 .harf_line:last-child{border-left: 0;}
 .harf_line > div{display: inline-block;}
 .line_title{width: 120px;padding-left: 10px;}
 .line_title,.line_content{display: inline-block;}
+.line_content input,.line_content select{border: 1px solid #ddd; height: 24px; padding: 0px 10px;}
+.line_content label{vertical-align: middle; line-height: 24px; height: 24px;}
+.line_content label input{height: auto; margin-right: 5px;}
+.submit_box input{width: 80px; height: 30px;background-color: #08AEEA; border: 0 solid #dfdfdf; color: #fff;}
+.submit_box input[type=reset]{background-color: #ee705a;}
 
 /*로그인*/
 #login_box{width: 400px; border: 5px solid #ccc; position: absolute; top: 50%; left:50%; transform: translate(-50%,-50%);background-color:rgba(255,255,255)}
 #login_box h1{margin: 40px 0; text-align: center;}
 #login_box input{float: none; display: block; margin: 10px auto; padding: 0px 7px; width: 300px; height: 50px; font-size: 16px; border: .5px solid #dddddd; box-sizing:border-box;}
 #login_box input[type=submit]{margin-top:30px;margin-bottom: 50px; border: 0px; float: none; display: block; padding: 0px 7px; width: 300px; height: 54px; font-size: 16px; background-color: #4895fd; color: #fff;}
+
+/*페이징*/
+.paging{font-size: 0; margin-top: 0; text-align: center; float: none;}
+.paging span{display: inline-block; width: 25px; height: 25px; line-height: 25px; text-align: center; color: #888888; font-size: 12px;}
+.paging span button,.paging button{color: #888; border:0; background-color:#fff; cursor: pointer;}
+.paging button.on{cursor: default;}
+.paging button.on{background-color: #3d6cb4; color: #fff; width: 15px;}
+.paging span.on a{color: #fff;}

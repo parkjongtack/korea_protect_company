@@ -185,6 +185,7 @@ Route::get('/ey_faq', 'Board@ey_faq_list');
 Route::post('/ey_faq/ey_faq_control', 'Board@faq_control');
 
 Route::get('/all_search','all_search@all_search');
+Route::get('/ey_login', 'EyAdmin@ey_login');
 
 Route::get('/search', function () {
     return view('search');
