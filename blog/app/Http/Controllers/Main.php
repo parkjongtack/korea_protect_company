@@ -27,6 +27,8 @@ class Main extends Controller
 								->where('category', 'main')
 								->where('start_period', '>=', date("Y-m-d"))
 								->where('end_period', '>=', date("Y-m-d"))
+								->where('use_status', 'Y')
+								->orderBy('priority','asc')
 								->get();		
 
 		$board_list_pcslider_sub = DB::table('board') 
@@ -35,6 +37,8 @@ class Main extends Controller
 								->where('category', 'sub')
 								->where('start_period', '>=', date("Y-m-d"))
 								->where('end_period', '>=', date("Y-m-d"))
+								->where('use_status', 'Y')
+								->orderBy('priority','asc')
 								->get();		
 
 		$board_list_notice = DB::table('board') 
