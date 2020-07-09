@@ -50,10 +50,14 @@
 							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'happy_call')
 							<input type="text" name="category" value="해피콜상담신청" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'ey_pcslider')
+							<input type="radio" name="category" value="main" checked> 메인
+							<input type="radio" name="category" value="sub"> 서브
 						@endif
                     </div>
                 </div>
             </div>
+			@if(request()->segment(1) != 'ey_pcslider')
             <div class="write_line">
                 <div class="all_line">
                   <div class="line_content" style="padding-left:10px;">
@@ -61,25 +65,43 @@
                   </div>
                 </div>
             </div>
+			@endif
             <div class="write_line">
                 <div class="all_line">
-                    <div class="line_title">
-                        제목
-                    </div>
-                    <div class="line_content">
-						<input type="text" name="subject" />
-                    </div>
+					@if(request()->segment(1) != 'ey_pcslider')
+						<div class="line_title">
+							제목
+						</div>
+						<div class="line_content">
+							<input type="text" name="subject" />
+						</div>
+					@else
+						<div class="line_title">
+							기간
+						</div>
+						<div class="line_content">
+							<input type="text" id="start_period" name="start_period" /> ~
+							<input type="text" id="end_period" name="end_period" />
+						</div>
+					@endif
                 </div>
             </div>
             <div class="write_line">
                 <div class="all_line">
-                    <div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
-                    <div class="line_content">
-						<div id="editor">
-							<div id="edit" style="width:900px;"></div>
+					@if(request()->segment(1) != 'ey_pcslider')
+						<div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
+						<div class="line_content">
+							<div id="editor">
+								<div id="edit" style="width:900px;"></div>
+							</div>
+							<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
 						</div>
-						<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
-                    </div>
+					@else
+						<div class="line_title" style="vertical-align:middle;margin-top:-50px;">우선순위</div>
+						<div class="line_content">
+							<input type="number" name="priority" />
+						</div>
+					@endif
                 </div>
             </div>
             <div class="write_line cate_file">
@@ -92,6 +114,19 @@
                     </div>
                 </div>
             </div>
+			@if(request()->segment(1) == 'ey_pcslider')
+				<div class="write_line cate_file">
+					<div class="all_line">
+						<div class="line_title">
+							노출여부
+						</div>
+						<div class="line_content">
+							<input type="radio" name="use_status" value="Y" checked> 사용
+							<input type="radio" name="use_status" value="N"> 중지
+						</div>
+					</div>
+				</div>
+			@endif
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_title">
@@ -146,7 +181,7 @@
   <script type="text/javascript" src="/editor/js/third_party/spell_checker.min.js"></script>
   <script type="text/javascript" src="/editor/js/plugins/special_characters.min.js"></script>
   <script type="text/javascript" src="/editor/js/plugins/word_paste.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
   <script>
     (function () {
       //new FroalaEditor("#edit")
@@ -290,33 +325,37 @@
 
 		var form = document.board_write_form;
 
-		if(form.subject.value == "") {
-			alert("제목을 입력해주세요.");
-			form.subject.focus();
-			return;
-		}
-		
-		let editor = new FroalaEditor('#edit', {}, function () {
-			// console.log(editor.html.get())				
-		});		
-		
-		if(editor.core.isEmpty() == true) {
-			alert("게시글을 작성해주세요.");
-			editor.events.focus(true);
-			return;
-		}
+		@if(request()->segment(1) != 'ey_pcslider')
 
-		$("textarea[name=contents]").val(editor.html.get());
+			if(form.subject.value == "") {
+				alert("제목을 입력해주세요.");
+				form.subject.focus();
+				return;
+			}
+			
+			let editor = new FroalaEditor('#edit', {}, function () {
+				// console.log(editor.html.get())				
+			});		
+			
+			if(editor.core.isEmpty() == true) {
+				alert("게시글을 작성해주세요.");
+				editor.events.focus(true);
+				return;
+			}
+
+			$("textarea[name=contents]").val(editor.html.get());
+
+		@endif
 
 		form.submit();
 
 	}
 
   </script>
-<script
+<!-- <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
 <script>
     function fnCngList(sVal){
         var f = document.form1;
@@ -362,6 +401,29 @@
             $('<input type="file">').appendTo(".cate_file .line_content")
         }
     }
+</script>
+<script>
+	$( function() {
+		 $("#start_period, #end_period").datepicker({
+			  showOn: "both", // 버튼과 텍스트 필드 모두 캘린더를 보여준다.
+			  changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+			  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+			  minDate: '-100y', // 현재날짜로부터 100년이전까지 년을 표시한다.
+			  nextText: '다음 달', // next 아이콘의 툴팁.
+			  prevText: '이전 달', // prev 아이콘의 툴팁.
+			  numberOfMonths: [1,1], // 한번에 얼마나 많은 월을 표시할것인가. [2,3] 일 경우, 2(행) x 3(열) = 6개의 월을 표시한다.
+			  stepMonths: 3, // next, prev 버튼을 클릭했을때 얼마나 많은 월을 이동하여 표시하는가. 
+			  yearRange: 'c-100:c+10', // 년도 선택 셀렉트박스를 현재 년도에서 이전, 이후로 얼마의 범위를 표시할것인가.
+			  showButtonPanel: true, // 캘린더 하단에 버튼 패널을 표시한다. 
+			  currentText: '오늘 날짜' , // 오늘 날짜로 이동하는 버튼 패널
+			  closeText: '닫기',  // 닫기 버튼 패널
+			  dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식.
+			  showAnim: "slide", //애니메이션을 적용한다.
+			  showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
+			  dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+			  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] // 월의 한글 형식.
+		 });
+	} );
 </script>
 {{-- 해피콜 --}}
 

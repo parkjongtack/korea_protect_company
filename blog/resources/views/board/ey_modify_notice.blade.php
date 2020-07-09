@@ -51,10 +51,14 @@
 							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'happy_call')
 							<input type="text" name="category" value="해피콜상담신청" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'ey_pcslider')
+							<input type="radio" name="category" value="main" @if($data->category == 'main') checked @endif> 메인
+							<input type="radio" name="category" value="sub" @if($data->category == 'sub') checked @endif> 서브
 						@endif
                     </div>
                 </div>
             </div>
+			@if(request()->segment(1) != 'ey_pcslider')
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_content" style="padding-left:10px;">
@@ -62,18 +66,30 @@
                     </div>
                 </div>
             </div>
+			@endif
             <div class="write_line">
                 <div class="all_line">
+				@if(request()->segment(1) != 'ey_pcslider')
                     <div class="line_title">
                         제목
                     </div>
                     <div class="line_content">
 						<input type="text" name="subject" value="{{ $data->subject }}" />
                     </div>
+				@else
+					<div class="line_title">
+						기간
+					</div>
+					<div class="line_content">
+						<input type="text" id="start_period" name="start_period" value="{{ $data->start_period }}" /> ~
+						<input type="text" id="end_period" name="end_period" value="{{ $data->end_period }}" />
+					</div>
+				@endif
                 </div>
             </div>
             <div class="write_line">
                 <div class="all_line">
+				@if(request()->segment(1) != 'ey_pcslider')
                     <div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
                     <div class="line_content">
 						<div id="editor">
@@ -88,6 +104,12 @@
 						</div>
 						<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
                     </div>
+				@else
+					<div class="line_title" style="vertical-align:middle;margin-top:-50px;">우선순위</div>
+					<div class="line_content">
+						<input type="number" name="priority" value="{{ $data->priority }}" />
+					</div>
+				@endif
                 </div>
             </div>
             <div class="write_line cate_file">
@@ -100,6 +122,19 @@
                     </div>
                 </div>
             </div>
+			@if(request()->segment(1) == 'ey_pcslider')
+				<div class="write_line cate_file">
+					<div class="all_line">
+						<div class="line_title">
+							노출여부
+						</div>
+						<div class="line_content">
+							<input type="radio" name="use_status" value="Y" @if($data->use_status == 'Y') checked @endif> 사용
+							<input type="radio" name="use_status" value="N" @if($data->use_status == 'N') checked @endif> 중지
+						</div>
+					</div>
+				</div>
+			@endif
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_title">
@@ -298,6 +333,8 @@
 
 		var form = document.board_write_form;
 
+		@if(request()->segment(1) != 'ey_pcslider')
+
 		if(form.subject.value == "") {
 			alert("제목을 입력해주세요.");
 			form.subject.focus();
@@ -315,6 +352,8 @@
 		}
 
 		$("textarea[name=contents]").val(editor.html.get());
+
+		@endif
 
 		form.submit();
 

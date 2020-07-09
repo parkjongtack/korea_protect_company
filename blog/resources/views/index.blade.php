@@ -3,7 +3,12 @@
                 <div class="main_slide_box">
                     <div class="swiper-container main_slide">
                         <div class="swiper-wrapper">
+						@foreach($pcslider_main as $pcslider_main)
                           <div class="swiper-slide">
+                              <img src="/storage/app/images/{{ $pcslider_main->attach_file }}" alt="">
+                          </div>
+						@endforeach
+                          <!-- <div class="swiper-slide">
                               <img src="img/main_slide_01.png" alt="">
                           </div>
                           <div class="swiper-slide">
@@ -11,10 +16,7 @@
                           </div>
                           <div class="swiper-slide">
                               <img src="img/main_slide_01.png" alt="">
-                          </div>
-                          <div class="swiper-slide">
-                              <img src="img/main_slide_01.png" alt="">
-                          </div>
+                          </div> -->
                         </div>
                         <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
@@ -91,7 +93,12 @@
                         <div class="main_sub_slide_box">
                             <div class="swiper-container sub_slide">
                                 <div class="swiper-wrapper">
+								@foreach($pcslider_sub as $pcslider_sub)
                                   <div class="swiper-slide">
+                                      <img src="img/sub_banner1.png" alt="">
+                                  </div>
+								@endforeach
+                                  <!-- <div class="swiper-slide">
                                       <img src="img/sub_banner1.png" alt="">
                                   </div>
                                   <div class="swiper-slide">
@@ -99,10 +106,7 @@
                                   </div>
                                   <div class="swiper-slide">
                                       <img src="img/sub_banner1.png" alt="">
-                                  </div>
-                                  <div class="swiper-slide">
-                                      <img src="img/sub_banner1.png" alt="">
-                                  </div>
+                                  </div> -->
                                 </div>
                                 <div class="sub_slide_btn">
                                     <div class="sub_slide_prev"></div>

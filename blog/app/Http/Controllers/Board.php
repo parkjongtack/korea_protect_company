@@ -27,7 +27,7 @@ class Board extends Controller
 		
 		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_write_data_room");
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call" || request()->segment(1) == "ey_pcslider") {
 			return view("ey_write_notice");
 		}
 
@@ -344,7 +344,7 @@ class Board extends Controller
 		
 		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_modify_data_room", $return_list);
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call" || request()->segment(1) == "ey_pcslider") {
 			return view("board/ey_modify_notice", $return_list);
 		}
 
@@ -759,12 +759,12 @@ class Board extends Controller
 		$return_list["board_next_infom_idx"] = $board_next_infom_idx;
 		$return_list["board_next_infom_board_type"] = $board_next_infom_board_type;
 
-			$board_prev_infom_cnt = DB::table('board') 
-						->select(DB::raw('*'))
-						->where('board_type', $request->board_type)
-						->where('idx', '<', $request->idx)
-						->orderBy('idx','desc')
-						->get()->count();		
+		$board_prev_infom_cnt = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', $request->board_type)
+					->where('idx', '<', $request->idx)
+					->orderBy('idx','desc')
+					->get()->count();		
 
 		$board_prev_infom = array();
 		if($board_prev_infom_cnt > 0) {
@@ -838,8 +838,8 @@ class Board extends Controller
 		
 		$paging_view = $paging->paging($totalCount, $thisPage, "page");
 		
-		$query = DB::table('board');
-				//->orderBy('idx', 'desc');
+		$query = DB::table('board')
+				->orderBy('idx', 'desc');
 				
 		if($request->key != "") {
 			$query->where(function($query) use($request){
@@ -892,6 +892,8 @@ class Board extends Controller
 
 		if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
 			return view("board/ey_notice", $return_list);
+		} else if(request()->segment(1) == "ey_pcslider") {
+			return view("board/ey_pcslider", $return_list);		
 		} else if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_data_room", $return_list);
 		}
@@ -1096,7 +1098,7 @@ class Board extends Controller
 			$file_array[1] = null;
 		}
 
-		if($request->category == 4 || request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room') {
+		if($request->category == 4 || request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room' || request()->segment(1) == 'ey_pcslider') {
 
 			if($request->writer_file_hwp) {
 				$file = $request->writer_file_hwp->store('images');
@@ -1125,16 +1127,31 @@ class Board extends Controller
 				$file_array4[1] = "";
 			}
 
+			if(request()->segment(1) == "ey_pcslider") {
+				
+				$period_query = "";
+				if($file_array[1] != null) {
+					$period_query = ", attach_file = '".$file_array[1]."'";
+				}
+
+				$period_query .= ", start_period = '".$request->start_period."', end_period = '".$request->end_period."', use_status = '".$request->use_status."', priority = '".$request->priority."'";
+				
+			} else {
+
+				$period_query = "";
+
+			}
+
 			if($request->write_type == "modify") {
 
-				DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].' where idx = "'.$request->board_idx.'"');
+				DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query.' where idx = "'.$request->board_idx.'"');
 
 				echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
 				exit;
 
 			} else {
 
-				DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "0", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1]);
+				DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "0", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'", reg_date = now()'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query);
 
 				/*
 				DB::table('board')->insert(

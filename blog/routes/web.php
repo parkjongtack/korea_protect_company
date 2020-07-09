@@ -143,6 +143,12 @@ Route::get('/ey_notice', 'Board@ey_notice');
 Route::post('/ey_notice/ey_board_write_action', 'Board@notice_action');
 Route::post('/ey_notice/ey_notice_control', 'Board@notice_control');
 
+Route::get('/ey_pcslider/ey_write_notice', 'Board@ey_write_notice');
+Route::get('/ey_pcslider/ey_write_notice/modify', 'Board@ey_modify_notice');
+Route::get('/ey_pcslider', 'Board@ey_notice');
+Route::post('/ey_pcslider/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_pcslider/ey_notice_control', 'Board@notice_control');
+
 Route::get('/ey_newsletter/notice_list', 'Board@notice_list');
 Route::get('/ey_newsletter/notice_view', 'Board@noticeView');
 Route::get('/ey_newsletter/ey_write_notice', 'Board@ey_write_notice');
@@ -186,15 +192,19 @@ Route::post('/ey_faq/ey_faq_control', 'Board@faq_control');
 
 Route::get('/all_search','all_search@all_search');
 Route::get('/ey_login', 'EyAdmin@ey_login');
+Route::post('/ey_login_action', 'EyAdmin@ey_login_action');
+Route::get('/ey_logout_action', 'EyAdmin@ey_logout_action');
 
 Route::get('/search', function () {
     return view('search');
 });
 
 //관리자페이지
+/*
 Route::get('/ey_pcslider', function () {
     return view('ey_main');
 });
+*/
 Route::get('/ey_pcpopup', function () {
     return view('ey_main');
 });

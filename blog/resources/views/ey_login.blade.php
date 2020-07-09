@@ -13,11 +13,28 @@
 		<div id="login_con">
 			<div id="login_box">
 				<h1><img src="/img/logo.png"></h1>
-		        <form action="login_check.php" method="post">
+		        <form name="login_form" action="/ey_login_action" method="post" onsubmit="javascript:login_check();">
+					{{ csrf_field() }}
 		            <input type="text" name="id" placeholder="아이디" required>
 		            <input type="password" name="pw" placeholder="비밀번호" required>
 		            <input type="submit" value="LOGIN">
 		        </form>
+				<script type="text/javascript">
+					function ey_login_action() {
+						var form = document.login_form;
+						
+						if(form.id.value == "") {
+							alert("아이디를 입력해주세요.");
+							return false;
+						}
+
+						if(form.pw.value == "") {
+							alert("비밀번호를 입력해주세요.");
+							return false;
+						}
+
+					}
+				</script>
 		    </div>
 		</div>
 	</body>

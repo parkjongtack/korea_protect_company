@@ -1,12 +1,21 @@
+@if(!session('user_id'))
+	<script type="text/javascript">
+		alert('로그인 해주세요.');
+		location.href = '/ey_login';
+	</script>
+@endif
 <!DOCTYPE html>
 <html lang="ko">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/css/ey_index.css">
         <script src="https://kit.fontawesome.com/7f5faa19ba.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="/js/ey_index.js"></script>
     </head>
     <body>
@@ -19,7 +28,7 @@
                     </a>
                 </div>
                 <div class="nav_title">
-                    <span>ADMIN</span> - <span>데모페이지</span><a href="#none"><i class="fas fa-sign-out-alt"></i></a>
+                    <span>ADMIN</span><a href="#none"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
                 <div class="nav_con">
                     <div class="na_title nav_img"><i class="fas fa-desktop"></i>메인페이지 설정</div>
@@ -69,7 +78,7 @@
                             </a>
                             <a href="#none">
                                 <li>
-                                    <i class="fas fa-sign-out-alt"></i>로그아웃
+                                    <i class="fas fa-sign-out-alt"></i><a href="/ey_logout_action">로그아웃</a>
                                 </li>
                             </a>
                         </ul>
@@ -95,6 +104,8 @@
 					커뮤니티
 					@elseif(request()->segment(1) == 'ey_security_request_education')
 					커뮤니티
+					@elseif(request()->segment(1) == 'ey_pcslider')
+					PC슬라이더
 					@endif
 					</h2>
                     <div class="title_nav">@if(request()->segment(1) == 'ey_faq')
@@ -115,26 +126,7 @@
 					CSO 양성교육
 					@elseif(request()->segment(1) == 'ey_security_request_education')
 					산업보안 방문교육
+					@elseif(request()->segment(1) == 'ey_pcslider')
+					PC슬라이더
 					@endif</div>
                 </div>
-				{{-- 
-					@if(request()->segment(1) == 'ey_faq')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_notice')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_newsletter')
-					커뮤니티
-					@elseif(request()->segment(1) == 'happy_call')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_data_room')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_law_data_room')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_security_data_room')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_cso_request_education')
-					커뮤니티
-					@elseif(request()->segment(1) == 'ey_security_request_education')
-					커뮤니티
-					@endif
-				--}}
