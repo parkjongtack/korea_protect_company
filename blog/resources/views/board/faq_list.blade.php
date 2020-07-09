@@ -20,7 +20,7 @@
                 <li><a href="#none" class="bold f_nanum">해피콜 상담서비스</a></li>
                 <li><a href="/happycall01">상담서비스 소개</a></li>
                 <li class="on"><a href="/faq/faq_list">FAQ</a></li>
-                <li><a href="/happy_call">상담하기</a></li>
+                <li><a href="/happy_call">상담신청</a></li>
             </ul>
         </div>
         <div class="sub_outer">

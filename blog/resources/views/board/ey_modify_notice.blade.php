@@ -33,7 +33,7 @@
     }
   </style>
 <div class="con_main">
-    <form action="/ey_notice/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
+    <form action="/{{ request()->segment(1) }}/ey_board_write_action" name="board_write_form" method="post" enctype="multipart/form-data" >
 		{{ csrf_field() }}
 		<input type="hidden" name="board_idx" value="{{ $_GET['board_idx'] }}" />
 		<input type="hidden" name="board_type" value="{{ request()->segment(1) }}" />
@@ -49,6 +49,8 @@
 							<input type="text" name="category" value="공지사항" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'ey_newsletter')
 							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'happy_call')
+							<input type="text" name="category" value="해피콜상담신청" readonly style="border:none;" />
 						@endif
                     </div>
                 </div>
@@ -75,7 +77,14 @@
                     <div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
                     <div class="line_content">
 						<div id="editor">
-							<div id="edit" style="width:900px;">{!! $data->contents !!}</div>
+							<div id="edit" style="width:900px;">
+								@if(request()->segment(3) == 'reply')
+									==============답글==========<br/>
+									{!! nl2br($data->contents) !!}
+								@else
+									{!! nl2br($data->contents) !!}
+								@endif
+							</div>
 						</div>
 						<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
                     </div>
@@ -102,7 +111,7 @@
                 </div>
             </div>
             <div class="submit_box" style="text-align:center;margin-top:10px;">
-                <input type="button" value="수정" onclick="javascript:write_action();">
+                <input type="button" value="@if(request()->segment(3) != 'reply') 수정 @else 작성 @endif" onclick="javascript:write_action();">
                 <input type="reset" value="취소">
             </div>
         </div>

@@ -42,10 +42,14 @@
 						<tr>
 							<td>{{ $number-- }}</td>
 							<td>{{ $data->category }}</td>
-							<td><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $data->idx }}">{{ $data->subject }}</a></td>
+							<td style="padding-left:{{ $data->depth*30 }}px;text-align:left;" ><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $data->idx }}">@if($data->depth > 1) <span>[답글]</span> @endif {{ $data->subject }}</a></td>
 							<td>{{ $data->writer }}</td>
 							<td>{{ $data->reg_date }}</td>
-							<td class="delete_box"><a href="javascript:notice_control('{{ $data->idx }}');">삭제</a><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $data->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a></td>
+							<td class="delete_box"><a href="javascript:notice_control('{{ $data->idx }}');">삭제</a><a href="/{{ request()->segment(1) }}/ey_write_notice/modify/?board_idx={{ $data->idx }}" style="background-color: #08AEEA; border:1px solid #0faeea; color: #fff;">수정</a>
+							@if(request()->segment(1) == 'happy_call')
+								<a href="javascript:location.href='/{{ request()->segment(1) }}/ey_write_notice/reply/?board_idx={{ $data->idx }}';" style="background-color: green; border:1px solid #0faeea; color: #fff;">답글</a>
+							@endif
+							</td>
 						</tr>
 					@endforeach
 				@endif

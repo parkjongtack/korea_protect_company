@@ -34,9 +34,9 @@
                         <div class="nav_sub"><a href="/ey_faq">FAQ</a></div>
                         <div class="nav_sub"><a href="/ey_notice">공지사항</a></div>
 						<div class="nav_sub"><a href="/ey_newsletter">뉴스레터</a></div>
-                        <div class="nav_sub"><a href="/ey_free">자유게시판</a></div>
-                        <div class="nav_sub"><a href="/ey_consul">상담게시판</a></div>
-                        <div class="nav_sub"><a href="/ey_education">교육게시판</a></div>
+                        <!-- <div class="nav_sub"><a href="/ey_free">자유게시판</a></div> -->
+                        <div class="nav_sub"><a href="/happy_call/happy_call_list">상담게시판</a></div>
+                        <!-- <div class="nav_sub"><a href="/ey_education">교육게시판</a></div> -->
 						<div class="nav_sub"><a href="/ey_data_room">자료실</a></div>
 						<div class="nav_sub"><a href="/ey_law_data_room">법령정보</a></div>
 						<div class="nav_sub"><a href="/ey_security_data_room">보안서식</a></div>

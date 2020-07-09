@@ -48,6 +48,8 @@
 							<input type="text" name="category" value="공지사항" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'ey_newsletter')
 							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'happy_call')
+							<input type="text" name="category" value="해피콜상담신청" readonly style="border:none;" />
 						@endif
                     </div>
                 </div>

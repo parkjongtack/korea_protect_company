@@ -25,9 +25,9 @@ class Board extends Controller
 
 	public function ey_write_notice(Request $request) {
 		
-		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room") {
 			return view("board/ey_write_data_room");
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "ey_security_data_room" || request()->segment(1) == "happy_call") {
 			return view("ey_write_notice");
 		}
 
@@ -344,7 +344,25 @@ class Board extends Controller
 		
 		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_modify_data_room", $return_list);
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
+			return view("board/ey_modify_notice", $return_list);
+		}
+
+	}
+
+	public function ey_reply(Request $request) {
+
+		$board_infom = DB::table('board') 
+					->select(DB::raw('*'))
+					->where('board_type', request()->segment(1))
+					->where('idx', $request->board_idx)
+					->first();
+
+		$return_list['data'] = $board_infom;
+		
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
+			return view("board/ey_modify_data_room", $return_list);
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
 			return view("board/ey_modify_notice", $return_list);
 		}
 
@@ -820,8 +838,8 @@ class Board extends Controller
 		
 		$paging_view = $paging->paging($totalCount, $thisPage, "page");
 		
-		$query = DB::table('board')
-				->orderBy('idx', 'desc');
+		$query = DB::table('board');
+				//->orderBy('idx', 'desc');
 				
 		if($request->key != "") {
 			$query->where(function($query) use($request){
@@ -841,6 +859,8 @@ class Board extends Controller
 		if($request->page != "" && $request->page > 1) {
 			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
 		}
+
+		$query->orderByRaw('grp desc, depth asc');
 
 		$list = $query->take($paging_option["pageSize"])->get();
 		
@@ -870,7 +890,7 @@ class Board extends Controller
 		$return_list["page"] = $thisPage;
 		$return_list["key"] = $request->key;
 
-		if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter") {
+		if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
 			return view("board/ey_notice", $return_list);
 		} else if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_data_room", $return_list);
@@ -903,8 +923,8 @@ class Board extends Controller
 		
 		$paging_view = $paging->paging($totalCount, $thisPage, "page");
 		
-		$query = DB::table('board')
-				->orderBy('idx', 'desc');
+		$query = DB::table('board');
+				//->orderBy('idx', 'desc');
 				
 		if($request->key != "") {
 			$query->where(function($query) use($request){
@@ -913,8 +933,10 @@ class Board extends Controller
 			});
 		}
 
-		$query = $query->where('board_type', 'happy_call');
+		$query->where('board_type', 'happy_call');
 		
+		$query->orderByRaw('grp desc, depth asc');
+
 		if($request->page != "" && $request->page > 1) {
 			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
 		}
@@ -1030,22 +1052,42 @@ class Board extends Controller
 		}
 
 		$board_cnt = DB::table('board')
-					->where('board_type', $request->board_type)->get()->count();
+					->where('board_type', $request->board_type)
+					//->where('idx', $request->board_idx)
+					->get()
+					->count();
 
 		$answer_infom = DB::table('board') 
-					->select(DB::raw('board.grp + 1 as grp_now, board.prino + 1 as prino_now'))
-					->where('board_type', $request->board_type)
+					->select(DB::raw('*, board.grp as grp_now, board.prino as prino_now, board.parno as parno_now'))
+					//->where('board_type', $request->board_type)
 					->orderBy('idx', 'desc')
 					->first();
 
+		$reply_answer_infom = DB::table('board') 
+					->select(DB::raw('depth, grp, prino, parno'))
+					//->where('board_type', $request->board_type)
+					->where('idx', $request->board_idx)
+					->first();
+
 		if($board_cnt <= 0) {
-			$prino_now = 1;
+			$parno_now = 0;
+			$prino_now = 0;
+			$depth_now = 1;
 			$grp_now = 1;
 		} else {
-			$prino_now = $answer_infom->prino_now;
-			$grp_now = $answer_infom->grp_now;
+			$parno_now = $request->board_idx;
+			$prino_now = $answer_infom->prino_now + 1;
+			$depth_now = $answer_infom->depth;
+			$grp_now = $answer_infom->grp_now + 1;
 		}
 		
+		if($request->write_type == "reply") {
+			$parno_now = $request->board_idx;
+			$prino_now = $reply_answer_infom->prino + 1;
+			$depth_now = $reply_answer_infom->depth + 1;
+			$grp_now = $reply_answer_infom->grp;			
+		}
+
 		if($request->writer_file) {
 			$file = $request->writer_file->store('images');
 			$file_array = explode("/", $file);
@@ -1085,14 +1127,14 @@ class Board extends Controller
 
 			if($request->write_type == "modify") {
 
-				DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "'.$prino_now.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].' where idx = "'.$request->board_idx.'"');
+				DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].' where idx = "'.$request->board_idx.'"');
 
 				echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
 				exit;
 
 			} else {
 
-				DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "'.$prino_now.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1]);
+				DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "0", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1]);
 
 				/*
 				DB::table('board')->insert(
@@ -1134,10 +1176,6 @@ class Board extends Controller
 							'ip_addr' => request()->ip(),
 							'board_type' => $request->board_type,
 							'top_type' => $request->top_type,
-							'parno' => 0,
-							'prino' => $prino_now,
-							'depth' => 1,
-							'grp' => $grp_now,
 						]
 					);
 
@@ -1161,32 +1199,66 @@ class Board extends Controller
 					);
 
 				}
-
-				echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
-				exit;
+				
+				if($request->board_type == "happy_call") {
+					echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."/happy_call_list';</script>";
+					exit;
+				} else {
+					echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+					exit;
+				}
 
 			} else {
 
-				DB::table('board')->insert(
-					[
-						'subject' => $request->subject,
-						'contents' => $request->contents,
-						'category' => $request->category,
-						'writer' => $request->writer,
-						'ip_addr' => request()->ip(),
-						'board_type' => $request->board_type,
-						'top_type' => $request->top_type,
-						'attach_file' => $file_array[1],
-						'parno' => 0,
-						'prino' => $prino_now,
-						'depth' => 1,
-						'grp' => $grp_now,
-						'reg_date' => \Carbon\Carbon::now(),
-					]
-				);
+				if($request->write_type != 'reply') {
 
-				echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
-				exit;
+					DB::table('board')->insert(
+						[
+							'subject' => $request->subject,
+							'contents' => $request->contents,
+							'category' => $request->category,
+							'writer' => $request->writer,
+							'ip_addr' => request()->ip(),
+							'board_type' => $request->board_type,
+							'top_type' => $request->top_type,
+							'attach_file' => $file_array[1],
+							'parno' => 0,
+							'prino' => $prino_now,
+							'depth' => 1,
+							'grp' => $grp_now,
+							'reg_date' => \Carbon\Carbon::now(),
+						]
+					);
+
+				} else {
+					
+					DB::table('board')->insert(
+						[
+							'subject' => $request->subject,
+							'contents' => $request->contents,
+							'category' => $request->category,
+							'writer' => $request->writer,
+							'ip_addr' => request()->ip(),
+							'board_type' => $request->board_type,
+							'top_type' => $request->top_type,
+							'attach_file' => $file_array[1],
+							'parno' => $parno_now,
+							'depth' => $depth_now,
+							'prino' => $prino_now,
+							'grp' => $grp_now,
+							'reg_date' => \Carbon\Carbon::now(),
+						]
+					);
+
+				}
+
+				if($request->board_type == "happy_call") {
+					echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."/happy_call_list';</script>";
+					exit;
+				} else {
+					echo "<script>alert('글 작성이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
+					exit;
+				}
 
 			}
 		}

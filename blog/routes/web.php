@@ -20,9 +20,13 @@ use Intervention\Image\Facades\Image as Image;
 
 Route::post('/research_action', 'Research@research_action');
 
+
+Route::get('/', 'Main@main');
+/*
 Route::get('/', function () {
     return view('index');
 });
+*/
 Route::get('/tech01', function () {
     return view('tech01');
 });
@@ -122,6 +126,14 @@ Route::get('/board_view', function () {
 Route::get('/happy_call/board_write_happy_call', 'Board@happyCallWrite');
 Route::get('/happy_call/board_passwd_check', 'Board@happyCallPassCheck');
 Route::get('/happy_call/board_view', 'Board@happyCallView');
+
+Route::get('/happy_call/ey_write_notice', 'Board@ey_write_notice');
+Route::get('/happy_call/ey_write_notice/modify', 'Board@ey_modify_notice');
+Route::get('/happy_call/ey_write_notice/reply', 'Board@ey_reply');
+Route::get('/happy_call/happy_call_list', 'Board@ey_notice');
+Route::post('/happy_call/ey_board_write_action/reply', 'Board@notice_action');
+Route::post('/happy_call/ey_board_write_action', 'Board@notice_action');
+Route::post('/happy_call/ey_notice_control', 'Board@notice_control');
 
 Route::get('/notice/notice_list', 'Board@notice_list');
 Route::get('/notice/notice_view', 'Board@noticeView');

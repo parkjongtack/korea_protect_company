@@ -50,38 +50,42 @@
                                 <li class="on tab_click">공지사항</li>
                                 <li class="tab_click">자료실</li>
                                 <a href="#">
-                                    <a href="#">
+                                    <a href="javascript:detail_list();">
                                         <li></li>
                                     </a>
                                 </a>
                             </ul>
-                            <ul class="tab_list">
-                                <a href=""><li>
-                                    <p>[한국산업기술보호협회]산업보안 이러닝 교육 제작 용역 입찰 재공고</p>
-                                    <span>2020-04-17</span>
+                            <ul id="tab_list1" class="tab_list">
+								@foreach($notice as $notice)
+                                <a href="/notice/notice_view/?idx={{ $notice->idx }}&board_type=ey_notice"><li>
+                                    <p>{{ $notice->subject }}</p>
+                                    <span>{{ $notice->reg_date_cut }}</span>
                                 </li></a>
-                                <a href="#"><li>
+								@endforeach
+                                <!-- <a href="#"><li>
                                     <p>[한국산업기술보호협회]산업보안 이러닝 플랫폼 구축,운영 욕역 입찰 재공고</p>
                                     <span>2020-04-17</span>
                                 </li></a>
                                 <a href="#"><li>
                                     <p>[한국산업기술보호협회]산업보안 이러닝 플랫폼 구축,운영 욕역 입찰 공고</p>
                                     <span>2020-04-17</span>
-                                </li></a>
+                                </li></a> -->
                             </ul>
-                            <ul class="tab_list">
-                                <a href="#"><li>
-                                    <p>OOOO 다운로드 받기</p>
-                                    <span>2020-04-17</span>
+                            <ul id="tab_list2" class="tab_list">
+								@foreach($data_room as $data_room)
+                                <a href="/ey_data_room/board_view/?idx={{ $data_room->idx }}&board_type=ey_data_room"><li>
+                                    <p>{{ $data_room->subject }}</p>
+                                    <span>{{ $data_room->reg_date_cut }}</span>
                                 </li></a>
-                                <a href="#"><li>
+								@endforeach
+                                <!-- <a href="#"><li>
                                     <p>자료실에 대한 내용입니다.</p>
                                     <span>2020-04-17</span>
                                 </li></a>
                                 <a href="#"><li>
                                     <p>자료실에 대한 내용입니다.</p>
                                     <span>2020-04-17</span>
-                                </li></a>
+                                </li></a> -->
                             </ul>
                         </div>
                         <div class="main_sub_slide_box">
@@ -109,6 +113,20 @@
                     </div>
                 </div>
                 <script>
+
+			function detail_list() {
+				
+				if($(".tab_click:eq(0)").hasClass('on') == true) {
+					location.href = '/notice/notice_list';
+				}
+
+				if($(".tab_click:eq(1)").hasClass('on') == true) {
+					location.href = '/ey_data_room/data_room_list?category_type=ey_data_room&category_type=1';
+				}
+				
+			}
+
+
             var swiper1 = new Swiper('.main_slide', {
               spaceBetween: 0,
               centeredSlides: true,

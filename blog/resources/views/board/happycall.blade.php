@@ -62,7 +62,7 @@
 							@if($data->secret_status == 'Y')
 								<td class="table_td_title"><a href="/happy_call/board_passwd_check/?idx={{ $data->idx }}&board_type={{ $data->board_type }}">{{ $data->subject }}</a></td>
 							@else
-								<td class="table_td_title"><a href="/happy_call/board_view/?idx={{ $data->idx }}&board_type={{ $data->board_type }}">{{ $data->subject }}</a></td>
+								<td class="table_td_title" @if($data->depth > 1) style='padding-left:{{ $data->depth*10 }}px;' @endif >@if($data->depth > 1) <span class="reply_img">답변</span> @endif<a href="/happy_call/board_view/?idx={{ $data->idx }}&board_type={{ $data->board_type }}">{{ $data->subject }}</a></td>
 							@endif
 							<td>{{ $data->writer }}</td>
 							<td>{{ $data->subject }}</td>
