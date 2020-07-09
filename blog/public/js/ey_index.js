@@ -16,7 +16,11 @@ $(function(){
     $(bars).click(function(){
         if(n_width == $('#nav').width()){
             $(n_con).animate({
-                width:0
+                left:-200,
+				width:-200
+            },300);
+			$(".nav_space").animate({
+                width:-200
             },300);
             $(c_con).animate({
                 width:"100%"
@@ -26,9 +30,12 @@ $(function(){
                 width:c_width
             },300)
             $(n_con).animate({
+                left:0,
+				width:200
+            },300);
+			$(".nav_space").animate({
                 width:200
             },300);
-            
         }
     });
     console.log(n_width);

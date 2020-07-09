@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/css/ey_index.css">
         <script src="https://kit.fontawesome.com/7f5faa19ba.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/ey_index.js"></script>
+        <script src="/js/ey_index.js"></script>
     </head>
     <body>
         <div id="container">
@@ -15,7 +15,7 @@
             <div id="nav">
                 <div class="logo">
                     <a href="#none">
-                        <img src="img/logo.png" alt="로고" width="100%">
+                        <img src="/img/logo.png" alt="로고" width="100%">
                     </a>
                 </div>
                 <div class="nav_title">
@@ -76,6 +76,65 @@
                     </div>
                 </div>
                 <div class="con_title">
-                    <h2>1뎁스제목</h2>
-                    <div class="title_nav">1뎁스제목 > 2뎁스제목</div>
+                    <h2>
+					@if(request()->segment(1) == 'ey_faq')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_notice')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_newsletter')
+					커뮤니티
+					@elseif(request()->segment(1) == 'happy_call')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_data_room')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_law_data_room')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_security_data_room')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_cso_request_education')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_security_request_education')
+					커뮤니티
+					@endif
+					</h2>
+                    <div class="title_nav">@if(request()->segment(1) == 'ey_faq')
+					FAQ
+					@elseif(request()->segment(1) == 'ey_notice')
+					공지사항
+					@elseif(request()->segment(1) == 'ey_newsletter')
+					뉴스레터
+					@elseif(request()->segment(1) == 'happy_call')
+					상담게시판
+					@elseif(request()->segment(1) == 'ey_data_room')
+					자료실
+					@elseif(request()->segment(1) == 'ey_law_data_room')
+					볍령정보
+					@elseif(request()->segment(1) == 'ey_security_data_room')
+					보안서식
+					@elseif(request()->segment(1) == 'ey_cso_request_education')
+					CSO 양성교육
+					@elseif(request()->segment(1) == 'ey_security_request_education')
+					산업보안 방문교육
+					@endif</div>
                 </div>
+				{{-- 
+					@if(request()->segment(1) == 'ey_faq')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_notice')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_newsletter')
+					커뮤니티
+					@elseif(request()->segment(1) == 'happy_call')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_data_room')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_law_data_room')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_security_data_room')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_cso_request_education')
+					커뮤니티
+					@elseif(request()->segment(1) == 'ey_security_request_education')
+					커뮤니티
+					@endif
+				--}}

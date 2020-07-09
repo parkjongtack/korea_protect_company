@@ -22,6 +22,10 @@ class EyAdmin extends Controller
 		return view("ey_write_notice");
 	}
 
+	public function ey_login(){
+        return view('ey_login');
+    }
+
 }
 
 ?>
