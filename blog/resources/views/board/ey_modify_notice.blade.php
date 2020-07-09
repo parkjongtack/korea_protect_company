@@ -51,6 +51,8 @@
 							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'happy_call')
 							<input type="text" name="category" value="해피콜상담신청" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'ey_pcpopup')
+							<input type="text" name="category" value="PC팝업" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'ey_pcslider')
 							<input type="radio" name="category" value="main" @if($data->category == 'main') checked @endif> 메인
 							<input type="radio" name="category" value="sub" @if($data->category == 'sub') checked @endif> 서브
@@ -58,7 +60,7 @@
                     </div>
                 </div>
             </div>
-			@if(request()->segment(1) != 'ey_pcslider')
+			@if(request()->segment(1) != 'ey_pcslider' && request()->segment(1) != 'ey_pcpopup')
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_content" style="padding-left:10px;">
@@ -67,6 +69,7 @@
                 </div>
             </div>
 			@endif
+			@if(request()->segment(1) != 'ey_pcpopup')
             <div class="write_line">
                 <div class="all_line">
 				@if(request()->segment(1) != 'ey_pcslider')
@@ -87,6 +90,19 @@
 				@endif
                 </div>
             </div>
+			@else
+			<div class="write_line">
+				<div class="all_line">
+					<div class="line_title">
+						제목
+					</div>
+					<div class="line_content">
+						<input type="text" name="subject" value="{{ $data->title }}" />
+					</div>
+				</div>
+			</div>
+			@endif
+			@if(request()->segment(1) != 'ey_pcpopup')
             <div class="write_line">
                 <div class="all_line">
 				@if(request()->segment(1) != 'ey_pcslider')
@@ -112,6 +128,56 @@
 				@endif
                 </div>
             </div>
+			@endif
+			@if(request()->segment(1) == 'ey_pcpopup')
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업위치
+                    </div>
+                    <div class="line_content">
+                        <input type="radio" name="pop_position" value="lefttop" @if($data->pop_position == 'lefttop') checked @endif />좌측상단
+                        <input type="radio" name="pop_position" value="righttop" @if($data->pop_position == 'righttop') checked @endif />우측상단
+                        <input type="radio" name="pop_position" value="leftbot" @if($data->pop_position == 'leftbot') checked @endif />좌측하단
+                        <input type="radio" name="pop_position" value="rightbot" @if($data->pop_position == 'rightbot') checked @endif />우측하단
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업크기
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="i_width" value="{{ $data->i_width }}" />
+                        세로 : <input type="number" name="i_height" value="{{ $data->i_height }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업여백
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="m_width" value="{{ $data->m_width }}" />
+                        세로 : <input type="number" name="m_height" value="{{ $data->m_height }}" />
+                    </div>
+                </div>
+            </div>
+			@endif
+			@if(request()->segment(1) == 'ey_pcpopup')
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        파일선택
+                    </div>
+                    <div class="line_content">
+                        <input type="file" name="writer_file" /><a href="/storage/app/images/{{ $data->img }}">{{ $data->img }}</a>
+                    </div>
+                </div>
+            </div>
+			@else
             <div class="write_line cate_file">
                 <div class="all_line">
                     <div class="line_title">
@@ -122,19 +188,26 @@
                     </div>
                 </div>
             </div>
-			@if(request()->segment(1) == 'ey_pcslider')
+			@endif
+			@if(request()->segment(1) == 'ey_pcslider' || request()->segment(1) == 'ey_pcpopup')
 				<div class="write_line cate_file">
 					<div class="all_line">
 						<div class="line_title">
 							노출여부
 						</div>
 						<div class="line_content">
-							<input type="radio" name="use_status" value="Y" @if($data->use_status == 'Y') checked @endif> 사용
-							<input type="radio" name="use_status" value="N" @if($data->use_status == 'N') checked @endif> 중지
+							@if(request()->segment(1) == 'ey_pcpopup')
+								<input type="radio" name="use_status" value="Y" @if($data->see == 'Y') checked @endif> 사용
+								<input type="radio" name="use_status" value="N" @if($data->see == 'N') checked @endif> 중지
+							@else
+								<input type="radio" name="use_status" value="Y" @if($data->use_status == 'Y') checked @endif> 사용
+								<input type="radio" name="use_status" value="N" @if($data->use_status == 'N') checked @endif> 중지
+							@endif
 						</div>
 					</div>
 				</div>
 			@endif
+			@if(request()->segment(1) != 'ey_pcpopup')
             <div class="write_line">
                 <div class="all_line">
                     <div class="line_title">
@@ -145,6 +218,7 @@
                     </div>
                 </div>
             </div>
+			@endif
             <div class="submit_box" style="text-align:center;margin-top:10px;">
                 <input type="button" value="@if(request()->segment(3) != 'reply') 수정 @else 작성 @endif" onclick="javascript:write_action();">
                 <input type="reset" value="취소">
@@ -333,7 +407,7 @@
 
 		var form = document.board_write_form;
 
-		@if(request()->segment(1) != 'ey_pcslider')
+		@if(request()->segment(1) != 'ey_pcslider' && request()->segment(1) != 'ey_pcpopup')
 
 		if(form.subject.value == "") {
 			alert("제목을 입력해주세요.");

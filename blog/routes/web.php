@@ -204,10 +204,18 @@ Route::get('/search', function () {
 Route::get('/ey_pcslider', function () {
     return view('ey_main');
 });
-*/
+
 Route::get('/ey_pcpopup', function () {
     return view('ey_main');
 });
+*/
+
+Route::get('/ey_pcpopup/ey_write_notice', 'Board@ey_write_notice');
+Route::get('/ey_pcpopup/ey_write_notice/modify', 'Board@ey_modify_notice');
+Route::get('/ey_pcpopup', 'Board@ey_notice');
+Route::post('/ey_pcpopup/ey_board_write_action', 'Board@notice_action');
+Route::post('/ey_pcpopup/ey_notice_control', 'Board@notice_control');
+
 Route::get('/ey_moslider', function () {
     return view('ey_main');
 });

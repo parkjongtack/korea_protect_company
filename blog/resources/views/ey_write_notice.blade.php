@@ -50,6 +50,8 @@
 							<input type="text" name="category" value="뉴스레터" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'happy_call')
 							<input type="text" name="category" value="해피콜상담신청" readonly style="border:none;" />
+						@elseif(request()->segment(1) == 'ey_pcpopup')
+							<input type="text" name="category" value="PC팝업" readonly style="border:none;" />
 						@elseif(request()->segment(1) == 'ey_pcslider')
 							<input type="radio" name="category" value="main" checked> 메인
 							<input type="radio" name="category" value="sub"> 서브
@@ -57,7 +59,7 @@
                     </div>
                 </div>
             </div>
-			@if(request()->segment(1) != 'ey_pcslider')
+			@if(request()->segment(1) != 'ey_pcslider' && request()->segment(1) != 'ey_pcpopup')
             <div class="write_line">
                 <div class="all_line">
                   <div class="line_content" style="padding-left:10px;">
@@ -86,9 +88,10 @@
 					@endif
                 </div>
             </div>
+			@if(request()->segment(1) != 'ey_pcpopup')
             <div class="write_line">
                 <div class="all_line">
-					@if(request()->segment(1) != 'ey_pcslider')
+					@if(request()->segment(1) != 'ey_pcslider' && request()->segment(1) != 'ey_pcpopup')
 						<div class="line_title" style="vertical-align:middle;margin-top:-50px;">내용</div>
 						<div class="line_content">
 							<div id="editor">
@@ -97,13 +100,51 @@
 							<textarea name="contents" cols="60" rows="10" style="display:none;" ></textarea>
 						</div>
 					@else
-						<div class="line_title" style="vertical-align:middle;margin-top:-50px;">우선순위</div>
+						<div class="line_title" style="vertical-align:middle;">우선순위</div>
 						<div class="line_content">
 							<input type="number" name="priority" />
 						</div>
 					@endif
                 </div>
             </div>
+			@endif
+			@if(request()->segment(1) == 'ey_pcpopup')
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업위치
+                    </div>
+                    <div class="line_content">
+                        <input type="radio" name="pop_position" value="lefttop" />좌측상단
+                        <input type="radio" name="pop_position" value="righttop" />우측상단
+                        <input type="radio" name="pop_position" value="leftbot" />좌측하단
+                        <input type="radio" name="pop_position" value="rightbot" />우측하단
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업크기
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="i_width" />
+                        세로 : <input type="number" name="i_height" />
+                    </div>
+                </div>
+            </div>
+            <div class="write_line cate_file">
+                <div class="all_line">
+                    <div class="line_title">
+                        팝업여백
+                    </div>
+                    <div class="line_content">
+                        가로 : <input type="number" name="m_width" />
+                        세로 : <input type="number" name="m_height" />
+                    </div>
+                </div>
+            </div>
+			@endif
             <div class="write_line cate_file">
                 <div class="all_line">
                     <div class="line_title">
@@ -114,7 +155,7 @@
                     </div>
                 </div>
             </div>
-			@if(request()->segment(1) == 'ey_pcslider')
+			@if(request()->segment(1) == 'ey_pcslider' || request()->segment(1) == 'ey_pcpopup')
 				<div class="write_line cate_file">
 					<div class="all_line">
 						<div class="line_title">
@@ -325,7 +366,7 @@
 
 		var form = document.board_write_form;
 
-		@if(request()->segment(1) != 'ey_pcslider')
+		@if(request()->segment(1) != 'ey_pcslider' && request()->segment(1) != 'ey_pcpopup')
 
 			if(form.subject.value == "") {
 				alert("제목을 입력해주세요.");

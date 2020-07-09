@@ -27,7 +27,7 @@ class Board extends Controller
 		
 		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_write_data_room");
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call" || request()->segment(1) == "ey_pcslider") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call" || request()->segment(1) == "ey_pcslider" || request()->segment(1) == "ey_pcpopup") {
 			return view("ey_write_notice");
 		}
 
@@ -334,17 +334,28 @@ class Board extends Controller
 
 	public function ey_modify_notice(Request $request) {
 
-		$board_infom = DB::table('board') 
-					->select(DB::raw('*'))
-					->where('board_type', request()->segment(1))
-					->where('idx', $request->board_idx)
-					->first();
+		if(request()->segment(1) == "ey_pcpopup") {
+
+			$board_infom = DB::table('poplayer') 
+						->select(DB::raw('*'))
+						->where('idx', $request->board_idx)
+						->first();
+
+		} else {
+		
+			$board_infom = DB::table('board') 
+						->select(DB::raw('*'))
+						->where('board_type', request()->segment(1))
+						->where('idx', $request->board_idx)
+						->first();
+		
+		}
 
 		$return_list['data'] = $board_infom;
 		
 		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_modify_data_room", $return_list);
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call" || request()->segment(1) == "ey_pcslider") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call" || request()->segment(1) == "ey_pcslider" || request()->segment(1) == "ey_pcpopup") {
 			return view("board/ey_modify_notice", $return_list);
 		}
 
@@ -805,7 +816,14 @@ class Board extends Controller
 	}
 
 	public function notice_control(Request $request) {
-		DB::table('board')->where('idx', $request->idx)->delete();
+
+		if(request()->segment(1) == "ey_pcpopup") {
+			$table = "poplayer";
+		} else {
+			$table = "board";
+		}
+
+		DB::table($table)->where('idx', $request->idx)->delete();
 		return true;
 	}
 
@@ -816,10 +834,16 @@ class Board extends Controller
 			"blockSize" => 5
 		);		
 
+		if(request()->segment(1) == 'ey_pcpopup') {
+			$table = "poplayer";
+		} else {
+			$table = "board";
+		}
+
 		$thisPage = ($request->page) ? $request->page : 1 ;
 		$paging = new PagingFunction($paging_option);
 
-		$totalQuery = DB::table('board');
+		$totalQuery = DB::table($table);
 		if($request->key != "") {
 			$totalQuery->where(function($totalQuery) use($request){
 				$totalQuery->where('subject', 'like', '%' . $request->key . '%')
@@ -827,18 +851,19 @@ class Board extends Controller
 			});
 		}
 
-		$totalQuery->where('board_type', request()->segment(1));
-        $totalQuery->where(function($query_set) {
-                $query_set->where('top_type', '<>', 'Y')
-                ->orWhere('top_type', null);
-        });
-
+		if(request()->segment(1) != "ey_pcpopup") {
+			$totalQuery->where('board_type', request()->segment(1));
+			$totalQuery->where(function($query_set) {
+					$query_set->where('top_type', '<>', 'Y')
+					->orWhere('top_type', null);
+			});
+		}
 
 		$totalCount = $totalQuery->get()->count();
 		
 		$paging_view = $paging->paging($totalCount, $thisPage, "page");
 		
-		$query = DB::table('board')
+		$query = DB::table($table)
 				->orderBy('idx', 'desc');
 				
 		if($request->key != "") {
@@ -848,11 +873,13 @@ class Board extends Controller
 			});
 		}
 
-		$query->where('board_type', request()->segment(1));
-        $query->where(function($query_set2) {
-                $query_set2->where('top_type', '<>', 'Y')
-                ->orWhere('top_type', null);
-        });
+		if(request()->segment(1) != "ey_pcpopup") {
+			$query->where('board_type', request()->segment(1));
+			$query->where(function($query_set2) {
+					$query_set2->where('top_type', '<>', 'Y')
+					->orWhere('top_type', null);
+			});
+		}
 		//$query->where('top_type', '<>', 'Y');
 		//$query->orWhere('top_type', null);
 		
@@ -860,24 +887,30 @@ class Board extends Controller
 			$query->skip(($request->page - 1) * $paging_option["pageSize"]);
 		}
 
-		$query->orderByRaw('grp desc, depth asc');
+		if(request()->segment(1) != "ey_pcpopup") {
+			$query->orderByRaw('grp desc, depth asc');
+		}
 
 		$list = $query->take($paging_option["pageSize"])->get();
 		
 		// 게시판 출력 글 번호 계산
 		$number =$totalCount-($paging_option["pageSize"]*($thisPage-1));
+		
+		$board_top_count = "";
+		$board_top_list = "";
+		if(request()->segment(1) != "ey_pcpopup") {
+			$board_top_count = DB::table($table) 
+						->select(DB::raw('*'))
+						->where('board_type', request()->segment(1))
+						->where('top_type', 'Y')
+						->get()->count();
 
-		$board_top_count = DB::table('board') 
-					->select(DB::raw('*'))
-					->where('board_type', request()->segment(1))
-					->where('top_type', 'Y')
-					->get()->count();
-
-		$board_top_list = DB::table('board') 
-					->select(DB::raw('*'))
-					->where('board_type', request()->segment(1))
-					->where('top_type', 'Y')
-					->get();
+			$board_top_list = DB::table($table) 
+						->select(DB::raw('*'))
+						->where('board_type', request()->segment(1))
+						->where('top_type', 'Y')
+						->get();
+		}
 
 		$return_list = array();
 		$return_list["board_top_count"] = $board_top_count;
@@ -892,7 +925,7 @@ class Board extends Controller
 
 		if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
 			return view("board/ey_notice", $return_list);
-		} else if(request()->segment(1) == "ey_pcslider") {
+		} else if(request()->segment(1) == "ey_pcslider" || request()->segment(1) == "ey_pcpopup") {
 			return view("board/ey_pcslider", $return_list);		
 		} else if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_data_room", $return_list);
@@ -1098,7 +1131,7 @@ class Board extends Controller
 			$file_array[1] = null;
 		}
 
-		if($request->category == 4 || request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room' || request()->segment(1) == 'ey_pcslider') {
+		if($request->category == 4 || request()->segment(1) == 'ey_law_data_room' || request()->segment(1) == 'ey_security_data_room' || request()->segment(1) == 'ey_pcslider' || request()->segment(1) == 'ey_pcpopup') {
 
 			if($request->writer_file_hwp) {
 				$file = $request->writer_file_hwp->store('images');
@@ -1140,19 +1173,38 @@ class Board extends Controller
 
 				$period_query = "";
 
+				if($file_array[1] != null) {
+					$period_query = ", img = '".$file_array[1]."'";
+				}				
+
 			}
 
 			if($request->write_type == "modify") {
 
-				DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query.' where idx = "'.$request->board_idx.'"');
+				if(request()->segment(1) == 'ey_pcpopup') {
+
+					DB::insert('update poplayer set title = "'.$request->subject.'", i_width = "'.$request->i_width.'", i_height = "'.$request->i_height.'", m_width = "'.$request->m_width.'", m_height = "'.$request->m_height.'", see = "'.$request->use_status.'", pop_position = "'.$request->pop_position.'", wdate = now(), wdatetime = now()'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query." where idx = '".$request->board_idx."'");
+
+				} else {
+
+					DB::update('update board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'"'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query.' where idx = "'.$request->board_idx.'" where idx = "'.$request->board_idx.'"');
+
+				}
 
 				echo "<script>alert('글 수정이 완료되었습니다.');location.href = '/".$request->board_type."';</script>";
 				exit;
 
 			} else {
 
-				DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "0", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'", reg_date = now()'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query);
+				if(request()->segment(1) == 'ey_pcpopup') {
 
+					DB::insert('insert into poplayer set title = "'.$request->subject.'", i_width = "'.$request->i_width.'", i_height = "'.$request->i_height.'", m_width = "'.$request->m_width.'", m_height = "'.$request->m_height.'", see = "'.$request->use_status.'", pop_position = "'.$request->pop_position.'", wdate = now(), wdatetime = now()'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query);
+
+				} else {
+
+					DB::insert('insert into board set subject = "'.$request->subject.'", contents = "'.$request->contents.'", category = "'.$request->category.'", ip_addr = "'.request()->ip().'", board_type = "'.$request->board_type.'", top_type = "'.$request->top_type.'", parno = "0", prino = "'.$prino_now.'", depth = "1", grp = "'.$grp_now.'", reg_date = now()'.$file_array2[1].$file_array3[1].$file_array4[1].$period_query);
+				
+				}
 				/*
 				DB::table('board')->insert(
 					[
