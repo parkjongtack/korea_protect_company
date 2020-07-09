@@ -184,6 +184,8 @@ Route::get('/ey_faq/ey_write_faq/modify', 'Board@ey_modify_faq');
 Route::get('/ey_faq', 'Board@ey_faq_list');
 Route::post('/ey_faq/ey_faq_control', 'Board@faq_control');
 
+Route::get('/all_search','all_search@all_search');
+
 Route::get('/search', function () {
     return view('search');
 });
