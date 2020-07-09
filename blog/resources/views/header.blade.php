@@ -21,11 +21,21 @@
                             </div>
                         </a>
                         <div class="h_search">
-                            <form action="">
-                                <input type="text" name="" placeholder="찾고 싶으신 정보를 검색해보세요!" required>
-                                <button></button>
+                            <form name="all_search_form" action="/all_search" onsubmit="javascript:all_search();">
+                                <input type="text" name="search" placeholder="찾고 싶으신 정보를 검색해보세요!" value="{{ request()->search }}" required>
+                                <button type="submit"></button>
                             </form>
                         </div>
+						<script type="text/javascript">
+							function all_search() {
+								var form = document.all_search_form;
+
+								if(form.search.value == "") {
+									alert("검색어를 입력해주세요.");
+									return false;
+								}
+							}
+						</script>
                         <div class="h_site bold">
                             <ul>
                                 <li><a href="/">HOME</a></li>
@@ -51,7 +61,7 @@
                         <a href="/happycall01"><li>
                             해피콜 상담서비스
                         </li></a>
-                        <a href="/information01"><li>
+                        <a href="/notice/notice_list"><li>
                             정보마당
                         </li></a>
                     </ul>

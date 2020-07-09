@@ -25,9 +25,9 @@ class Board extends Controller
 
 	public function ey_write_notice(Request $request) {
 		
-		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room") {
+		if(request()->segment(1) == "ey_data_room" || request()->segment(1) == "ey_law_data_room" || request()->segment(1) == "ey_security_data_room") {
 			return view("board/ey_write_data_room");
-		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "ey_security_data_room" || request()->segment(1) == "happy_call") {
+		} else if(request()->segment(1) == "ey_notice" || request()->segment(1) == "ey_newsletter" || request()->segment(1) == "happy_call") {
 			return view("ey_write_notice");
 		}
 

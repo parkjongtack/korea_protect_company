@@ -19,7 +19,7 @@ use App\Classes\jsonRPCClient;
 class Main extends Controller
 {
 
-	public function main() {
+	public function main(Request $request) {
 
 		$board_list_notice = DB::table('board') 
 								->select(DB::raw('*, substr(reg_date, 1, 10) as reg_date_cut'))
