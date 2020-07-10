@@ -12,7 +12,7 @@
                 <li @if(request()->segment(1) == 'ey_law_data_room') class="on" @endif ><a href="/ey_law_data_room/data_room_list/?category_type=ey_law_data_room&category_type=1">법령정보</a></li>
                 <li @if(request()->segment(1) == 'ey_security_data_room') class="on" @endif ><a href="/ey_security_data_room/data_room_list/?category_type=ey_security_data_room&category_type=1">보안서식</a></li>
                 <li @if(request()->segment(1) == 'ey_data_room') class="on" @endif ><a href="/ey_data_room/data_room_list/?category_type=ey_data_room&category_type=1">자료실</a></li>
-                <li @if(request()->segment(1) == 'ey_newsletter') class="on" @endif ><a href="/information05">뉴스레터</a></li>
+                <li @if(request()->segment(1) == 'ey_newsletter') class="on" @endif ><a href="/ey_newsletter/notice_list">뉴스레터</a></li>
             </ul>
         </div>
         <div class="sub_outer">

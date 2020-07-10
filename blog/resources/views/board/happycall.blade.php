@@ -84,8 +84,10 @@
                         <td>20-60-30</td>
                     </tr> -->
                 </table>
-				{!! $paging_view !!}
-                <!-- <div class="pag_write">
+                <div class="pag_write">
+                {!! $paging_view !!}
+                </div>
+                <!-- 
                     <ul>
                         <li><a href="#none"><img src="../img/pag_prev_btn.png" alt=""></a></li>
                         <li class="on"><a href="#none">1</a></li>
@@ -96,7 +98,7 @@
                         <li><a href="#none">6</a></li>
                         <li><a href="#none"><img src="../img/pag_next_btn.png" alt=""></a></li>
                     </ul>
-                </div> -->
+                -->
 				<form name="search_form" action="{{ $_SERVER['REQUEST_URI'] }}/" class="board_search_con" onsubmit="return search();">
                     <input type="text" name="key" placeholder="검색어를 입력하세요" value="{{ $key }}" required>
                     <button></button>

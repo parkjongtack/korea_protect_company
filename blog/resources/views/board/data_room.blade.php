@@ -72,8 +72,8 @@
 				<div class="tab4 tab_menu @if($_GET['category_type'] == 4) on @endif" style="width: 20%;" onclick="javascript:location.href='{{ $_SERVER['REDIRECT_URL'] }}/?category_type=4'">
 					중소기술보호법
 				</div>
-				<div class="tab5 tab_menu @if($_GET['category_type'] == 5) on @endif" style="width: 20%;" onclick="javascript:location.href='{{ $_SERVER['REDIRECT_URL'] }}/?category_type=4'">
-					기티 법령
+				<div class="tab5 tab_menu @if($_GET['category_type'] == 5) on @endif" style="width: 20%;" onclick="javascript:location.href='{{ $_SERVER['REDIRECT_URL'] }}/?category_type=5'">
+					기타 법령
 				</div>
 			@elseif(request()->segment(1) == 'ey_security_data_room')
 				<div class="tab1 tab_menu @if($_GET['category_type'] == 1) on @endif" style="width: 50%;" onclick="javascript:location.href='{{ $_SERVER['REDIRECT_URL'] }}/?category_type=1'">
