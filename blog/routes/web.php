@@ -20,6 +20,7 @@ use Intervention\Image\Facades\Image as Image;
 
 Route::post('/research_action', 'Research@research_action');
 
+Route::post('/file_upload', 'Board@file_upload');
 
 Route::get('/', 'Main@main');
 /*
