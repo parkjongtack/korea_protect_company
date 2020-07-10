@@ -56,7 +56,7 @@
 					echo"<div class='poplayer poplayer".$img['idx']."' style='top:".$img['m_height']."px;left:".$img['m_width']."px'>";
 					echo"<img src=".$imgsrc." style='width:".$img['i_width']."px; height:".$img['i_height']."px;' alt=''>";
 					echo'<div class="close_box">';
-					echo'<a class="close1" href="#">[닫기]</a>';
+					echo'<a class="close1'.$img['idx'].'" href="#">[닫기]</a>';
 					echo'<a class="24h'.$img['idx'].'" href="#">하루동안 보지 않기</a>';
 					echo'</div>';
 					echo"</div>";
@@ -64,7 +64,7 @@
 					echo"<div class='poplayer poplayer".$img['idx']."' style='bottom:".$img['m_height']."px;left:".$img['m_width']."px'>";
 					echo"<img src=".$imgsrc." style='width:".$img['i_width']."px; height:".$img['i_height']."px;' alt=''>";
 					echo'<div class="close_box">';
-					echo'<a class="close1" href="#">[닫기]</a>';
+					echo'<a class="close1'.$img['idx'].'" href="#">[닫기]</a>';
 					echo'<a class="24h'.$img['idx'].'" href="#">하루동안 보지 않기</a>';
 					echo'</div>';
 					echo"</div>";
@@ -72,7 +72,7 @@
 					echo"<div class='poplayer poplayer".$img['idx']."' style='top:".$img['m_height']."px;right:".$img['m_width']."px'>";
 					echo"<img src=".$imgsrc." style='width:".$img['i_width']."px; height:".$img['i_height']."px;' alt=''>";
 					echo'<div class="close_box">';
-					echo'<a class="close1" href="#">[닫기]</a>';
+					echo'<a class="close1'.$img['idx'].'" href="#">[닫기]</a>';
 					echo'<a class="24h'.$img['idx'].'" href="#">하루동안 보지 않기</a>';
 					echo'</div>';
 					echo"</div>";
@@ -80,7 +80,7 @@
 					echo"<div class='poplayer poplayer".$img['idx']."' style='bottom:".$img['m_height']."px;right:".$img['m_width']."px'>";
 					echo"<img src=".$imgsrc." style='width:".$img['i_width']."px; height:".$img['i_height']."px;' alt=''>";
 					echo'<div class="close_box">';
-					echo'<a class="close1" href="#">[닫기]</a>';
+					echo'<a class="close1'.$img['idx'].'" href="#">[닫기]</a>';
 					echo'<a class="24h'.$img['idx'].'" href="#">하루동안 보지 않기</a>';
 					echo'</div>';
 					echo"</div>";
@@ -95,29 +95,28 @@
 							todayDate.setHours(todayDate.getHours() + expirehours);
 							document.cookie = name + "=" + escape(value) + ";path=/;expires=" + todayDate.toGMTString() + ";"
 						}
-					
-					
+						
 						if (cookiedata.indexOf("ncookie<?=$img['idx']?>=done") < 0) {
-							$('.poplayer<?=$img['idx']?>').show();
+							$('.poplayer<?=$img["idx"]?>').show();
 						} else {
-							$('.poplayer<?=$img['idx']?>').hide();
+							$('.poplayer<?=$img["idx"]?>').hide();
 						}
 						function Pop_close() {
-							var par = $(this).parents('div.poplayer<?=$img['idx']?>');
+							var par = $(this).parents('div.poplayer<?=$img["idx"]?>');
 							$(par).hide();
 						}
-						$('.close1').click(function(){
-							var par = $(this).parents('div.poplayer<?=$img['idx']?>');
+						$('.close1<?=$img["idx"]?>').click(function(){
+							var par = $(this).parents('div.poplayer<?=$img["idx"]?>');
 							$(par).hide();
 						});
 						function todaycloseWin<?=$img['idx']?>() {
 								setCookie("ncookie<?=$img['idx']?>", "done", 24);
-								$('.poplayer<?=$img['idx']?>').hide();
-							}
-						$('.24h<?=$img['idx']?>').click(function(){
+								$('.poplayer<?=$img["idx"]?>').hide();
+						}
+						$('.24h<?=$img["idx"]?>').click(function(){
 							todaycloseWin<?=$img['idx']?>();
 						});
-						//팝업모바일
+						// 팝업모바일
 						var popbox = $('.poplayer');
 						var popimg = $('.poplayer img');
 					
