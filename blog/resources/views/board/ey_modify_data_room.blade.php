@@ -234,7 +234,7 @@
 			imageUploadParam: 'upfiles',
 
 			// Set the image upload URL.
-			imageUploadURL: './file_upload.php',
+			imageUploadURL: '/file_upload',
 
 			// Additional upload params.
 			imageUploadParams: {id: 'upfiles'},
@@ -304,7 +304,7 @@
 			videoUploadParam: 'upfiles',
 
 			// Set the video upload URL.
-			videoUploadURL: './file_upload.php',
+			videoUploadURL: '/file_upload',
 
 			// Additional upload params.
 			videoUploadParams: {id: 'upfiles'},
